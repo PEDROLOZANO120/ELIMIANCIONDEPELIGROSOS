@@ -72,7 +72,7 @@ async function cargar(forzar){
   pintar();
   clearInterval(window.__t); window.__t=setInterval(()=>{ if(!editando) cargar(); },4000);
 }
-function txtReloj(){ if(!P) return ''; const t=P.tiempo; if(!t.iniciado) return Math.round(t.restante/60)+':00 (sin iniciar)';
+function txtReloj(){ if(!P) return ''; const t=P.tiempo; if(!t.iniciado) return Math.round(t.restante/60)+':00 por grupo';
   const s=(t.pausado||!P.abierto)?t.restante:Math.max(0,Math.round((finLocal-Date.now())/1000)); return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`+(t.agotado?' · TERMINADO':(t.pausado?' · en pausa':'')); }
 setInterval(()=>{ const r=$('#relojD'); if(r) r.textContent=txtReloj(); },1000);
 
@@ -127,15 +127,15 @@ function pintar(){
   $('#app').innerHTML=`
   <div class="top"><div class="marca"><img src="logo-ingenieria-ambiental-uteq.png" alt="Logotipo de Ingeniería Ambiental UTEQ"><div><h1>&#9888; Bodega Peligrosa · Panel docente</h1>
     <div class="muted">Eliminación de Residuos Peligrosos · ${esc(P.version)} · datos: ${P.modo==='supabase'?'Supabase':'local'}</div></div></div>
-    <div class="row"><span class="pill ${P.abierto?'ok':'oro'}">${P.abierto?'ABIERTO':(t.iniciado?'EN PAUSA':'CERRADO')}</span>
-      <button class="btn ${P.abierto?'rojo':''}" onclick="abrir(${!P.abierto})">${P.abierto?'⏸ Pausar':(t.iniciado?'▶ Reanudar':'▶ Abrir para todos')}</button>
+    <div class="row"><span class="pill ${P.abierto?'ok':'oro'}">${P.abierto?'ABIERTO':(P.datos.fin_en?'EN PAUSA':'CERRADO')}</span>
+      <button class="btn ${P.abierto?'rojo':''}" onclick="abrir(${!P.abierto})">${P.abierto?'⏸ Pausar':(P.datos.fin_en?'▶ Reanudar':'▶ Abrir para todos')}</button>
       <button class="btn sec" onclick="descargarPDF()">&#128196; Informe PDF del curso</button></div></div>
   ${P.ganador?`<div class="banner">🏆 <b>Ganador: ${esc(P.ganador)}</b> · +1 punto directo.</div>`:''}
   <div class="card"><div class="row" style="justify-content:space-between">
-    <div><div class="muted">Tiempo restante</div><div class="reloj" id="relojD">${txtReloj()}</div></div>
-    <div class="row">${t.iniciado?`<button class="btn sec" onclick="sumar(5)">+5 min</button><button class="btn sec" onclick="sumar(-5)">−5 min</button>`:
-      `<label class="muted" for="pz">Preguntas por zona</label><select id="pz" onfocus="editando=true" onblur="editando=false" onchange="porZona()">${[5,6,7].map(n=>`<option value="${n}" ${(P.datos.por_zona||5)==n?'selected':''}>${n} de 10 (${({5:105,6:120,7:130})[n]} min)</option>`).join('')}</select>
-       <label class="muted" for="dur">Duración (min)</label><input id="dur" type="number" min="10" max="240" value="${P.datos.duracion_min}" style="width:80px" onfocus="editando=true" onblur="editando=false"><button class="btn sec" onclick="duracion()">Fijar</button>`}</div>
+    <div><div class="muted">Duración por grupo (inicia al ingresar)</div><div class="reloj" id="relojD">${txtReloj()}</div></div>
+    <div class="row">${P.datos.fin_en?`<button class="btn sec" onclick="sumar(5)">+5 min</button><button class="btn sec" onclick="sumar(-5)">−5 min</button>`:
+      `<label class="muted" for="pz">Preguntas por zona</label><select id="pz" onfocus="editando=true" onblur="editando=false" onchange="porZona()">${[5,6,7].map(n=>`<option value="${n}" ${(P.datos.por_zona||5)==n?'selected':''}>${n} de 10 (${({5:105,6:120,7:130})[n]} min)</option>`).join('')}</select>`}
+       <label class="muted" for="dur">Duración de nuevos intentos (min)</label><input id="dur" type="number" min="10" max="240" value="${P.datos.duracion_min}" style="width:80px" onfocus="editando=true" onblur="editando=false"><button class="btn sec" onclick="duracion()">Fijar</button></div>
     <div class="row"><span class="pill ${P.datos.publicado?'ok':'oro'}">${P.datos.publicado?'Resultados publicados':'Resultados sin publicar'}</span>
       <button class="btn ${P.datos.publicado?'sec':''}" onclick="publicar(${!P.datos.publicado})">${P.datos.publicado?'Ocultar resultados':'Publicar resultados'}</button></div></div>
     <p class="muted" style="margin:8px 0 0">Al <b>publicar</b>, cada grupo ve su rúbrica y su PDF incluye el detalle con explicaciones. ${pend?`Faltan ${pend} rúbrica(s) por calificar.`:''} Al terminar el tiempo, el expediente y el reto final se entregan solos con lo guardado.</p></div>
