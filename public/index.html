@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bodega Peligrosa</title>
+<meta name="description" content="Bodega Peligrosa · Código de Contención — Eliminación de Residuos Peligrosos, Ingeniería Ambiental UTEQ">
+<link rel="icon" href="logo-ingenieria-ambiental-uteq.png">
+<style>
+:root{
+  --bg:#07100b; --bg2:#0c1912; --card:#102117; --line:#23402d; --txt:#e8f3ea; --ap:#9db5a3;
+  --toxi:#9cff3b; --toxi2:#57d61a; --haz:#ffd21f; --ok:#38d97a; --mal:#ff5a5a; --par:#ffc23d; --azul:#5fb4ff;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:radial-gradient(ellipse at 50% -20%, #18361f 0%, var(--bg) 60%) fixed; color:var(--txt);
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif; line-height:1.5; min-height:100vh}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:49;opacity:.05;background:repeating-linear-gradient(0deg,#fff 0 1px,transparent 1px 3px)}
+h1,h2,h3{margin:0;letter-spacing:.04em}
+.haz{height:7px;background:repeating-linear-gradient(-45deg,var(--haz) 0 12px,#111 12px 24px)}
+header.top{position:sticky;top:0;z-index:40;background:rgba(7,16,11,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.topin{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:8px 16px;max-width:1240px;margin:0 auto}
+.marca{display:flex;align-items:center;gap:10px}
+.marca img{width:38px;height:38px;border-radius:50%;background:#fff}
+.logo{font-weight:800;font-size:1.15rem;color:var(--toxi);text-shadow:0 0 12px rgba(156,255,59,.55);letter-spacing:.12em}
+.sub{font-size:.72rem;color:var(--ap);letter-spacing:.04em}
+.chip{display:inline-flex;gap:6px;align-items:center;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:.84rem;white-space:nowrap}
+.chip.warn{border-color:var(--par);color:var(--par)} .chip.danger{border-color:var(--mal);color:var(--mal)}
+.chip.reloj{font-variant-numeric:tabular-nums;font-weight:700}
+.wrap{max-width:1240px;margin:0 auto;padding:14px 16px 40px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 8px 28px rgba(0,0,0,.45)}
+.card + .card{margin-top:12px}
+.zonas{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:thin}
+.ztab{flex:0 0 auto;min-width:126px;text-align:left;padding:8px 11px;border:1px solid var(--line);border-radius:12px;background:var(--bg2);color:var(--txt);font:inherit;cursor:pointer}
+.ztab .n{font-size:.68rem;color:var(--ap);text-transform:uppercase;letter-spacing:.12em}
+.ztab .t{font-weight:700;font-size:.9rem;display:block}
+.ztab .e{font-size:.74rem;color:var(--ap)}
+.ztab.act{border-color:var(--toxi);box-shadow:0 0 0 2px rgba(156,255,59,.25) inset}
+.ztab.ok .e{color:var(--ok)} .ztab.lock{opacity:.55}
+.ztab:focus-visible,.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
+.etq{color:var(--toxi);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase}
+.instr{border:1px dashed var(--haz);border-radius:10px;padding:10px 12px;background:rgba(255,210,31,.05);font-size:.88rem;margin:8px 0 0}
+.nivel{font-size:.7rem;color:var(--ap);text-transform:uppercase;letter-spacing:.14em}
+.enun{font-size:1.08rem;margin:.4rem 0 1rem}
+.enun svg{vertical-align:middle;margin:0 4px}
+.btn{appearance:none;border:1px solid var(--toxi2);background:linear-gradient(180deg,#3d8f14,#21560a);color:#fff;padding:10px 20px;border-radius:10px;font:inherit;font-weight:700;letter-spacing:.04em;cursor:pointer}
+.btn:hover:not(:disabled){filter:brightness(1.2)} .btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sec{background:transparent;border-color:var(--line);color:var(--txt)}
+.btn.sm{padding:5px 10px;font-size:.82rem}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;margin:7px 0;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02);color:var(--txt);font:inherit;cursor:pointer}
+.opt:hover{border-color:var(--toxi2)} .opt.sel{border-color:var(--toxi);background:rgba(156,255,59,.12)}
+.opt .mark{flex:0 0 20px;height:20px;border:2px solid var(--ap);border-radius:50%;margin-top:2px}
+.opt.multi .mark{border-radius:5px} .opt.sel .mark{background:var(--toxi);border-color:var(--toxi)}
+.ord{display:flex;gap:8px;align-items:center;margin:7px 0;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02)}
+.ord .n,.mizq .n{flex:0 0 26px;height:26px;border-radius:50%;background:#2a5a17;display:grid;place-items:center;font-weight:700;font-size:.82rem}
+.ord .t{flex:1}
+.ord button{border:1px solid var(--line);background:transparent;color:var(--txt);border-radius:8px;width:36px;height:36px;cursor:pointer}
+.ord button:disabled{opacity:.3}
+.hint{color:var(--ap);font-size:.85rem}
+.fb{border-radius:10px;padding:13px;margin:10px 0;border:1px solid}
+.fb.ok{border-color:var(--ok);background:rgba(56,217,122,.08)} .fb.mal{border-color:var(--mal);background:rgba(255,90,90,.08)} .fb.par{border-color:var(--par);background:rgba(255,194,61,.08)}
+.prog{height:8px;background:#1b3222;border-radius:6px;overflow:hidden;margin:8px 0 2px}
+.prog > i{display:block;height:100%;background:linear-gradient(90deg,#2a7a10,var(--toxi));transition:width .4s}
+.puzzle{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:#000;border:2px solid var(--line);border-radius:10px;overflow:hidden;aspect-ratio:1}
+.tile{background-size:400% 400%}
+.tile.lock{background:linear-gradient(135deg,#132619,#08100b)!important;display:grid;place-items:center;color:#2f5a3a;font-size:1.1rem}
+.tile.new{animation:pop .9s}
+@keyframes pop{0%{transform:scale(1.3);filter:brightness(3)}100%{transform:none;filter:none}}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+tr.yo td{color:var(--toxi);font-weight:700}
+.center{text-align:center} .big{font-size:2.2rem}
+.login{max-width:470px;margin:6vh auto}
+select,input,textarea{width:100%;padding:11px;margin:5px 0 10px;background:#08130c;color:var(--txt);border:1px solid var(--line);border-radius:10px;font:inherit;font-size:1rem}
+textarea{min-height:120px;resize:vertical}
+.reglas{border:1px dashed var(--haz);border-radius:10px;padding:11px 13px;background:rgba(255,210,31,.05);margin:12px 0;font-size:.9rem}
+.rev{display:inline-block;margin:4px 6px 4px 0;padding:7px 12px;border:1px solid var(--toxi2);border-radius:8px;background:rgba(156,255,59,.08);color:var(--haz);font-size:1.1rem;letter-spacing:.2em;font-weight:700}
+.turno{margin-top:10px;padding:9px 12px;border:1px dashed var(--toxi2);border-radius:10px;background:rgba(156,255,59,.06);font-size:.9rem}
+.miembro{display:inline-block;margin:2px 4px 2px 0;padding:2px 10px;border:1px solid var(--line);border-radius:999px;font-size:.8rem;color:var(--ap)}
+.miembro.on{border-color:var(--haz);color:var(--haz);font-weight:700}
+.match{display:grid;gap:10px}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,42%);gap:10px;align-items:center}
+@media (max-width:640px){.mrow{grid-template-columns:minmax(0,1fr)}}
+.mizq{display:flex;gap:8px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.02)}
+.mizq svg{flex:0 0 auto}
+.chipb{display:inline-block;margin:3px 6px 3px 0;padding:3px 11px;border:1px solid var(--haz);color:var(--haz);border-radius:999px;font-size:.88rem}
+.parrafo{line-height:2.5;font-size:1.03rem}
+select.hueco{display:inline-block;width:auto;min-width:96px;max-width:100%;margin:0 4px;padding:4px 8px;font-size:.95rem;vertical-align:middle}
+/* bodega */
+.tambores{display:grid;gap:8px}
+.tamb{display:grid;grid-template-columns:44px minmax(0,1fr) 150px;gap:10px;align-items:center;padding:8px;border:1px solid var(--line);border-radius:10px;cursor:pointer}
+.tamb.sel{border-color:var(--toxi)}
+@media (max-width:560px){.tamb{grid-template-columns:44px minmax(0,1fr)}.tamb select{grid-column:1/-1}}
+.tamb select{margin:0}
+.jaulas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.jaula{min-height:110px;border:2px dashed #3d6a49;border-radius:12px;padding:8px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 2px,transparent 2px 16px);cursor:pointer}
+.jaula h4{margin:0 0 6px;font-size:.8rem;color:var(--ap);letter-spacing:.1em;text-transform:uppercase}
+.jaula.alerta{border-color:var(--mal)}
+.drum{display:inline-flex;align-items:center;gap:4px;margin:2px;padding:2px 6px;border-radius:8px;background:#1d3a26;font-size:.76rem}
+/* herramientas */
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.modal{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:4vh 12px}
+.modal.on{display:flex}
+.modal .card{width:min(980px,100%);max-height:90vh;overflow:auto}
+.lst{font-size:.86rem}
+.lst td:first-child{white-space:nowrap;font-weight:700;color:var(--haz)}
+.mk{border-collapse:collapse;font-size:.78rem;margin:8px auto}
+.mk td,.mk th{border:1px solid #333;width:38px;height:28px;text-align:center;padding:0}
+.mk .V{background:#33c24a;color:#000}.mk .A{background:#ffe44d;color:#000}.mk .R{background:#e32b2b;color:#fff}
+.mk td.hi{outline:3px solid #fff;outline-offset:-3px}
+/* etiqueta SGA */
+.paleta{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.pz{border:2px solid transparent;border-radius:8px;background:#fff;padding:2px;cursor:grab}
+.pz.on{border-color:var(--toxi);box-shadow:0 0 0 3px rgba(156,255,59,.35)}
+.etiqueta{min-height:120px;border:3px solid #111;border-radius:6px;background:#fff;color:#111;padding:10px;margin:8px 0}
+.etiqueta.over{outline:3px dashed var(--toxi)}
+.etiqueta .ph{color:#777;font-size:.85rem}
+.cwwrap{overflow-x:auto;padding:4px 0}
+.cw,.sopa{display:grid;gap:2px;width:max-content}
+.cwc{position:relative;width:var(--cs);height:var(--cs)} .cwb{width:var(--cs);height:var(--cs)}
+.cwc input{width:100%;height:100%;margin:0;padding:0;text-align:center;font-weight:700;font-size:calc(var(--cs)*.55);text-transform:uppercase;background:#f1f6e8;color:#0d1a10;border:1px solid #3b5a1d;border-radius:3px}
+.cwc.act input{background:#e6ff9c}
+.cwc .num{position:absolute;top:0;left:2px;font-size:calc(var(--cs)*.3);color:#2a6010;font-weight:700;z-index:2;pointer-events:none}
+.sc{width:var(--cs);height:var(--cs);padding:0;border:1px solid var(--line);background:#0c1a10;color:var(--txt);font:inherit;font-weight:700;font-size:calc(var(--cs)*.5);border-radius:3px;cursor:pointer}
+.sc.ini{outline:3px solid var(--haz)}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+@media (max-width:760px){.clues{grid-template-columns:1fr}}
+.clues h4{margin:0 0 4px;color:var(--toxi);letter-spacing:.1em;text-transform:uppercase;font-size:.8rem}
+.clues ul{list-style:none;margin:0;padding:0}
+.cl{appearance:none;display:block;width:100%;text-align:left;padding:6px 8px;margin:3px 0;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--txt);font:inherit;font-size:.88rem;cursor:pointer}
+.resp{display:inline-block;margin-left:4px;padding:0 8px;border-radius:999px;background:rgba(255,210,31,.12);color:var(--haz);font-size:.72rem}
+.sopapistas{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.sopapistas div{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;padding:4px 8px;font-size:.82rem}
+.marca2{appearance:none;margin:4px 6px 0 0;padding:3px 10px;border:2px solid;border-radius:8px;background:transparent;color:var(--txt);font:inherit;font-size:.82rem;cursor:pointer}
+.overlay{position:fixed;inset:0;z-index:100;display:none;place-items:center;background:rgba(40,30,0,.94);text-align:center;padding:24px}
+.overlay.on{display:grid}
+.ganador{border-color:var(--haz)!important;box-shadow:0 0 40px rgba(255,210,31,.3)!important}
+.tag{font-size:.7rem;padding:2px 8px;border-radius:6px;background:#2a5a17;text-transform:uppercase;letter-spacing:.1em}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:12px}
+.estado-guardado{font-size:.8rem;color:var(--ap)}
+.notas td{padding:4px}
+.confeti{position:fixed;inset:0;pointer-events:none;z-index:120;overflow:hidden}
+.confeti i{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:caer linear forwards}
+@keyframes caer{to{top:105vh;transform:rotate(720deg)}}
+.festejo{animation:latido .6s}
+@keyframes latido{0%{transform:scale(.96)}50%{transform:scale(1.03)}100%{transform:none}}
+.sacudir{animation:sacudir .45s}
+@keyframes sacudir{0%,100%{transform:none}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+img.picto,img.rotulo{vertical-align:middle;display:inline-block}
+.mizq img{flex:0 0 auto}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="overlay" id="ovSalida" role="alertdialog" aria-modal="true" aria-labelledby="ovTitulo">
+  <div><div class="big">&#9763;</div><h2 id="ovTitulo">Saliste de la pantalla</h2>
+  <p id="ovTexto" style="max-width:520px;margin:12px auto"></p><button class="btn" id="ovBtn">Volver a la bodega</button></div>
+</div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalT"><div class="card" id="modalC"></div></div>
+
+<header class="top"><div class="haz"></div>
+  <div class="topin">
+    <div class="marca"><img src="logo-ingenieria-ambiental-uteq.png" alt="Logotipo de Ingeniería Ambiental UTEQ">
+      <div><div class="logo">&#9888; BODEGA PELIGROSA</div><div class="sub">Eliminación de Residuos Peligrosos · Ingeniería Ambiental UTEQ</div></div></div>
+    <div id="barra" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+
+<script src="graficos.js"></script>
+<script src="listado142.js"></script>
+<script>
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rico = (t,sz)=>GRAF.rico(t,esc,sz);
+const f2 = n=>Number(n).toFixed(2).replace('.',',');
+let token=null; try{token=sessionStorage.getItem('bt_token');}catch(e){}
+let E=null, vista='z1', modo='login', fichasPrevias=null, enviando=false;
+let sel=[], ordenActual=[], bodegaSel=[], extraActual=null;
+
+async function api(ruta,metodo='GET',cuerpo){
+  const r = await fetch(ruta,{method:metodo,headers:Object.assign({'Content-Type':'application/json'},token?{'Authorization':'Bearer '+token}:{}),body:cuerpo?JSON.stringify(cuerpo):undefined});
+  if(r.status===401){ cerrarSesion(); throw new Error('sesion'); }
+  return r.json();
+}
+function cerrarSesion(){ try{sessionStorage.removeItem('bt_token');}catch(e){} token=null; modo='login'; mostrarLogin(); }
+
+/* ---------- imagen del rompecabezas ---------- */
+const IMG='data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<defs><linearGradient id="c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c4a26"/><stop offset="1" stop-color="#071009"/></linearGradient></defs>
+<rect width="400" height="400" fill="url(#c)"/><path d="M40 170 200 80 360 170v170H40z" fill="#d9e4d2" stroke="#123" stroke-width="6"/>
+<path d="M40 170 200 80 360 170" fill="none" stroke="#2f6b12" stroke-width="14"/><rect x="70" y="300" width="260" height="14" fill="#7a5a2d"/>
+<g fill="#2f7fb8" stroke="#123" stroke-width="3"><rect x="90" y="232" width="44" height="68" rx="6"/><rect x="146" y="232" width="44" height="68" rx="6"/><rect x="210" y="232" width="44" height="68" rx="6"/><rect x="266" y="232" width="44" height="68" rx="6"/></g>
+<g transform="translate(186 150) rotate(45)"><rect x="-26" y="-26" width="52" height="52" fill="#fff" stroke="#d40c1c" stroke-width="7"/></g>
+<path d="M172 152l10 12 22-24" fill="none" stroke="#1d9b3d" stroke-width="9" stroke-linecap="round"/>
+<rect y="340" width="400" height="60" fill="#111"/><text x="200" y="378" text-anchor="middle" font-family="Arial" font-size="28" font-weight="700" fill="#9cff3b" letter-spacing="4">BODEGA SEGURA</text></svg>`);
+function pintarPuzzle(prev){
+  const c=$('#puzzle'); if(!c) return; let h='';
+  E.piezas.forEach((f,r)=>f.forEach((ok,k)=>{ const nueva=ok&&prev&&!prev[r][k]; const pos=`${k*100/3}% ${r*100/3}%`;
+    h+= ok?`<div class="tile ${nueva?'new':''}" style="background-image:url('${IMG}');background-position:${pos}"></div>`:`<div class="tile lock" title="Zona ${r+1}, sello ${k+1}">&#128274;</div>`; }));
+  c.innerHTML=h;
+}
+
+/* ---------- reloj y barra ---------- */
+let finLocal=null;
+function fijarReloj(){ const t=E.tiempo; finLocal = t.iniciado ? Date.now()+t.restante*1000 : null; }
+function txtReloj(){
+  if(!E) return '';
+  if(!E.tiempo.iniciado) return `${Math.round(E.tiempo.restante/60)} min`;
+  const s = E.tiempo.pausado||!E.abierto ? E.tiempo.restante : Math.max(0,Math.round((finLocal-Date.now())/1000));
+  return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`+(E.tiempo.pausado?' (pausa)':'');
+}
+setInterval(()=>{ const r=$('#reloj'); if(r&&E){ r.textContent='⏱ '+txtReloj(); const s=(finLocal-Date.now())/1000; r.parentNode&&r.classList.toggle('danger', E.tiempo.iniciado && s<300); if(E.tiempo.iniciado&&!E.tiempo.pausado&&E.abierto&&s<=0&&!E.tiempo.agotado){ refrescar(true); } } },1000);
+function pintarBarra(){
+  if(!E){ $('#barra').innerHTML=''; return; }
+  const n=E.salidas, dg=E.salidas_gratis; let cls='chip', txt;
+  if(n<dg){ txt=`Salidas: ${n}/${dg} sin descuento`; if(n>0) cls+=' warn'; } else { cls+=' danger'; txt=`Salidas: ${n} · −${f2(E.penalizacion_actual)}`; }
+  $('#barra').innerHTML=`<span class="chip">&#128101; ${esc(E.grupo.nombre)}</span><span class="chip">&#128737; ${E.total_sellos}/${E.max_sellos} sellos</span>
+   <span class="chip reloj" id="reloj" aria-live="off">⏱ ${txtReloj()}</span>
+   <button class="chip" id="btnSonido" onclick="alternarSonido()" aria-pressed="${SONIDO}" title="Activar o silenciar los sonidos" style="cursor:pointer;color:inherit;font:inherit">${SONIDO?'🔊 Sonido':'🔇 Silencio'}</button>
+   <span class="${cls}" title="Las 2 primeras salidas no descuentan; desde la 3.ª cada una resta ${f2(E.descuento)} puntos.">&#9888; ${txt}</span>`;
+}
+
+/* ---------- ingreso ---------- */
+async function mostrarLogin(){
+  modo='login'; E=null; pintarBarra();
+  let grupos=[]; try{ grupos=await (await fetch('/api/grupos-publicos')).json(); }catch(e){}
+  $('#app').innerHTML=`<div class="login card">
+    <h1 class="center" style="color:var(--toxi)">Bodega Peligrosa</h1>
+    <p class="center hint">Código de Contención · Semana 4 · AM 142, NTE INEN 2266 y SGA</p>
+    <p style="font-size:.95rem">Una empresa que genera residuos peligrosos tiene su <b>bodega de almacenamiento temporal</b> en emergencia: llegaron envases sin identificar con residuos inflamables, corrosivos, comburentes, tóxicos y gases a presión. Su grupo es la <b>brigada de gestión ambiental</b>: identifiquen cada residuo, rotúlenlo, etiquétenlo y ubíquenlo de forma segura antes de que la bodega quede fuera de control.</p>
+    <div class="reglas"><b>&#9888; Antes de entrar</b><br>
+      • Para entrar, elijan su grupo y <b>resuelvan el acertijo de la puerta</b>: una característica de peligrosidad del CRTIB.<br>
+      • Un solo dispositivo por grupo y sin salir de esta pantalla. <b>Las 2 primeras salidas no descuentan; desde la 3.ª, cada una resta 0,50</b> sobre 10. Las herramientas (Archivo 142 y Matriz) se abren dentro del juego y no cuentan como salida.<br>
+      • 4 zonas automáticas (7 pts), un expediente que revisa el docente (2 pts) y un reto final con crucigrama y sopa de letras (1 pt).<br>
+      • Pueden recorrer las zonas en el orden que quieran. Cada respuesta se envía una sola vez.<br>
+      • Cada zona da hasta 4 sellos. El primer grupo con los 16 sellos y al menos el 50 % del reto final gana <b>+1 punto directo</b>.</div>
+    <label for="selGrupo">Grupo</label>
+    <select id="selGrupo">${grupos.length?grupos.map(g=>`<option value="${esc(g.id)}">${esc(g.nombre)}</option>`).join(''):'<option value="">(El docente aún no creó grupos)</option>'}</select>
+    <div id="acertijo"></div>
+    <label id="lblResp" for="resp">Respuesta del acertijo (una palabra)</label>
+    <input id="resp" autocomplete="off" placeholder="Una palabra, con o sin tildes">
+    <a href="#" id="verPin" class="hint">Tengo un PIN del docente</a>
+    <div id="cajaPin" style="display:none"><label for="pin">PIN del docente</label><input id="pin" inputmode="numeric" autocomplete="off"></div>
+    <button class="btn" style="width:100%" id="btnEntrar">Entrar a la bodega</button>
+    <p id="err" style="color:var(--mal);min-height:1.4em" role="alert"></p></div>`;
+  async function cargarAcertijo(){
+    const id=$('#selGrupo').value, box=$('#acertijo'); $('#err').textContent=''; if(!id){box.innerHTML='';return;}
+    try{ const j=await (await fetch('/api/acertijo?id='+encodeURIComponent(id))).json();
+      if(j.pista){ box.innerHTML=`<div class="reglas" style="border-color:var(--toxi);margin:8px 0"><b>&#128274; Acertijo de la puerta</b><p style="margin:6px 0">«${esc(j.pista)}»</p>
+          <div class="hint">¿Qué característica de peligrosidad soy? Ayuda: mis ${j.largo} letras revueltas</div><div class="rev">${esc(j.letras)}</div></div>`; }
+      else { box.innerHTML='<p class="hint">No se pudo cargar el acertijo. Pidan el PIN al docente.</p>'; $('#cajaPin').style.display=''; }
+    }catch(e){}
+  }
+  $('#selGrupo').onchange=cargarAcertijo; cargarAcertijo();
+  $('#verPin').onclick=e=>{e.preventDefault(); $('#cajaPin').style.display=$('#cajaPin').style.display==='none'?'':'none';};
+  $('#btnEntrar').onclick=async()=>{
+    const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:$('#selGrupo').value,respuesta:$('#resp').value,pin:$('#pin').value})});
+    const j=await r.json(); if(!r.ok){ $('#err').textContent=j.error||'No se pudo entrar'; return; }
+    token=j.token; try{sessionStorage.setItem('bt_token',token);}catch(e){} iniciar();
+  };
+  ['#resp','#pin'].forEach(s=>$(s).addEventListener('keydown',e=>{if(e.key==='Enter')$('#btnEntrar').click();}));
+}
+
+/* ---------- herramientas ---------- */
+const CLASES_K=["1","2.1","2.2","2.3","3","4.1","4.2","4.3","5.1","5.2","6","7","8","9"];
+const FILAS_K=["AAAAAAAAAAAAAA","AVVAVVVVVVRRVA","AVVVVVVVVVVVVA","AAVVRRRRRRVVRA","AVVRVVVVRVAVVA","AVVRVVVVRVAVRA","AVVRVVVVRVAVRA","AVVRVVVVRVAVRA","AVVRRRRRVVAVRA","AVVRVVVVVVAVRA","ARVVAAAAAAVVAA","ARVVVVVVVVVVVA","AVVRVRARRRAVAA","AAAAAAAAAAAAAA"];
+function abrirModal(html){ $('#modalC').innerHTML=html+`<div style="text-align:right;margin-top:10px"><button class="btn sec" id="cerrarM">Cerrar</button></div>`; $('#modal').classList.add('on'); $('#cerrarM').onclick=cerrarModal; }
+function cerrarModal(){ $('#modal').classList.remove('on'); }
+$('#modal').addEventListener('click',e=>{ if(e.target.id==='modal') cerrarModal(); });
+const norm=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+function herramienta142(){
+  abrirModal(`<h2 id="modalT">&#128450; Archivo 142</h2><p class="hint">Transcripción del Acuerdo Ministerial 142 (R.O. 856, 2012): Anexo B Listado 2 y Anexo C completos; del Listado 1, los sectores usados en esta actividad. Busquen por palabra, código o letra CRTIB.</p>
+   <input id="q142" placeholder="Ejemplo: envases, mercurio, NE-4, solvente" autocomplete="off"><div class="hint" id="n142"></div>
+   <div style="max-height:56vh;overflow:auto"><table class="lst" id="t142"></table></div>`);
+  const pintar=()=>{ const q=norm($('#q142').value.trim()); const pal=q.split(/\s+/).filter(Boolean);
+    const f=LISTADO142.filter(x=>pal.every(p=>norm(x.join(' ')).includes(p)));
+    $('#n142').textContent=f.length+' resultado(s)';
+    let ult=''; $('#t142').innerHTML=f.map(x=>{ let cab=''; if(x[4]!==ult){ ult=x[4]; cab=`<tr><th colspan="4" style="color:var(--toxi)">${esc(LISTADO142_NOMBRES[x[4]])}</th></tr>`; }
+      return cab+`<tr><td>${esc(x[0].startsWith('A-')?'Anexo A':x[0])}</td><td>${esc(x[1])}</td><td>${esc(x[2])}</td><td class="hint">${esc(x[3])}</td></tr>`; }).join('');
+  };
+  $('#q142').oninput=pintar; pintar(); $('#q142').focus();
+}
+function herramientaMatriz(){
+  let h='<table class="mk" id="mk"><tr><th>ONU</th>'+CLASES_K.map(c=>`<th>${c}</th>`).join('')+'</tr>';
+  CLASES_K.forEach((a,i)=>{ h+=`<tr><th>${a}</th>`+[...FILAS_K[i]].map((v,j)=>`<td class="${v}" data-i="${i}" data-j="${j}" title="${a} con ${CLASES_K[j]}">${v==='R'?'✕':(v==='A'?'!':'')}</td>`).join('')+'</tr>'; });
+  h+='</table>';
+  abrirModal(`<h2 id="modalT">&#129514; Matriz de incompatibilidades · Anexo K (NTE INEN 2266)</h2>
+    <div style="overflow-x:auto">${h}</div>
+    <p class="hint"><span class="chipb" style="background:#33c24a;color:#000;border:0">verde</span> pueden almacenarse y transportarse juntos ·
+    <span class="chipb" style="background:#ffe44d;color:#000;border:0">! amarillo</span> precaución: revisar incompatibilidades individuales ·
+    <span class="chipb" style="background:#e32b2b;color:#fff;border:0">✕ rojo</span> incompatibles: almacenamiento separado. La clase 1 depende de incompatibilidades específicas. Fuente referencial de la norma: Código IMDG.</p>
+    <p class="hint">Consejo: toquen una celda para resaltar su fila y su columna.</p>`);
+  document.querySelectorAll('#mk td').forEach(td=>td.onclick=()=>{ document.querySelectorAll('#mk td').forEach(x=>x.classList.toggle('hi', x.dataset.i===td.dataset.i||x.dataset.j===td.dataset.j)); });
+}
+const BTN_TOOLS=`<div class="tools"><button class="btn sec sm" onclick="herramienta142()">&#128450; Archivo 142</button><button class="btn sec sm" onclick="herramientaMatriz()">&#129514; Matriz Anexo K</button></div>`;
+
+/* ---------- estructura de bloques ---------- */
+function bloques(){
+  const z = E.temas.map(t=>({k:'z'+t.id, n:'Zona '+t.id, t:t.zona, e: t.cerrado?`✔ ${f2(t.puntos)}/${t.total} · ${t.sellos} sellos`:`${t.respondidas}/${t.total} respondidas`, ok:t.cerrado}));
+  z.push({k:'exp', n:'Zona 5', t:'Expediente', e:E.expediente.entregado?'✔ entregado':'pendiente', ok:E.expediente.entregado});
+  z.push({k:'reto', n:'Final', t:'Reto final', e:E.reto.entregado?`✔ ${E.reto.cw_ok}/${E.reto.cw_total} · ${E.reto.sopa_ok}/${E.reto.sopa_total}`:(E.reto_abierto?'disponible':'🔒 bloqueado'), ok:E.reto.entregado, lock:!E.reto_abierto&&!E.reto.entregado});
+  return z;
+}
+function barraZonas(){
+  return `<nav class="zonas" aria-label="Zonas de la bodega">`+bloques().map(b=>`<button class="ztab ${b.k===vista?'act':''} ${b.ok?'ok':''} ${b.lock?'lock':''}" data-v="${b.k}" aria-current="${b.k===vista}">
+    <span class="n">${b.n}</span><span class="t">${esc(b.t)}</span><span class="e">${b.e}</span></button>`).join('')+`</nav>`;
+}
+function navAntSig(){
+  const b=bloques(), i=b.findIndex(x=>x.k===vista);
+  return `<div class="nav"><button class="btn sec sm" ${i<=0?'disabled':''} onclick="irA('${b[Math.max(0,i-1)].k}')">◀ Anterior</button><button class="btn sec sm" ${i>=b.length-1?'disabled':''} onclick="irA('${b[Math.min(b.length-1,i+1)].k}')">Siguiente ▶</button></div>`;
+}
+function irA(v){ vista=v; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+/* ---------- pantalla principal ---------- */
+function render(){
+  pintarBarra();
+  if(!E.abierto && !E.tiempo.agotado && !E.reto.entregado && !E.tiempo.iniciado){
+    modo='lobby';
+    $('#app').innerHTML=`<div class="card center" style="max-width:640px;margin:6vh auto"><div class="big">&#9888;</div><h2>La bodega de la empresa aún está cerrada</h2>
+     <p class="hint">Esperen la señal del docente. Esta pantalla se abrirá sola.</p><p>Grupo: <b>${esc(E.grupo.nombre)}</b><br><span class="hint">${esc(E.grupo.integrantes||'')}</span></p>
+     <div class="reglas" style="text-align:left">Duración: <b>${Math.round(E.tiempo.restante/60)} minutos</b> para todo. Zonas 1 a 4: 1,75 pts cada una · Expediente: 2 pts (docente) · Reto final: 1 pt. Al terminar el tiempo, el expediente y el reto final se entregan solos con lo que tengan guardado.</div></div>`;
+    return;
+  }
+  modo='juego';
+  let centro='';
+  const fin = E.tiempo.agotado;
+  if(E.yo_gano || E.fase==='completo') centro = pantallaFinal();
+  else if(E.fase==='extras' && vista==='extras') centro = pantallaExtras();
+  else if(vista.startsWith('z')) centro = pantallaZona(+vista.slice(1));
+  else if(vista==='exp') centro = pantallaExpediente();
+  else if(vista==='reto') centro = pantallaReto();
+  else centro = pantallaExtras();
+  const aviso = fin ? `<div class="card fb mal"><b>⏱ Tiempo terminado.</b> Ya no se aceptan respuestas. ${E.informe_disponible?'Pueden descargar su informe abajo.':''}</div>` :
+               (!E.abierto ? `<div class="card fb par"><b>⏸ Juego en pausa.</b> El docente detuvo el reloj. Esperen.</div>`:'');
+  const tabs = (E.fase==='juego'||vista!=='extras') && !(E.yo_gano||E.fase==='completo') ? barraZonas() : '';
+  const botonExtras = E.fase==='extras' && vista!=='extras' ? `<div class="card fb par">Ya entregaron el reto final y les faltan sellos. <button class="btn sm" onclick="irA('extras')">Ir a los retos extra</button></div>` : '';
+  $('#app').innerHTML=`${aviso}${botonExtras}${tabs}<div class="grid"><div id="centro">${centro}</div><aside>${lateral()}</aside></div>`;
+  document.querySelectorAll('.ztab').forEach(b=>b.onclick=()=>irA(b.dataset.v));
+  pintarPuzzle(fichasPrevias); fichasPrevias=E.piezas.map(f=>f.slice());
+  enlazar();
+}
+function lateral(){
+  const filas=E.tablero.map((t,i)=>`<tr class="${t.id===E.grupo.id?'yo':''}"><td>${i+1}</td><td>${esc(t.nombre)}</td><td>${t.sellos}/${E.max_sellos}</td></tr>`).join('');
+  return `<div class="card"><h3 style="margin-bottom:8px">Sellos de contención</h3><div class="puzzle" id="puzzle"></div>
+    <p class="hint" style="margin:8px 0 0">Cada fila es una zona. Con suficientes puntos en una zona se abren sus sellos.</p></div>
+    ${resultadosCard()}
+    <div class="card"><h3 style="margin-bottom:8px">Brigadas</h3><table><tr><th>#</th><th>Grupo</th><th>Sellos</th></tr>${filas}</table></div>`;
+}
+function resultadosCard(){
+  const n=E.notas; const pub=E.publicado;
+  const docTxt = E.expediente.revision ? f2(E.expediente.revision.total) : 'pendiente';
+  const pdf = E.informe_disponible ? `<button class="btn sm" style="width:100%;margin-top:8px" onclick="descargarPDF()">&#128196; Descargar informe PDF</button><div class="hint">${pub?'Resultados publicados por el docente.':'Informe provisional: el docente aún no publica la revisión.'}</div>`:'<div class="hint">El informe PDF se habilita al entregar el reto final o al terminar el tiempo.</div>';
+  return `<div class="card"><h3 style="margin-bottom:6px">Mi nota</h3><table class="notas">
+   <tr><td>Zonas 1–4</td><td style="text-align:right">${f2(n.zonas)} / 7</td></tr>
+   <tr><td>Reto final</td><td style="text-align:right">${f2(n.reto)} / 1</td></tr>
+   <tr><td>Expediente (docente)</td><td style="text-align:right">${docTxt} / 2</td></tr>
+   <tr><td>Salidas</td><td style="text-align:right">−${f2(n.deduccion)}</td></tr>
+   <tr><td><b>Total ${E.expediente.revision?'':'parcial'}</b></td><td style="text-align:right"><b>${f2(Math.max(0,n.auto+(E.expediente.revision?E.expediente.revision.total:0)-n.deduccion))}</b></td></tr></table>${pdf}</div>`;
+}
+async function descargarPDF(){
+  try{ const r=await fetch('/api/informe-pdf',{headers:{'Authorization':'Bearer '+token}});
+    if(!r.ok){ const j=await r.json().catch(()=>({})); alert(j.error||'No se pudo generar el informe'); return; }
+    const url=URL.createObjectURL(await r.blob()); const a=document.createElement('a'); a.href=url; a.download='informe_'+(E.grupo.nombre||'grupo').replace(/\W+/g,'_')+'.pdf';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),4000);
+  }catch(e){ alert('No se pudo descargar el informe'); }
+}
+function turnoHtml(){
+  if(!E.miembros||!E.miembros.length) return '';
+  return `<div class="turno">&#127908; <b>Le toca leer a: ${esc(E.turno)}</b> (integrante del grupo). Lea el caso en voz alta a sus compañeros; el grupo discute y responde. Todo lo necesario está escrito en la pregunta.<div style="margin-top:6px">${E.miembros.map(n=>`<span class="miembro ${n===E.turno?'on':''}">${esc(n)}</span>`).join('')}</div></div>`;
+}
+
+function pantallaZona(id){
+  const t=E.temas.find(x=>x.id===id); const p=E.preguntas[String(id)];
+  const pct=Math.round(t.respondidas/t.total*100);
+  const regla=t.regla.map(x=>`${String(x.min).replace('.',',')} pts = ${x.sellos}`).join(' · ');
+  const cab=`<div class="card"><div class="etq">Zona ${t.id} · ${esc(t.zona)}</div><h2 style="margin:3px 0">${esc(t.nombre)}</h2>
+    <div class="instr"><b>${t.total} preguntas · ${f2(t.peso)} puntos · ≈ ${String(t.min).replace('.',',')} min.</b> ${esc(t.intro)} Respondan una pregunta a la vez; cada respuesta se envía <b>una sola vez</b> y verán la explicación al instante. Relacionar, completar, bodega y selección múltiple dan puntaje parcial. La zona queda completa al responder sus ${t.total} preguntas.<br><span class="hint">Sellos de la zona: ${regla}.</span></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 4px" aria-label="Preguntas de la zona">${Array.from({length:t.total},(_,i)=>`<span title="Pregunta ${i+1}" style="width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;border:2px solid ${i<t.respondidas?'var(--ok)':(i===t.respondidas?'var(--haz)':'var(--line)')};background:${i<t.respondidas?'rgba(56,217,122,.18)':(i===t.respondidas?'rgba(255,210,31,.15)':'transparent')};color:${i===t.respondidas?'var(--haz)':'var(--txt)'}">${i<t.respondidas?'✓':i+1}</span>`).join('')}</div>
+    <div style="font-size:1.05rem;font-weight:700;color:var(--haz)">${t.respondidas<t.total?`Pregunta ${t.respondidas+1} de ${t.total} de esta zona`:`Zona terminada: ${t.total} de ${t.total}`}</div>
+    <div class="hint">Las preguntas aparecen una por una: al enviar una, aparece la siguiente. Llevan ${E.respondidas_principal} de ${E.total_principal} en total.</div>
+    <div style="margin-top:8px">${BTN_TOOLS}</div>${p?turnoHtml():''}</div>`;
+  let cuerpo;
+  if(p){ preguntaActual=p; extraActual=null; cuerpo=`<div class="card" id="cardPregunta">${cuerpoPregunta(p)}</div>`; }
+  else if(t.cerrado){ cuerpo=`<div class="card fb ok"><h3>&#128274; Zona ${t.id} contenida</h3>Puntos: <b>${f2(t.puntos)}/${t.total}</b> · Nota de la zona: <b>${f2(t.nota)}/${f2(t.peso)}</b> · Sellos: <b>${t.sellos}/4</b>${t.sellos<4?'. Los sellos que faltan se recuperan con retos extra después del reto final.':' 🎉'}</div>`; }
+  else cuerpo=`<div class="card hint">Esta zona no está disponible ahora.</div>`;
+  return cab+cuerpo+navAntSig();
+}
+let preguntaActual=null;
+const AYUDA={single:'Elijan UNA respuesta.',multi:'Marquen las correctas (el número se indica en el enunciado). Cada error resta un acierto.',order:'Usen las flechas para ordenar.',
+  match:'Elijan la pareja de cada fila. Puntaje parcial.',fill:'Elijan del banco la palabra de cada espacio. Puntaje parcial.',bodega:'Asignen una jaula a cada tambor (lista o tocando el tambor y luego la jaula).',sopa:'Minijuego: cada palabra encontrada suma.',cruci:'Minijuego: cada palabra correcta suma.'};
+function cuerpoPregunta(p){
+  sel=[]; ordenActual=(p.opciones||[]).map(o=>o.k); bodegaSel=(p.tambores||[]).map(()=>-1);
+  const opts=arr=>arr.map(o=>`<option value="${o.k}">${esc(o.texto)}</option>`).join('');
+  let c='';
+  if(p.tipo==='order') c=`<div id="ordenLista"></div>`;
+  else if(p.tipo==='match') c=`<div class="match">`+p.izquierda.map((t,i)=>`<div class="mrow"><div class="mizq"><span class="n">${i+1}</span><span>${rico(t,62)}</span></div>
+      <select data-i="${i}" aria-label="Pareja para la fila ${i+1}"><option value="-1">— elijan —</option>${opts(p.derecha)}</select></div>`).join('')+`</div>`;
+  else if(p.tipo==='fill'){ const partes=p.texto.split(/\{(\d+)\}/);
+    c=`<div class="hint" style="text-transform:uppercase;letter-spacing:.12em;font-size:.7rem">Banco</div><div>${p.banco.map(o=>`<span class="chipb">${esc(o.texto)}</span>`).join('')}</div>
+      <div class="parrafo">${partes.map((s,i)=>i%2===0?esc(s):`<select class="hueco" data-i="${+s-1}" aria-label="Espacio ${s}"><option value="-1">(${s})</option>${opts(p.banco)}</select>`).join('')}</div>`; }
+  else if(p.tipo==='bodega'){
+    c=`<div class="tambores">`+p.tambores.map((t,i)=>`<div class="tamb" data-t="${i}">${GRAF.rotulo(t.clase,44)}<div><b>Tambor ${i+1}</b><br>${esc(t.t)} <span class="hint">(clase ${esc(t.clase)})</span></div>
+      <select data-b="${i}" aria-label="Jaula para el tambor ${i+1}"><option value="-1">— jaula —</option>${p.jaulas.map((j,k)=>`<option value="${k}">${esc(j)}</option>`).join('')}</select></div>`).join('')+`</div>
+      <div class="jaulas">${p.jaulas.map((j,k)=>`<div class="jaula" data-j="${k}"><h4>${esc(j)}</h4><div class="cont"></div></div>`).join('')}</div>
+      <div style="margin-top:8px">${BTN_TOOLS}</div>`;
+  }
+  else if(p.tipo==='sopa') c=miniSopaHTML(p);
+  else if(p.tipo==='cruci') c=miniCruciHTML(p);
+  else c=p.opciones.map(o=>`<button class="opt ${p.tipo==='multi'?'multi':''}" data-k="${o.k}" aria-pressed="false"><span class="mark"></span><span>${rico(o.texto,46)}</span></button>`).join('');
+  return `<div class="nivel">${esc(p.nivel)} · ${AYUDA[p.tipo]||''}</div><div class="enun">${rico(p.enunciado,70)}</div>${c}
+    <div style="margin-top:14px"><button class="btn" id="btnResp" ${['order','sopa','cruci'].includes(p.tipo)?'':'disabled'}>Enviar respuesta</button> <span class="hint">No se puede cambiar después.</span></div>`;
+}
+function pintarOrden(){
+  const p=preguntaActual, cont=$('#ordenLista'); if(!cont) return; const m={}; p.opciones.forEach(o=>m[o.k]=o.texto);
+  cont.innerHTML=ordenActual.map((k,i)=>`<div class="ord"><span class="n">${i+1}</span><span class="t">${esc(m[k])}</span>
+    <button data-d="-1" data-i="${i}" ${i===0?'disabled':''} aria-label="Subir">▲</button><button data-d="1" data-i="${i}" ${i===ordenActual.length-1?'disabled':''} aria-label="Bajar">▼</button></div>`).join('');
+  cont.querySelectorAll('button').forEach(b=>b.onclick=()=>{ const i=+b.dataset.i,j=i+ +b.dataset.d; [ordenActual[i],ordenActual[j]]=[ordenActual[j],ordenActual[i]]; pintarOrden(); });
+}
+let tamborActivo=null;
+function pintarBodega(){
+  const p=preguntaActual; if(!p||p.tipo!=='bodega') return;
+  document.querySelectorAll('.jaula').forEach(j=>{ const k=+j.dataset.j; const dentro=p.tambores.map((t,i)=>({t,i})).filter(x=>bodegaSel[x.i]===k);
+    j.querySelector('.cont').innerHTML=dentro.map(x=>`<span class="drum">${GRAF.rotulo(x.t.clase,22)} T${x.i+1}</span>`).join('')||'<span class="hint">vacía</span>'; });
+  document.querySelectorAll('select[data-b]').forEach(s=>s.value=String(bodegaSel[+s.dataset.b]));
+  document.querySelectorAll('.tamb').forEach(t=>t.classList.toggle('sel', +t.dataset.t===tamborActivo));
+  $('#btnResp').disabled = bodegaSel.some(v=>v<0);
+}
+function enlazar(){
+  if(vista.startsWith('z') || vista==='extras') enlazarPregunta();
+  if(vista==='exp') enlazarExpediente();
+  if(vista==='reto') enlazarReto();
+  document.querySelectorAll('[data-extra]').forEach(b=>b.onclick=()=>abrirExtra(+b.dataset.extra));
+}
+function enlazarPregunta(){
+  const p=preguntaActual; if(!p || !$('#btnResp')) return;
+  if(p.tipo==='sopa'||p.tipo==='cruci') enlazarMini();
+  if(p.tipo==='order') pintarOrden();
+  if(p.tipo==='match'||p.tipo==='fill'){ const ss=[...document.querySelectorAll('#cardPregunta select[data-i]')].sort((a,b)=>a.dataset.i-b.dataset.i);
+    const upd=()=>{ sel=ss.map(s=>+s.value); $('#btnResp').disabled=sel.some(v=>v<0); }; ss.forEach(s=>s.onchange=upd); }
+  if(p.tipo==='bodega'){
+    document.querySelectorAll('select[data-b]').forEach(s=>s.onchange=()=>{ bodegaSel[+s.dataset.b]=+s.value; pintarBodega(); });
+    document.querySelectorAll('.tamb').forEach(t=>t.onclick=e=>{ if(e.target.tagName==='SELECT'||e.target.tagName==='OPTION') return; tamborActivo=+t.dataset.t; pintarBodega(); });
+    document.querySelectorAll('.jaula').forEach(j=>j.onclick=()=>{ if(tamborActivo===null) return; bodegaSel[tamborActivo]=+j.dataset.j; tamborActivo=null; pintarBodega(); });
+    pintarBodega();
+  }
+  document.querySelectorAll('#cardPregunta .opt').forEach(b=>b.onclick=()=>{
+    const k=+b.dataset.k;
+    if(p.tipo==='multi'){ b.classList.toggle('sel'); sel=[...document.querySelectorAll('#cardPregunta .opt.sel')].map(x=>+x.dataset.k); }
+    else { document.querySelectorAll('#cardPregunta .opt').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); sel=[k]; }
+    document.querySelectorAll('#cardPregunta .opt').forEach(x=>x.setAttribute('aria-pressed',x.classList.contains('sel')));
+    $('#btnResp').disabled=sel.length===0;
+  });
+  $('#btnResp').onclick=enviar;
+}
+async function enviar(){
+  if(enviando) return; enviando=true;
+  const p=preguntaActual; $('#btnResp').disabled=true;
+  const antes=E.temas.map(t=>({id:t.id,sellos:t.sellos,cerrado:t.cerrado}));
+  const valor = p.tipo==='order'?ordenActual:(p.tipo==='bodega'?bodegaSel:(p.tipo==='sopa'?MINI.sopa:(p.tipo==='cruci'?miniCruciResp():sel)));
+  let resp; try{ resp=await api('/api/responder','POST',{qid:p.id,sel:valor}); }catch(e){ enviando=false; $('#btnResp').disabled=false; alert('Sin conexión: intenten de nuevo.'); return; }
+  enviando=false;
+  if(resp.error){ if(resp.estado){E=resp.estado;} alert(resp.error==='tiempo'?'Se terminó el tiempo.':(resp.error==='fuera_de_orden'?'Esa pregunta ya fue respondida.':resp.error)); await refrescar(true); return; }
+  E=resp.estado; fijarReloj(); pintarBarra();
+  const t=E.temas.find(x=>x.id===resp.tema), a=antes.find(x=>x.id===resp.tema);
+  let msg='';
+  if(t.cerrado && !a.cerrado) msg+=`<div class="fb ok"><h3>&#128274; Zona ${t.id} contenida</h3>Puntos: <b>${f2(t.puntos)}/${t.total}</b> · Sellos: <b>${t.sellos}/4</b>${t.sellos<4?' (faltan '+(4-t.sellos)+': se recuperan con retos extra al final).':' 🎉'}</div>`;
+  else if(t.sellos>a.sellos) msg+=`<div class="fb ok">&#128737; ¡Sello obtenido! Zona ${t.id}: ${t.sellos}/4.</div>`;
+  if(E.temas.every(x=>x.cerrado) && !E.expediente.entregado) msg+=`<div class="fb par">Terminaron las 4 zonas. Falta el <b>Expediente de contención</b> (Zona 5); después se abre el reto final.</div>`;
+  const lista = resp.tipo==='order'?'<ol>'+resp.correcta.map(x=>`<li>${rico(x,30)}</li>`).join('')+'</ol>':'<ul>'+resp.correcta.map(x=>`<li>${rico(x,30)}</li>`).join('')+'</ul>';
+  const tit = resp.ok?'🎉 '+azar(MSJ_OK):(resp.parcial?'🟡 '+azar(MSJ_PAR)+' ('+f2(resp.puntos)+' de 1)':'💥 '+azar(MSJ_MAL));
+  sonar(resp.ok?'ok':(resp.parcial?'par':'mal'));
+  $('#cardPregunta').innerHTML=`<div class="fb ${resp.ok?'ok festejo':(resp.parcial?'par':'mal sacudir')}" role="status"><h3 style="font-size:1.3rem">${tit}</h3>${resp.ok?'':`<div class="hint">Respuesta esperada:</div>${lista}`}<p style="margin:6px 0 0">${esc(resp.explicacion)}</p></div>${msg}
+    <button class="btn" id="btnSig">Continuar</button>`;
+  const aside=document.querySelector('aside'); if(aside){ const prev=fichasPrevias; aside.innerHTML=lateral(); pintarPuzzle(prev); fichasPrevias=E.piezas.map(f=>f.slice()); }
+  if(resp.ok) confeti();
+  $('#btnSig').onclick=()=>{ if(extraActual){ extraActual=null; vista='extras'; } render(); };
+  $('#btnSig').focus();
+}
+
+/* ---------- expediente (zona 5) ---------- */
+const CLASES=[["1","Clase 1 · Explosivos"],["2.1","2.1 · Gases inflamables"],["2.2","2.2 · Gases no inflamables, no tóxicos"],["2.3","2.3 · Gases tóxicos"],["3","Clase 3 · Líquidos inflamables"],
+ ["4.1","4.1 · Sólidos inflamables"],["4.2","4.2 · Combustión espontánea"],["4.3","4.3 · Peligroso cuando se moja"],["5.1","5.1 · Comburentes"],["5.2","5.2 · Peróxidos orgánicos"],
+ ["6.1","6.1 · Tóxicas"],["6.2","6.2 · Infecciosas"],["7","Clase 7 · Radiactivo"],["8","Clase 8 · Corrosivas"],["9","Clase 9 · Peligrosos varios"]];
+const SECC=["Identificación del producto","Identificación del peligro","Composición","Primeros auxilios","Lucha contra incendios","Vertido accidental","Manipulación y almacenamiento","Controles de exposición / protección personal","Propiedades físicas y químicas","Estabilidad y reactividad","Información toxicológica","Información ecotoxicológica","Eliminación","Transporte","Reglamentación","Otras informaciones"];
+const JAULAS=[["J1","J1 · permanganato de potasio (5.1)"],["J2","J2 · thinner y pinturas (3)"],["J3","J3 · baterías y ácidos (8)"],["J4","J4 · plaguicidas (6.1)"],["J5","J5 · cilindros de CO₂ (2.2)"],["CA","Celda aislada con ventilación propia"]];
+let EXPB=null, expTimer=null, expArmado=false;
+function pantallaExpediente(){
+  const x=E.expediente; EXPB=Object.assign({c1:'',c2:'',c3:[],c4:'',c5j:'',c5:''}, x.borrador||{});
+  const crit=x.criterios.map(c=>`<li>${esc(c.nombre)}: <b>${f2(c.max)}</b></li>`).join('');
+  const bloqueado = x.entregado || !E.abierto || E.tiempo.agotado;
+  const rev = x.revision ? `<div class="fb ok"><h3>Revisión del docente: ${f2(x.revision.total)} / 2</h3>${x.criterios.map(c=>`${esc(c.nombre)}: <b>${f2(x.revision[c.k]||0)}</b> / ${f2(c.max)}`).join('<br>')}${x.revision.obs?`<p>${esc(x.revision.obs)}</p>`:''}</div>`:'';
+  return `<div class="card"><div class="etq">Zona 5 · Calificación docente</div><h2 style="margin:3px 0">Expediente de contención</h2>
+    <div class="instr"><b>1 caso · 2 puntos · ≈ 8 min.</b> ${esc(x.intro)} Se guarda solo mientras escriben. Se entrega una vez; si se acaba el tiempo, se entrega lo guardado. Al entregarlo (y con las 4 zonas completas) se abre el reto final.
+    <br>Criterios de la rúbrica:<ul style="margin:4px 0 0">${crit}</ul></div><div style="margin-top:8px">${BTN_TOOLS}</div>${turnoHtml()}</div>
+  ${rev}
+  <div class="card"><div class="etq">Caso ${x.variante}</div><h3>${esc(x.titulo)}</h3><p>${esc(x.caso)}</p><p class="hint">${esc(x.bodega)}</p></div>
+  <fieldset class="card" id="fsExp" ${bloqueado?'disabled':''} style="border:1px solid var(--line)">
+    <label for="c1"><b>1.</b> Nombre oficial y código del residuo según el AM 142</label>
+    <input id="c1" list="dl142" value="${esc(EXPB.c1)}" placeholder="Código · nombre oficial (pueden buscar en el Archivo 142)" autocomplete="off">
+    <datalist id="dl142">${LISTADO142.filter(x=>x[4]!=='A').map(x=>`<option value="${esc(x[0]+' · '+x[1])}">`).join('')}</datalist>
+    <label for="c2"><b>2.</b> Clase o división de peligro según la NTE INEN 2266</label>
+    <div style="display:flex;gap:10px;align-items:center"><select id="c2"><option value="">— elijan —</option>${CLASES.map(c=>`<option value="${c[0]}" ${EXPB.c2===c[0]?'selected':''}>${esc(c[1])}</option>`).join('')}</select><span id="rotPrev"></span></div>
+    <div><b>3.</b> Armen la etiqueta SGA: arrastren (o toquen) los pictogramas que debe llevar el envase.</div>
+    <div class="paleta" id="paleta">${Object.keys(GRAF.GHS).map(k=>`<span class="pz" draggable="true" data-g="${k}" tabindex="0" role="button" aria-label="Pictograma SGA ${k}">${GRAF.pictogramaSGA(k,52,false)}</span>`).join('')}</div>
+    <div class="etiqueta" id="etiqueta" aria-live="polite"></div>
+    <label for="c4"><b>4.</b> Sección de la FDS que consultan primero para el incidente del caso</label>
+    <select id="c4"><option value="">— elijan —</option>${SECC.map((s,i)=>`<option value="${i+1}" ${String(EXPB.c4)===String(i+1)?'selected':''}>Sección ${i+1} · ${esc(s)}</option>`).join('')}</select>
+    <label for="c5j"><b>5.</b> ¿Dónde ubican el residuo en la bodega?</label>
+    <select id="c5j"><option value="">— elijan —</option>${JAULAS.map(j=>`<option value="${j[0]}" ${EXPB.c5j===j[0]?'selected':''}>${esc(j[1])}</option>`).join('')}</select>
+    <label for="c5">Justifiquen la ubicación en 3 a 5 oraciones: compatibilidad según el Anexo K y dos condiciones de almacenamiento de la NTE INEN 2266 que aplicarían.</label>
+    <textarea id="c5" maxlength="2500">${esc(EXPB.c5)}</textarea>
+    <div class="estado-guardado" id="expEstado">${x.entregado?'Entregado.':'Los cambios se guardan solos.'}</div>
+    ${x.entregado?'':`<div style="margin-top:10px"><button class="btn" id="btnExp" type="button">Entregar expediente</button> <span class="hint" id="expMsg">Revisen antes: no se puede cambiar después.</span></div>`}
+  </fieldset>${navAntSig()}`;
+}
+function pintarEtiqueta(){
+  const et=$('#etiqueta'); if(!et) return;
+  et.innerHTML = `<div style="font-weight:800">RESIDUO PELIGROSO · ${esc(E.expediente.titulo)}</div>` + (EXPB.c3.length? `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">${EXPB.c3.map(g=>`<span title="Toquen para quitar" data-q="${g}" style="cursor:pointer">${GRAF.pictogramaSGA(g,60,false)}</span>`).join('')}</div>` : '<div class="ph">Suelten aquí los pictogramas.</div>');
+  document.querySelectorAll('#paleta .pz').forEach(p=>p.classList.toggle('on', EXPB.c3.includes(p.dataset.g)));
+  et.querySelectorAll('[data-q]').forEach(s=>s.onclick=()=>{ if($('#fsExp').disabled) return; EXPB.c3=EXPB.c3.filter(x=>x!==s.dataset.q); pintarEtiqueta(); guardarExp(); });
+  const rp=$('#rotPrev'); if(rp) rp.innerHTML = EXPB.c2 && GRAF.ROT[EXPB.c2] ? GRAF.rotulo(EXPB.c2,46) : '';
+}
+function guardarExp(inmediato){
+  if(E.expediente.entregado) return;
+  $('#expEstado').textContent='Guardando…';
+  clearTimeout(expTimer);
+  expTimer=setTimeout(async()=>{ try{ const r=await api('/api/expediente','POST',{campos:EXPB}); $('#expEstado').textContent = r.ok?'Guardado ✔':(r.error||'No se pudo guardar'); if(r.ok) E.expediente.borrador=JSON.parse(JSON.stringify(EXPB)); }catch(e){ $('#expEstado').textContent='Sin conexión: se reintentará al siguiente cambio.'; } }, inmediato?0:1200);
+}
+function enlazarExpediente(){
+  pintarEtiqueta();
+  if($('#fsExp').disabled) return;
+  ['c1','c5'].forEach(k=>$('#'+k).addEventListener('input',e=>{ EXPB[k]=e.target.value; guardarExp(); }));
+  ['c2','c4','c5j'].forEach(k=>$('#'+k).addEventListener('change',e=>{ EXPB[k]=e.target.value; pintarEtiqueta(); guardarExp(); }));
+  const tog=g=>{ EXPB.c3 = EXPB.c3.includes(g)?EXPB.c3.filter(x=>x!==g):EXPB.c3.concat([g]); pintarEtiqueta(); guardarExp(); };
+  document.querySelectorAll('#paleta .pz').forEach(p=>{ p.onclick=()=>tog(p.dataset.g); p.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); tog(p.dataset.g);} };
+    p.ondragstart=e=>{ e.dataTransfer.setData('text/plain',p.dataset.g); }; });
+  const et=$('#etiqueta');
+  et.ondragover=e=>{ e.preventDefault(); et.classList.add('over'); }; et.ondragleave=()=>et.classList.remove('over');
+  et.ondrop=e=>{ e.preventDefault(); et.classList.remove('over'); const g=e.dataTransfer.getData('text/plain'); if(g&&!EXPB.c3.includes(g)){ EXPB.c3.push(g); pintarEtiqueta(); guardarExp(); } };
+  const b=$('#btnExp'); if(b) b.onclick=async()=>{
+    const falta=['c1','c2','c4','c5j','c5'].filter(k=>!String(EXPB[k]).trim()).length + (EXPB.c3.length?0:1);
+    if(!expArmado){ expArmado=true; b.textContent='Pulsen otra vez para ENTREGAR'; $('#expMsg').textContent = falta? `Atención: faltan ${falta} respuesta(s). Pueden entregar igual.`:'Después no se puede cambiar.'; setTimeout(()=>{ expArmado=false; if(document.body.contains(b)) b.textContent='Entregar expediente'; },6000); return; }
+    b.disabled=true; clearTimeout(expTimer);
+    const r=await api('/api/expediente','POST',{campos:EXPB,entregar:true}); expArmado=false;
+    if(r.error){ alert(r.error); b.disabled=false; return; }
+    E=r.estado; vista = E.reto_abierto ? 'reto' : 'exp'; render();
+  };
+}
+
+/* ---------- reto final ---------- */
+let RT=null, retoTimer=null;
+const sinTildes=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toUpperCase().replace(/[^A-Z]/g,'');
+function pantallaReto(){
+  if(E.reto.entregado) return `<div class="card fb ok"><h3>Reto final entregado${E.reto.auto?' (automático al terminar el tiempo)':''}</h3>Crucigrama: <b>${E.reto.cw_ok}/${E.reto.cw_total}</b> · Sopa: <b>${E.reto.sopa_ok}/${E.reto.sopa_total}</b> · Nota: <b>${f2(E.notas.reto)}/1</b></div>`+navAntSig();
+  if(!E.vista_reto) return `<div class="card"><div class="etq">Reto final</div><h2>&#128274; Bloqueado</h2><p>Se abre cuando completen las <b>4 zonas</b> y entreguen el <b>expediente</b>.</p>
+     <p class="hint">Zonas completas: ${E.temas.filter(t=>t.cerrado).length}/4 · Expediente: ${E.expediente.entregado?'entregado':'pendiente'}</p></div>`+navAntSig();
+  const v=E.vista_reto, cw=v.crucigrama, sp=v.sopa, d=v.borrador||{};
+  RT={celdas:{},letras:Object.assign({}, d.letras||{}),sopa:(d.sopa||[]).slice(),dir:'H',ini:null,armado:false,cw,sp};
+  cw.entradas.forEach(e=>{ for(let i=0;i<e.largo;i++){ const k=(e.r+(e.dir==='V'?i:0))+','+(e.c+(e.dir==='H'?i:0)); if(!RT.celdas[k]) RT.celdas[k]={claves:[]}; RT.celdas[k].claves.push(e.clave); if(i===0) RT.celdas[k].n=e.n; }});
+  const cs=`min(32px, calc((100vw - 80px) / ${Math.max(cw.cols,sp.n)}))`;
+  let g=''; for(let r=0;r<cw.filas;r++) for(let c=0;c<cw.cols;c++){ const k=r+','+c, cel=RT.celdas[k];
+    g+=cel?`<div class="cwc">${cel.n?`<span class="num">${cel.n}</span>`:''}<input maxlength="1" autocomplete="off" autocapitalize="characters" data-r="${r}" data-c="${c}" aria-label="Fila ${r+1}, columna ${c+1}" value="${esc(RT.letras[k]||'')}"></div>`:`<div class="cwb"></div>`; }
+  const lis=dir=>cw.entradas.filter(e=>e.dir===dir).map(e=>`<li><button class="cl" data-clave="${e.clave}"><b>${e.n}.</b> ${esc(e.pista)} <span class="hint">(${e.largo})</span> <span class="resp">${esc(e.resp)}</span></button></li>`).join('');
+  let sg=''; for(let r=0;r<sp.n;r++) for(let c=0;c<sp.n;c++) sg+=`<button class="sc" data-r="${r}" data-c="${c}" aria-label="Fila ${r+1} columna ${c+1}, ${sp.grid[r][c]}">${sp.grid[r][c]}</button>`;
+  return `<div class="card"><div class="etq">Reto final · 1 punto (10 %)</div><h2>La cámara de los nombres</h2>
+    <div class="instr"><b>6 palabras de crucigrama (0,5) + 6 de sopa de letras (0,5) · ≈ 7 min.</b> Cada pista tiene un responsable que lidera la búsqueda. El avance se guarda solo. Se entrega <b>una sola vez</b>; si se acaba el tiempo, se entrega lo guardado.</div></div>
+  <div class="card"><h3>1 · Crucigrama</h3><p class="hint">Toquen una pista para ir a su primera casilla. Escriban sin tildes; el cursor avanza solo.</p>
+    <div class="cwwrap"><div class="cw" id="cw" style="--cs:${cs};grid-template-columns:repeat(${cw.cols},var(--cs))">${g}</div></div>
+    <div class="clues"><div><h4>Horizontales</h4><ul>${lis('H')}</ul></div><div><h4>Verticales</h4><ul>${lis('V')}</ul></div></div></div>
+  <div class="card"><h3>2 · Sopa de letras</h3><p class="hint">Encuentren el nombre (una palabra clave) de cada pictograma. Toquen la <b>primera</b> y la <b>última</b> letra; valen horizontal, vertical y diagonal, en ambos sentidos.</p>
+    <div class="cwwrap"><div class="sopa" id="sopa" style="--cs:${cs};grid-template-columns:repeat(${sp.n},var(--cs))">${sg}</div></div>
+    <p id="sopaMsg" class="hint" style="min-height:1.3em" role="status"></p><div id="sopaMarcas"></div>
+    <div class="sopapistas">${sp.palabras.map(p=>`<div>${GRAF.rico(p.pista,esc,48)}<span>${p.largo} letras <span class="resp">${esc(p.resp)}</span></span></div>`).join('')}</div></div>
+  <div class="card center"><button class="btn" id="btnEntregar">Entregar reto final</button><p class="hint" id="entregaMsg">Revisen con calma: no se puede cambiar después.</p><span class="estado-guardado" id="retoEstado"></span></div>${navAntSig()}`;
+}
+function respCW(){ const o={}; RT.cw.entradas.forEach(e=>{ o[e.clave]=Array.from({length:e.largo},(_,i)=>RT.letras[(e.r+(e.dir==='V'?i:0))+','+(e.c+(e.dir==='H'?i:0))]||'').join(''); }); return o; }
+function guardarReto(){ clearTimeout(retoTimer); const st=$('#retoEstado'); if(st) st.textContent='Guardando…';
+  retoTimer=setTimeout(async()=>{ try{ const r=await api('/api/reto','POST',{cw:respCW(),sopa:RT.sopa,letras:RT.letras}); if(st) st.textContent=r.ok?'Avance guardado ✔':(r.error||''); }catch(e){ if(st) st.textContent='Sin conexión: se reintentará.'; } },1500); }
+function enlazarReto(){
+  if(!RT || !$('#cw')) return;
+  const cw=RT.cw, sp=RT.sp, inputs=[...document.querySelectorAll('#cw input')], porK={}; inputs.forEach(i=>porK[i.dataset.r+','+i.dataset.c]=i);
+  const entradaDe=k=>{ const cel=RT.celdas[k]; const cl=cel.claves.find(x=>x.endsWith(RT.dir))||cel.claves[0]; RT.dir=cl.slice(-1); return cw.entradas.find(e=>e.clave===cl); };
+  const celdasDe=e=>Array.from({length:e.largo},(_,i)=>(e.r+(e.dir==='V'?i:0))+','+(e.c+(e.dir==='H'?i:0)));
+  const marcar=e=>{ inputs.forEach(i=>i.parentNode.classList.remove('act')); if(e) celdasDe(e).forEach(k=>porK[k].parentNode.classList.add('act')); };
+  inputs.forEach(inp=>{ const k=inp.dataset.r+','+inp.dataset.c;
+    inp.addEventListener('focus',()=>{ marcar(entradaDe(k)); inp.select(); });
+    inp.addEventListener('click',()=>{ const cel=RT.celdas[k]; if(cel.claves.length>1&&document.activeElement===inp) RT.dir=RT.dir==='H'?'V':'H'; marcar(entradaDe(k)); });
+    inp.addEventListener('input',()=>{ const l=sinTildes(inp.value).slice(-1); inp.value=l; RT.letras[k]=l; guardarReto();
+      if(l){ const e=entradaDe(k), ks=celdasDe(e), i=ks.indexOf(k); if(i>=0&&i<ks.length-1) porK[ks[i+1]].focus(); } });
+    inp.addEventListener('keydown',e=>{ const d={ArrowRight:[0,1],ArrowLeft:[0,-1],ArrowDown:[1,0],ArrowUp:[-1,0]}[e.key];
+      if(d){ const n=porK[(+inp.dataset.r+d[0])+','+(+inp.dataset.c+d[1])]; if(n){ e.preventDefault(); n.focus(); } }
+      else if(e.key==='Backspace'&&!inp.value){ const en=entradaDe(k), ks=celdasDe(en), i=ks.indexOf(k); if(i>0){ e.preventDefault(); porK[ks[i-1]].focus(); } } });
+  });
+  document.querySelectorAll('.cl').forEach(b=>b.onclick=()=>{ const e=cw.entradas.find(x=>x.clave===b.dataset.clave); RT.dir=e.dir; porK[e.r+','+e.c].focus(); });
+  const celdasS=[...document.querySelectorAll('#sopa .sc')], sc=(r,c)=>celdasS[r*sp.n+c];
+  const linea=s=>{ const [r1,c1,r2,c2]=s, dr=Math.sign(r2-r1), dc=Math.sign(c2-c1), n=Math.max(Math.abs(r2-r1),Math.abs(c2-c1)); return Array.from({length:n+1},(_,i)=>[r1+dr*i,c1+dc*i]); };
+  const pintarSopa=()=>{ celdasS.forEach(b=>{b.style.background='';b.style.color='';b.classList.remove('ini');});
+    RT.sopa.forEach((s,i)=>linea(s).forEach(([r,c])=>{ const b=sc(r,c); b.style.background=`hsl(${(i*53+90)%360} 65% 34%)`; b.style.color='#fff'; }));
+    if(RT.ini) sc(RT.ini[0],RT.ini[1]).classList.add('ini');
+    $('#sopaMarcas').innerHTML=RT.sopa.length?`<div class="hint">Marcadas: <b>${RT.sopa.length}</b> de ${sp.palabras.length}. Toquen una marca para quitarla.</div>`+RT.sopa.map((s,i)=>`<button class="marca2" data-i="${i}" style="border-color:hsl(${(i*53+90)%360} 65% 50%)">${linea(s).map(([r,c])=>sp.grid[r][c]).join('')} ✕</button>`).join(''):'';
+    document.querySelectorAll('.marca2').forEach(b=>b.onclick=()=>{ RT.sopa.splice(+b.dataset.i,1); guardarReto(); pintarSopa(); }); };
+  celdasS.forEach(b=>b.onclick=()=>{ const r=+b.dataset.r, c=+b.dataset.c, msg=$('#sopaMsg'); msg.textContent='';
+    if(!RT.ini){ RT.ini=[r,c]; pintarSopa(); return; } const [r1,c1]=RT.ini; if(r1===r&&c1===c){ RT.ini=null; pintarSopa(); return; }
+    const dr=r-r1, dc=c-c1; if(!(dr===0||dc===0||Math.abs(dr)===Math.abs(dc))){ msg.textContent='Esa línea no es recta: horizontal, vertical o diagonal.'; RT.ini=null; pintarSopa(); return; }
+    if(RT.sopa.length>=sp.palabras.length+4){ msg.textContent='Demasiadas marcas: quiten alguna.'; RT.ini=null; pintarSopa(); return; }
+    RT.sopa.push([r1,c1,r,c]); RT.ini=null; guardarReto(); pintarSopa(); });
+  pintarSopa();
+  $('#btnEntregar').onclick=async()=>{ const btn=$('#btnEntregar'), m=$('#entregaMsg');
+    if(!RT.armado){ RT.armado=true; btn.textContent='Pulsen otra vez para ENTREGAR'; m.textContent='Después de entregar no se puede cambiar nada.'; setTimeout(()=>{ if(RT&&RT.armado&&document.body.contains(btn)){ RT.armado=false; btn.textContent='Entregar reto final'; m.textContent='Revisen con calma: no se puede cambiar después.'; } },6000); return; }
+    btn.disabled=true; clearTimeout(retoTimer);
+    const r=await api('/api/reto','POST',{cw:respCW(),sopa:RT.sopa,letras:RT.letras,entregar:true});
+    if(r.error){ m.textContent=r.error; btn.disabled=false; return; }
+    E=r.estado; RT=null; vista = E.fase==='extras'?'extras':'reto'; render(); };
+}
+
+/* ---------- extras y final ---------- */
+function pantallaExtras(){
+  const faltan=E.temas.filter(t=>t.cerrado&&t.faltan>0);
+  if(extraActual) return `<div class="card"><div class="etq">Zona ${extraActual.tema} · <span class="tag">Reto extra</span></div>${turnoHtml()}</div><div class="card" id="cardPregunta">${cuerpoPregunta(extraActual.p)}</div>`;
+  const items=faltan.map(t=>`<div class="card"><div class="etq">Zona ${t.id}</div><b>${esc(t.zona)}</b><div class="hint">Faltan <b>${t.faltan}</b> sello(s). Cada reto extra acertado por completo da 1 sello. Disponibles: ${t.extras_quedan}.</div>
+    <div style="margin-top:8px">${t.extras_quedan>0&&E.abierto&&!E.tiempo.agotado?`<button class="btn" data-extra="${t.id}">Enfrentar reto extra</button>`:'<span class="tag">Sin retos digitales</span> <span class="hint">Pidan un reto presencial al docente.</span>'}</div></div>`).join('');
+  return `<div class="card"><div class="etq">Fase final</div><h2>La bodega aún no está sellada</h2><p>Entregaron todo, pero faltan sellos. El primer grupo con los ${E.max_sellos} sellos gana el punto directo. <b>Los retos extra no cambian la nota.</b></p></div>${items}`;
+}
+async function abrirExtra(tema){
+  const r=await api('/api/pregunta-extra?tema='+tema);
+  if(!r.pregunta){ alert('No hay más retos digitales en esta zona. Pidan un reto presencial al docente.'); return; }
+  extraActual={tema,p:r.pregunta}; preguntaActual=r.pregunta; vista='extras'; render();
+}
+function pantallaFinal(){
+  const g=E.yo_gano;
+  return `<div class="card center ${g?'ganador':''}"><div class="big">${g?'🏆':'🛡'}</div><h2>${g?'¡Contuvieron la bodega primero!':'Bodega sellada'}</h2>
+   <p>${g?'Su grupo fue el primero en reunir los 16 sellos: <b>+1 punto directo</b>.':(!E.reto_ok_ganar?`Reunieron los sellos, pero para ganar el punto hacía falta al menos el <b>${Math.round(E.min_reto_ganar*100)} %</b> del reto final.`:(E.ganador?`Reunieron todos los sellos; el grupo ganador fue <b>${esc(E.ganador)}</b>.`:'Reunieron todos los sellos.'))}</p>
+   <p class="hint">Descarguen su informe PDF en el panel «Mi nota».</p></div>`;
+}
+
+
+/* ---------- sonidos y celebración ---------- */
+let SONIDO=true; try{ SONIDO = localStorage.getItem('bt_sonido')!=='0'; }catch(e){}
+function alternarSonido(){ SONIDO=!SONIDO; try{ localStorage.setItem('bt_sonido', SONIDO?'1':'0'); }catch(e){} pintarBarra(); if(SONIDO) sonar('ok'); }
+const MSJ_OK=['¡Felicidades, muy bien!','¡Excelente, brigada!','¡Correcto! Residuo bajo control','¡Muy bien! Así se maneja una bodega segura'];
+const MSJ_PAR=['¡Bien, pero falta completar!','Van por buen camino, pero no todo está bien','Casi: revisen lo que falló'];
+const MSJ_MAL=['¡Uy, qué mal! Esta vez no','¡Alerta! Respuesta incorrecta','¡Fuga en la bodega! No era esa'];
+const azar=a=>a[Math.floor(Math.random()*a.length)];
+let _ac=null;
+function sonar(tipo){
+  if(!SONIDO) return;
+  try{
+    _ac=_ac||new (window.AudioContext||window.webkitAudioContext)();
+    const notas = tipo==='ok'?[[523,0],[659,.11],[784,.22],[1047,.34]] : tipo==='par'?[[523,0],[587,.14]] : [[220,0],[165,.18]];
+    notas.forEach(([fr,t0])=>{ const o=_ac.createOscillator(), g=_ac.createGain(); o.type=tipo==='mal'?'sawtooth':'triangle'; o.frequency.value=fr;
+      const t=_ac.currentTime+t0; g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(tipo==='mal'?0.12:0.2,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+(tipo==='mal'?0.32:0.22));
+      o.connect(g).connect(_ac.destination); o.start(t); o.stop(t+0.4); });
+  }catch(e){}
+}
+function confeti(){
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const box=document.createElement('div'); box.className='confeti'; box.setAttribute('aria-hidden','true');
+  const col=['#9cff3b','#ffd21f','#38d97a','#5fb4ff','#ff7a59'];
+  box.innerHTML=Array.from({length:60},(_,i)=>`<i style="left:${Math.random()*100}%;background:${col[i%5]};animation-delay:${Math.random()*.4}s;animation-duration:${1.4+Math.random()}s;transform:rotate(${Math.random()*360}deg)"></i>`).join('');
+  document.body.appendChild(box); setTimeout(()=>box.remove(),2800);
+}
+
+/* ---------- minijuegos dentro de las zonas ---------- */
+let MINI=null;
+function miniSopaHTML(p){
+  MINI={tipo:'sopa',sopa:[],ini:null,p};
+  const cs=`min(34px, calc((100vw - 90px) / ${p.n}))`;
+  let g=''; for(let r=0;r<p.n;r++) for(let c=0;c<p.n;c++) g+=`<button class="sc" data-r="${r}" data-c="${c}" aria-label="Fila ${r+1} columna ${c+1}, ${p.grid[r][c]}">${p.grid[r][c]}</button>`;
+  return `<div id="mini"><div class="cwwrap"><div class="sopa" id="mSopa" style="--cs:${cs};grid-template-columns:repeat(${p.n},var(--cs))">${g}</div></div>
+    <p id="mMsg" class="hint" role="status" style="min-height:1.3em"></p><div id="mMarcas"></div>
+    <ol class="hint" style="margin:6px 0 0 18px">${p.palabras.map(w=>`<li>${esc(w.pista)} <span class="resp">${w.largo} letras</span></li>`).join('')}</ol></div>`;
+}
+function miniCruciHTML(p){
+  MINI={tipo:'cruci',letras:{},celdas:{},dir:'H',p};
+  p.entradas.forEach(e=>{ for(let i=0;i<e.largo;i++){ const k=(e.r+(e.dir==='V'?i:0))+','+(e.c+(e.dir==='H'?i:0)); if(!MINI.celdas[k]) MINI.celdas[k]={claves:[]}; MINI.celdas[k].claves.push(e.clave); if(i===0) MINI.celdas[k].n=e.n; }});
+  const cs=`min(34px, calc((100vw - 90px) / ${p.cols}))`;
+  let g=''; for(let r=0;r<p.filas;r++) for(let c=0;c<p.cols;c++){ const k=r+','+c, cel=MINI.celdas[k];
+    g+=cel?`<div class="cwc">${cel.n?`<span class="num">${cel.n}</span>`:''}<input maxlength="1" autocomplete="off" autocapitalize="characters" data-r="${r}" data-c="${c}" aria-label="Fila ${r+1}, columna ${c+1}"></div>`:`<div class="cwb"></div>`; }
+  const lis=d=>p.entradas.filter(e=>e.dir===d).map(e=>`<li><button class="cl" type="button" data-clave="${e.clave}"><b>${e.n}.</b> ${esc(e.pista)} <span class="hint">(${e.largo})</span></button></li>`).join('');
+  return `<div id="mini"><div class="cwwrap"><div class="cw" id="mCw" style="--cs:${cs};grid-template-columns:repeat(${p.cols},var(--cs))">${g}</div></div>
+    <div class="clues"><div><h4>Horizontales</h4><ul>${lis('H')}</ul></div><div><h4>Verticales</h4><ul>${lis('V')}</ul></div></div></div>`;
+}
+function miniCruciResp(){ const o={}; MINI.p.entradas.forEach(e=>{ o[e.clave]=Array.from({length:e.largo},(_,i)=>MINI.letras[(e.r+(e.dir==='V'?i:0))+','+(e.c+(e.dir==='H'?i:0))]||'').join(''); }); return o; }
+function enlazarMini(){
+  if(!MINI||!$('#mini')) return;
+  const p=MINI.p;
+  if(MINI.tipo==='sopa'){
+    const cel=[...document.querySelectorAll('#mSopa .sc')], sc=(r,c)=>cel[r*p.n+c];
+    const linea=s=>{ const [r1,c1,r2,c2]=s, dr=Math.sign(r2-r1), dc=Math.sign(c2-c1), n=Math.max(Math.abs(r2-r1),Math.abs(c2-c1)); return Array.from({length:n+1},(_,i)=>[r1+dr*i,c1+dc*i]); };
+    const pintar=()=>{ cel.forEach(b=>{b.style.background='';b.style.color='';b.classList.remove('ini');});
+      MINI.sopa.forEach((s,i)=>linea(s).forEach(([r,c])=>{ const b=sc(r,c); b.style.background=`hsl(${(i*53+90)%360} 65% 34%)`; b.style.color='#fff'; }));
+      if(MINI.ini) sc(MINI.ini[0],MINI.ini[1]).classList.add('ini');
+      $('#mMarcas').innerHTML=MINI.sopa.length?`<div class="hint">Marcadas: <b>${MINI.sopa.length}</b> de ${p.palabras.length}. Toquen una marca para quitarla.</div>`+MINI.sopa.map((s,i)=>`<button class="marca2" type="button" data-i="${i}" style="border-color:hsl(${(i*53+90)%360} 65% 50%)">${linea(s).map(([r,c])=>p.grid[r][c]).join('')} ✕</button>`).join(''):'';
+      document.querySelectorAll('#mMarcas .marca2').forEach(b=>b.onclick=()=>{ MINI.sopa.splice(+b.dataset.i,1); pintar(); }); };
+    cel.forEach(b=>b.onclick=()=>{ const r=+b.dataset.r, c=+b.dataset.c, m=$('#mMsg'); m.textContent='';
+      if(!MINI.ini){ MINI.ini=[r,c]; pintar(); return; } const [r1,c1]=MINI.ini; if(r1===r&&c1===c){ MINI.ini=null; pintar(); return; }
+      const dr=r-r1, dc=c-c1; if(!(dr===0||dc===0||Math.abs(dr)===Math.abs(dc))){ m.textContent='Esa línea no es recta: horizontal, vertical o diagonal.'; MINI.ini=null; pintar(); return; }
+      if(MINI.sopa.length>=p.palabras.length+3){ m.textContent='Demasiadas marcas: quiten alguna.'; MINI.ini=null; pintar(); return; }
+      MINI.sopa.push([r1,c1,r,c]); MINI.ini=null; sonar('par'); pintar(); });
+    pintar();
+  } else {
+    const inputs=[...document.querySelectorAll('#mCw input')], porK={}; inputs.forEach(i=>porK[i.dataset.r+','+i.dataset.c]=i);
+    const entradaDe=k=>{ const c=MINI.celdas[k]; const cl=c.claves.find(x=>x.endsWith(MINI.dir))||c.claves[0]; MINI.dir=cl.slice(-1); return p.entradas.find(e=>e.clave===cl); };
+    const celdasDe=e=>Array.from({length:e.largo},(_,i)=>(e.r+(e.dir==='V'?i:0))+','+(e.c+(e.dir==='H'?i:0)));
+    const marcar=e=>{ inputs.forEach(i=>i.parentNode.classList.remove('act')); if(e) celdasDe(e).forEach(k=>porK[k].parentNode.classList.add('act')); };
+    inputs.forEach(inp=>{ const k=inp.dataset.r+','+inp.dataset.c;
+      inp.addEventListener('focus',()=>{ marcar(entradaDe(k)); inp.select(); });
+      inp.addEventListener('click',()=>{ if(MINI.celdas[k].claves.length>1&&document.activeElement===inp) MINI.dir=MINI.dir==='H'?'V':'H'; marcar(entradaDe(k)); });
+      inp.addEventListener('input',()=>{ const l=sinTildes(inp.value).slice(-1); inp.value=l; MINI.letras[k]=l;
+        if(l){ const e=entradaDe(k), ks=celdasDe(e), i=ks.indexOf(k); if(i>=0&&i<ks.length-1) porK[ks[i+1]].focus(); } });
+      inp.addEventListener('keydown',e=>{ const d={ArrowRight:[0,1],ArrowLeft:[0,-1],ArrowDown:[1,0],ArrowUp:[-1,0]}[e.key];
+        if(d){ const n=porK[(+inp.dataset.r+d[0])+','+(+inp.dataset.c+d[1])]; if(n){ e.preventDefault(); n.focus(); } }
+        else if(e.key==='Backspace'&&!inp.value){ const en=entradaDe(k), ks=celdasDe(en), i=ks.indexOf(k); if(i>0){ e.preventDefault(); porK[ks[i-1]].focus(); } } }); });
+    document.querySelectorAll('#mini .cl').forEach(b=>b.onclick=()=>{ const e=p.entradas.find(x=>x.clave===b.dataset.clave); MINI.dir=e.dir; porK[e.r+','+e.c].focus(); });
+  }
+}
+
+/* ---------- control de salidas ---------- */
+let fuera=false;
+function salio(){ if(E&&/^Revisi[oó]n /.test(E.grupo.nombre)) return; if(!token||fuera||!E||modo!=='juego'||!E.abierto||E.tiempo.agotado||E.reto.entregado) return; fuera=true;
+  api('/api/salida','POST',{tipo:'salida'}).then(r=>{ if(r&&E){ E.salidas=r.salidas; E.penalizacion_actual=r.penalizacion; } }).catch(()=>{}); }
+function volvio(){ if(!fuera) return; fuera=false;
+  api('/api/salida','POST',{tipo:'regreso'}).then(r=>{ if(!r||!E) return; E.salidas=r.salidas; E.penalizacion_actual=r.penalizacion; pintarBarra();
+    const n=r.salidas, g=E.salidas_gratis; $('#ovTitulo').textContent=`Salida n.º ${n} registrada`;
+    $('#ovTexto').innerHTML = n<=g ? `Todavía no pierden puntos (van ${n} de ${g} salidas sin descuento). <b>Desde la ${g+1}.ª, cada salida resta ${f2(E.descuento)}</b>.` : `Ya superaron las ${g} salidas sin descuento. Esta salida <b>resta ${f2(E.descuento)}</b>. Descuento acumulado: <b>−${f2(r.penalizacion)}</b>.`;
+    $('#ovSalida').classList.add('on'); $('#ovBtn').focus(); }).catch(()=>{}); }
+document.addEventListener('visibilitychange',()=>{ document.hidden?salio():volvio(); });
+window.addEventListener('blur',()=>{ setTimeout(()=>{ if(!document.hasFocus()&&!document.querySelector('select:focus,input:focus')) salio(); },200); });
+window.addEventListener('focus',()=>volvio());
+$('#ovBtn').onclick=()=>$('#ovSalida').classList.remove('on');
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ $('#ovSalida').classList.remove('on'); cerrarModal(); } });
+
+/* ---------- arranque y sondeo ---------- */
+function ocupado(){ // no repintar mientras escriben o hay una respuesta en pantalla
+  return (vista==='exp'&&!E.expediente.entregado) || (vista==='reto'&&RT) || $('#btnSig') || (preguntaActual&&['sopa','cruci'].includes(preguntaActual.tipo)&&$('#mini')) || (preguntaActual&&(sel.length||tamborActivo!==null||bodegaSel.some(v=>v>=0)||(preguntaActual.tipo==='order'&&ordenActual.join()!==(preguntaActual.opciones||[]).map(o=>o.k).join()))) || $('#modal').classList.contains('on');
+}
+async function refrescar(forzar){
+  try{ const nuevo=await api('/api/estado'); const antes=E; E=nuevo; fijarReloj();
+    const cambioFase = !antes || antes.abierto!==E.abierto || antes.fase!==E.fase || antes.tiempo.agotado!==E.tiempo.agotado || antes.publicado!==E.publicado || antes.reto_abierto!==E.reto_abierto;
+    if(forzar || cambioFase || !ocupado()) { if(!forzar && !cambioFase && modo==='juego' && vista.startsWith('z') && preguntaActual && E.preguntas[vista.slice(1)] && E.preguntas[vista.slice(1)].id===preguntaActual.id){ pintarBarra(); const a=document.querySelector('aside'); if(a){ a.innerHTML=lateral(); pintarPuzzle(fichasPrevias);} } else render(); }
+    else { pintarBarra(); const a=document.querySelector('aside'); if(a){ a.innerHTML=lateral(); pintarPuzzle(fichasPrevias); } }
+  }catch(e){}
+}
+async function iniciar(){
+  try{ E=await api('/api/estado'); }catch(e){ return; }
+  fijarReloj(); fichasPrevias=null;
+  if(E.fase==='extras') vista='extras';
+  render();
+  clearInterval(window.__poll); window.__poll=setInterval(()=>{ if(token&&!fuera) refrescar(false); },6000);
+}
+if(location.protocol==='file:'){
+  $('#app').innerHTML=`<div class="card login"><h2 style="color:var(--haz)">&#9888; Así no se abre el juego</h2>
+   <p>Abrió el archivo <b>index.html</b> directamente. El juego necesita su servidor encendido para mostrar los grupos y las preguntas.</p>
+   <ul><li>Para <b>revisar las preguntas</b>: doble clic en <b>REVISAR.bat</b> (carpeta <i>bodega-toxica</i>) y use la dirección <b>http://localhost:8081/</b>. Grupo «Revisión 1», PIN <b>2266</b>.</li>
+   <li>Para la <b>clase sin internet</b>: doble clic en <b>INICIAR.bat</b> y use la dirección que muestra la ventana negra.</li>
+   <li>En <b>internet</b>: la dirección de Vercel, una vez publicado.</li></ul></div>`;
+} else if(token) iniciar(); else mostrarLogin();
+</script>
+</body>
+</html>

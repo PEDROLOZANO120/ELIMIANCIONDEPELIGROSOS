@@ -1,0 +1,16 @@
+{
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/docente", "destination": "/docente.html" },
+    { "source": "/api/(.*)", "destination": "/api/index?ruta=$1" }
+  ],
+  "functions": {
+    "api/index.py": { "includeFiles": "api/**", "maxDuration": 15 }
+  },
+  "headers": [
+    { "source": "/(.*)", "headers": [
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "same-origin" }
+    ] }
+  ]
+}

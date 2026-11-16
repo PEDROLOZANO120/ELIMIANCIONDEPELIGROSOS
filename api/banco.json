@@ -1,0 +1,1780 @@
+{
+ "version": "BT-ERP-S4-v2.0",
+ "titulo": "Bodega Peligrosa · Código de Contención",
+ "asignatura": "Eliminación de Residuos Peligrosos",
+ "carrera": "Ingeniería Ambiental · Facultad de Ciencias de la Ingeniería · UTEQ",
+ "semana": "Semana 4 · AM 142, NTE INEN 2266 y SGA",
+ "duracion_min": 85,
+ "pesos": {
+  "zonas": 7.0,
+  "reto": 1.0,
+  "docente": 2.0
+ },
+ "temas": [
+  {
+   "id": 1,
+   "zona": "Archivo 142",
+   "nombre": "El archivo de los nombres perdidos",
+   "intro": "Los residuos llegaron con nombres de bodega. Encuentren su nombre oficial y su código en el Acuerdo Ministerial 142. Pueden usar la herramienta «Archivo 142».",
+   "preguntas": [
+    {
+     "id": "Z1-1",
+     "tipo": "match",
+     "nivel": "Aplicar",
+     "min": 3.5,
+     "enunciado": "Ubiquen cada caso en la parte del AM 142 donde debe buscarse. Las opciones pueden repetirse y sobra al menos una.",
+     "izquierda": [
+      "Una oficina pública acumula cartuchos de tóner usados de sus impresoras.",
+      "Una clínica odontológica separa restos de amalgamas dentales.",
+      "Un camal municipal cambia las llantas desgastadas de sus volquetas.",
+      "Un importador pregunta si puede vender aldrín para controlar plagas."
+     ],
+     "derecha": [
+      "Anexo A · sustancias químicas peligrosas",
+      "Anexo B · Listado 1 · desechos por fuente específica",
+      "Anexo B · Listado 2 · desechos por fuente no específica",
+      "Anexo C · desechos especiales",
+      "Ninguno: el AM 142 no lo regula"
+     ],
+     "correcta": [
+      2,
+      1,
+      3,
+      0
+     ],
+     "explicacion": "Tóner usado: NE-53 (Listado 2, fuente no específica), porque una oficina no tiene un sector propio en el Listado 1. Amalgamas: Q.86.12 (Listado 1), porque la atención odontológica sí tiene un apartado por fuente específica. Neumáticos usados: ES-04 (Anexo C). Aldrín: figura en el Anexo A, Listado 1, como sustancia química peligrosa prohibida.",
+     "fija": true
+    },
+    {
+     "id": "Z1-2",
+     "tipo": "match",
+     "nivel": "Aplicar",
+     "min": 3.5,
+     "pool": true,
+     "fija": false,
+     "variantes": [
+      {
+       "enunciado": "Taller automotriz «El Pistón»: la bodega recibió estos residuos con su nombre de uso diario (nombre genérico). Para el registro oficial, elijan el nombre y código del Acuerdo Ministerial 142 de cada uno. Recuerden: si la actividad que genera el residuo tiene una fila propia en el Listado 1, esa fila manda. Pueden usar el Archivo 142. Sobran opciones.",
+       "izquierda": [
+        "«Aceite quemado» drenado de los motores",
+        "«Waipes con grasa y diésel» de limpiar las piezas",
+        "«Filtros de aceite» cambiados en cada mantenimiento",
+        "«Tierra empapada de gasolina» del patio del taller",
+        "«Thinner sucio» de lavar las pistolas de pintura"
+       ],
+       "derecha": [
+        "NE-51 · Solventes orgánicos gastados y mezclas de solventes gastados",
+        "NE-42 · Material adsorbente contaminado con hidrocarburos (waipes, paños, trapos, aserrín)",
+        "NE-12 · Desechos de aceites minerales no aptos para el uso al que estaban destinados",
+        "NE-32 · Filtros usados de aceite mineral",
+        "NE-03 · Aceites minerales usados o gastados",
+        "NE-52 · Suelos contaminados con materiales peligrosos",
+        "NE-36 · Lodos de aceite",
+        "NE-41 · Material filtrante y/o carbón activado usados con contenido nocivo"
+       ],
+       "correcta": [
+        4,
+        1,
+        3,
+        5,
+        0
+       ],
+       "explicacion": "Correctas: «Aceite quemado» drenado de los motores → NE-03; «Waipes con grasa y diésel» de limpiar las piezas → NE-42; «Filtros de aceite» cambiados en cada mantenimiento → NE-32; «Tierra empapada de gasolina» del patio del taller → NE-52; «Thinner sucio» de lavar las pistolas de pintura → NE-51. Ante dos filas posibles se elige la más específica para ese residuo."
+      },
+      {
+       "enunciado": "Universidad (laboratorios y mantenimiento): la bodega recibió estos residuos con su nombre de uso diario (nombre genérico). Para el registro oficial, elijan el nombre y código del Acuerdo Ministerial 142 de cada uno. Recuerden: si la actividad que genera el residuo tiene una fila propia en el Listado 1, esa fila manda. Pueden usar el Archivo 142. Sobran opciones.",
+       "izquierda": [
+        "«Focos ahorradores quemados» de las aulas",
+        "«Pilas recargables de níquel-cadmio» de los equipos de campo",
+        "«Frascos sin etiqueta» de las prácticas de química",
+        "«Guantes y mandiles manchados con químicos» del laboratorio",
+        "«Reactivos vencidos» con etiqueta legible, del laboratorio de docencia"
+       ],
+       "derecha": [
+        "NE-30 · Equipo de protección personal contaminado con materiales peligrosos",
+        "NE-23 · Desechos químicos de laboratorio de análisis y control de calidad",
+        "NE-08 · Baterías usadas que contengan Hg, Ni, Cd u otros materiales peligrosos",
+        "NE-21 · Desechos que contienen mercurio",
+        "M.71.02 · Actividades de enseñanza · Productos químicos caducados o fuera de especificaciones",
+        "NE-40 · Luminarias, lámparas, tubos fluorescentes, focos ahorradores usados que contengan mercurio",
+        "NE-48 · Productos químicos caducados o fuera de especificaciones",
+        "NE-54 · Sustancias químicas de desecho no identificadas de la investigación o la enseñanza"
+       ],
+       "correcta": [
+        5,
+        2,
+        7,
+        0,
+        4
+       ],
+       "explicacion": "Correctas: focos ahorradores → NE-40; pilas de níquel-cadmio → NE-08; frascos sin etiqueta de prácticas → NE-54 (la fila nombra las actividades de enseñanza); guantes y mandiles con químicos → NE-30; reactivos vencidos → M.71.02. Las actividades de enseñanza tienen filas propias en el Listado 1 (división 71), y una de ellas describe los productos químicos caducados: por eso manda M.71.02 y no la fila general NE-48."
+      },
+      {
+       "enunciado": "Club campestre (jardines, canchas y piscina): la bodega recibió estos residuos con su nombre de uso diario (nombre genérico). Para el registro oficial, elijan el nombre y código del Acuerdo Ministerial 142 de cada uno. Recuerden: si la actividad que genera el residuo tiene una fila propia en el Listado 1, esa fila manda. Pueden usar el Archivo 142. Sobran opciones.",
+       "izquierda": [
+        "«Canecas de herbicida sin enjuagar» que dejaron los jardineros",
+        "«Veneno para plagas vencido» de la bodega de jardinería",
+        "«Sacos y cartones con restos de químicos»",
+        "«Aserrín con el que se recogió un derrame de ácido» de la piscina",
+        "«Fierros contaminados» con restos de plaguicida"
+       ],
+       "derecha": [
+        "ES-01 · Envases vacíos de agroquímicos con triple lavado",
+        "NE-43 · Material adsorbente contaminado con sustancias químicas peligrosas (waipes, paños, trapos, aserrín)",
+        "NE-09 · Chatarra contaminada con materiales peligrosos",
+        "NE-04 · Agroquímicos caducados o fuera de especificaciones generados en actividades comunes",
+        "NE-44 · Material de embalaje contaminado con restos de sustancias o desechos peligrosos",
+        "NE-27 · Envases contaminados con materiales peligrosos",
+        "NE-42 · Material adsorbente contaminado con hidrocarburos (waipes, paños, trapos, aserrín)",
+        "NE-28 · Envases vacíos de agroquímicos sin triple lavado"
+       ],
+       "correcta": [
+        7,
+        3,
+        4,
+        1,
+        2
+       ],
+       "explicacion": "Correctas: «Canecas de herbicida sin enjuagar» que dejaron los jardineros → NE-28; «Veneno para plagas vencido» de la bodega de jardinería → NE-04; «Sacos y cartones con restos de químicos» → NE-44; «Aserrín con el que se recogió un derrame de ácido» de la piscina → NE-43; «Fierros contaminados» con restos de plaguicida → NE-09. Ante dos filas posibles se elige la más específica para ese residuo."
+      },
+      {
+       "enunciado": "Empresa de buses urbanos (patio y oficinas): la bodega recibió estos residuos con su nombre de uso diario (nombre genérico). Para el registro oficial, elijan el nombre y código del Acuerdo Ministerial 142 de cada uno. Recuerden: si la actividad que genera el residuo tiene una fila propia en el Listado 1, esa fila manda. Pueden usar el Archivo 142. Sobran opciones.",
+       "izquierda": [
+        "«Lodo del fondo del tanque de diésel»",
+        "«Agua aceitosa» de la fosa de lavado de motores",
+        "«Pintura vieja y endurecida» del área de enderezada",
+        "«Cartuchos de tinta vacíos» de las oficinas",
+        "«Medicamentos vencidos» del botiquín de la empresa"
+       ],
+       "derecha": [
+        "NE-38 · Lodos de tanques de almacenamiento de hidrocarburos",
+        "NE-35 · Hidrocarburos sucios o contaminados con otras sustancias",
+        "NE-50 · Sedimentos o colas de la recuperación de solventes orgánicos",
+        "NE-49 · Residuos de tintas, pinturas, resinas que contengan sustancias peligrosas",
+        "NE-45 · Mezclas oleosas, emulsiones de hidrocarburos-agua, desechos de taladrina",
+        "NE-26 · Emulsiones bituminosas",
+        "NE-47 · Productos farmacéuticos caducados generados en empresas no farmacéuticas",
+        "NE-53 · Cartuchos de impresión de tinta o tóner usados"
+       ],
+       "correcta": [
+        0,
+        4,
+        3,
+        7,
+        6
+       ],
+       "explicacion": "Correctas: «Lodo del fondo del tanque de diésel» → NE-38; «Agua aceitosa» de la fosa de lavado de motores → NE-45; «Pintura vieja y endurecida» del área de enderezada → NE-49; «Cartuchos de tinta vacíos» de las oficinas → NE-53; «Medicamentos vencidos» del botiquín de la empresa → NE-47. Ante dos filas posibles se elige la más específica para ese residuo."
+      },
+      {
+       "enunciado": "Hotel de playa (cuarto de máquinas, subestación propia y muelle): la bodega recibió estos residuos con su nombre de uso diario (nombre genérico). Para el registro oficial, elijan el nombre y código del Acuerdo Ministerial 142 de cada uno. Recuerden: si la actividad que genera el residuo tiene una fila propia en el Listado 1, esa fila manda. Pueden usar el Archivo 142. Sobran opciones.",
+       "izquierda": [
+        "«Aceite viejo del transformador», con análisis que descarta PCB",
+        "«Transformador en desuso» que contuvo aceite con PCB",
+        "«Cilindros de gas refrigerante» de aires acondicionados dados de baja",
+        "«Escombros con restos de pintura con plomo» de una caseta demolida",
+        "«Agua con combustible» acumulada en el fondo de la lancha del muelle"
+       ],
+       "derecha": [
+        "NE-55 · Transformadores en desuso que hayan contenido aceites con PCB, PCT, PBB",
+        "NE-25 · Desechos, sustancias y artículos contaminados con PCB, PCT, PCN o PBB ≥ 50 mg/kg",
+        "NE-02 · Aceites dieléctricos usados u otros aceites minerales que contengan PCB ≥ 50 ppm",
+        "NE-05 · Aguas de sentina",
+        "NE-34 · Aceites, grasas y ceras usadas o fuera de especificaciones",
+        "NE-01 · Aceites dieléctricos usados que no contengan PCB, PCT o PBB",
+        "NE-33 · Gases comprimidos, gases refrigerantes en desuso, almacenados en contenedores o cilindros",
+        "NE-31 · Escombros de construcción contaminados con materiales peligrosos"
+       ],
+       "correcta": [
+        5,
+        0,
+        6,
+        7,
+        3
+       ],
+       "explicacion": "Correctas: «Aceite viejo del transformador», con análisis que descarta PCB → NE-01; «Transformador en desuso» que contuvo aceite con PCB → NE-55; «Cilindros de gas refrigerante» de aires acondicionados dados de baja → NE-33; «Escombros con restos de pintura con plomo» de una caseta demolida → NE-31; «Agua con combustible» acumulada en el fondo de la lancha del muelle → NE-05. Ante dos filas posibles se elige la más específica para ese residuo."
+      }
+     ]
+    },
+    {
+     "id": "Z1-3",
+     "tipo": "single",
+     "nivel": "Evaluar",
+     "min": 2.5,
+     "enunciado": "Un hospital separa las agujas y lancetas usadas en la toma de muestras. El pasante propone registrarlas como NE-10 «Desechos biopeligrosos activos…». ¿Qué decisión es correcta según la estructura del AM 142?",
+     "opciones": [
+      "Mantener NE-10, porque el Listado 2 agrupa todo lo biopeligroso de los establecimientos de salud.",
+      "Registrar Q.86.05 «Objetos cortopunzantes…»: la atención de salud tiene filas por fuente específica.",
+      "Registrar NE-27 «Envases contaminados…», porque las agujas se entregan dentro de un recipiente rígido.",
+      "Registrar NE-23 «Desechos químicos de laboratorio…», porque las muestras de sangre se procesan en el laboratorio clínico."
+     ],
+     "correcta": [
+      1
+     ],
+     "explicacion": "Cuando la actividad del generador aparece en el Listado 1 (fuente específica) con una fila que describe el residuo, esa fila manda: Q.86.05, objetos cortopunzantes (B; Y1). El recipiente rígido es el envase, no el residuo, y las agujas no son un desecho químico.",
+     "fija": false
+    },
+    {
+     "id": "Z1-4",
+     "tipo": "match",
+     "nivel": "Aplicar",
+     "min": 4,
+     "fija": false,
+     "enunciado": "Las dependencias del municipio (talleres, comedor y oficinas) generaron estos residuos y los llevan a su bodega con su nombre de uso diario (nombre genérico). Para el registro oficial, elijan el nombre y código del Acuerdo Ministerial 142 que corresponde a cada uno. Pueden usar el Archivo 142. Sobran opciones.",
+     "izquierda": [
+      "«Llantas viejas» de los camiones recolectores.",
+      "«Aceite de la freidora» del comedor municipal.",
+      "«Baterías muertas» (plomo-ácido) de los montacargas.",
+      "«Tóner gastado» de las impresoras de las oficinas.",
+      "«Canecas de herbicida enjuagadas tres veces», con certificado de triple lavado.",
+      "«Tubos fluorescentes quemados» de las oficinas."
+     ],
+     "derecha": [
+      "ES-04 · Neumáticos usados o partes de los mismos",
+      "ES-07 · Aceites vegetales usados generados en procesos de fritura de alimentos",
+      "NE-08 · Baterías usadas que contengan Hg, Ni, Cd u otros materiales peligrosos",
+      "NE-53 · Cartuchos de impresión de tinta o tóner usados",
+      "ES-01 · Envases vacíos de agroquímicos con triple lavado",
+      "NE-40 · Luminarias, lámparas, tubos fluorescentes, focos ahorradores usados que contengan mercurio",
+      "NE-28 · Envases vacíos de agroquímicos sin triple lavado",
+      "NE-03 · Aceites minerales usados o gastados",
+      "ES-06 · Equipos eléctricos y electrónicos en desuso no desensamblados",
+      "NE-21 · Desechos que contienen mercurio"
+     ],
+     "correcta": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "explicacion": "Llantas → ES-04 y aceite de fritura → ES-07: desechos especiales (Anexo C). Baterías de plomo-ácido → NE-08 (el plomo es «otro material peligroso»). Tóner → NE-53. Con triple lavado certificado el envase pasa a ES-01 (sin lavar sería NE-28). Tubos fluorescentes → NE-40, la fila más específica (NE-21 es general). NE-03 es para aceite mineral, no vegetal."
+    },
+    {
+     "id": "Z1-5",
+     "tipo": "order",
+     "nivel": "Comprender",
+     "min": 2,
+     "enunciado": "Ordenen los pasos para pasar un residuo con nombre de bodega a su nombre oficial del AM 142.",
+     "opciones": [
+      "Describir el residuo: qué es, de qué proceso sale y qué contiene.",
+      "Buscar la actividad del generador en el Listado 1 (fuente específica).",
+      "Si esa actividad no tiene una fila para el residuo, buscar en el Listado 2 (fuente no específica).",
+      "Comparar las filas candidatas y quedarse con la más específica.",
+      "Registrar el nombre oficial, el código, las letras CRTIB y el código Basilea."
+     ],
+     "explicacion": "El Listado 1 se ordena por actividad (sector CIIU), así que primero se describe el residuo y su origen. Si la actividad no tiene una fila aplicable se usa el Listado 2. Entre varias filas candidatas se elige la más específica y al final se registran nombre, código, características de peligrosidad y código Basilea.",
+     "fija": false
+    },
+    {
+     "id": "Z1-6",
+     "tipo": "fill",
+     "nivel": "Comprender",
+     "min": 3.5,
+     "fija": true,
+     "enunciado": "Completen el párrafo sobre la estructura del Acuerdo Ministerial 142. Sobran palabras.",
+     "texto": "El Acuerdo Ministerial 142 expide tres listados nacionales. El Anexo {1} contiene las sustancias químicas peligrosas, entre ellas las prohibidas, como el DDT o el aldrín. El Anexo B agrupa los desechos peligrosos en dos listados: el Listado 1 los organiza por fuente {2}, según la actividad productiva que los genera, como la atención de salud o la construcción de edificios, y el Listado 2 los agrupa por fuente {3}, para residuos que aparecen en cualquier actividad, como los aceites minerales usados. El Anexo C reúne los desechos {4}, como los neumáticos usados o el aceite vegetal de fritura. Junto a cada desecho peligroso se indican sus características de peligrosidad, abreviadas con la sigla {5}, y el código del Convenio de Basilea.",
+     "banco": [
+      "A",
+      "B",
+      "C",
+      "específica",
+      "no específica",
+      "especiales",
+      "domésticos",
+      "CRTIB",
+      "CAS",
+      "ONU"
+     ],
+     "correcta": [
+      0,
+      3,
+      4,
+      5,
+      7
+     ],
+     "explicacion": "Anexo A: sustancias químicas peligrosas. Anexo B: desechos peligrosos, con el Listado 1 por fuente específica (por sector CIIU) y el Listado 2 por fuente no específica. Anexo C: desechos especiales. La columna CRTIB indica si el desecho es corrosivo, reactivo, tóxico, inflamable o biológico-infeccioso; además se da el código Basilea (Y o A)."
+    },
+    {
+     "id": "Z1-7",
+     "tipo": "match",
+     "nivel": "Aplicar",
+     "min": 3.5,
+     "enunciado": "Asignen a cada residuo la característica de peligrosidad (CRTIB) con la que figura en el AM 142. Pueden usar el Archivo 142. Las opciones pueden repetirse y sobra al menos una.",
+     "izquierda": [
+      "Ácido de baterías gastado, con pH 0,8.",
+      "Restos de explosivos decomisados y guardados en una bodega policial.",
+      "Gasas con sangre del área de curaciones de un centro de salud.",
+      "Thinner gastado de lavar pistolas de pintura.",
+      "Planchas de fibrocemento que contienen asbesto."
+     ],
+     "derecha": [
+      "C · Corrosivo",
+      "R · Reactivo",
+      "T · Tóxico",
+      "I · Inflamable (solo)",
+      "B · Biológico-infeccioso",
+      "T, I · Tóxico e inflamable"
+     ],
+     "correcta": [
+      0,
+      1,
+      4,
+      5,
+      2
+     ],
+     "explicacion": "Ácido con pH < 2: NE-18 (C). Desechos de carácter explosivo: NE-15 (R). Material que estuvo en contacto con fluidos corporales en la atención de salud: Q.86.07 (B). Solventes orgánicos gastados: NE-51 (T, I). Amianto o asbesto: NE-13 (T). Ningún residuo de la lista figura solo como I.",
+     "fija": false
+    },
+    {
+     "id": "Z1-8",
+     "tipo": "single",
+     "nivel": "Analizar",
+     "min": 2.5,
+     "enunciado": "El patio de comidas de un centro comercial entrega aceite de cocina usado de las freidoras y su taller de mantenimiento entrega aceite de motor usado de los generadores. ¿Cómo se registran según el AM 142?",
+     "opciones": [
+      "Aceite de cocina como ES-07 (especial) y aceite de motor como NE-03 (peligroso).",
+      "Ambos como NE-03, porque los dos son aceites que ya se usaron.",
+      "Ambos como ES-07, porque el centro comercial no es una industria.",
+      "Aceite de cocina como NE-34 y aceite de motor como NE-12."
+     ],
+     "correcta": [
+      0
+     ],
+     "explicacion": "El aceite vegetal usado en procesos de fritura es un desecho especial (ES-07, Anexo C). El aceite de motor drenado es un aceite mineral usado: desecho peligroso NE-03 (T, I). El tipo de aceite, no el tipo de empresa, decide la clasificación.",
+     "fija": false
+    },
+    {
+     "id": "Z1-9",
+     "tipo": "single",
+     "nivel": "Evaluar",
+     "min": 2.5,
+     "enunciado": "Una empresa constructora de edificios guarda en su bodega planchas sobrantes de fibrocemento con asbesto, compradas hace años, que ya no puede usar. ¿Qué código del AM 142 es el correcto?",
+     "opciones": [
+      "NE-13 · Desechos de amianto/asbesto o materiales contaminados con ellos",
+      "F.41.02 · Materiales de construcción que contienen amianto/asbesto",
+      "F.43.02 · Desechos de aislamiento que contienen amianto",
+      "NE-31 · Escombros de construcción contaminados con materiales peligrosos"
+     ],
+     "correcta": [
+      1
+     ],
+     "explicacion": "La construcción de edificios (sección F, división 41) tiene una fila propia en el Listado 1 para este residuo: F.41.02. Por regla, la fuente específica prevalece sobre NE-13. F.43.02 se refiere a aislamientos y NE-31 a escombros.",
+     "fija": false
+    },
+    {
+     "id": "Z1-10",
+     "tipo": "sopa",
+     "nivel": "Recordar",
+     "min": 2.5,
+     "fija": true,
+     "n": 9,
+     "enunciado": "Minijuego · Sopa de letras del Archivo 142: encuentren las 6 palabras. Toquen la primera y la última letra; valen horizontal, vertical y diagonal en ambos sentidos.",
+     "palabras": [
+      {
+       "palabra": "CODIGO",
+       "pista": "Identificador, como NE-03 o ES-04, que se anota en el registro del residuo."
+      },
+      {
+       "palabra": "ANEXO",
+       "pista": "Parte del AM 142 que contiene cada listado: A, B o C."
+      },
+      {
+       "palabra": "FUENTE",
+       "pista": "El Listado 1 agrupa los desechos por ___ específica."
+      },
+      {
+       "palabra": "LISTADO",
+       "pista": "El Anexo B tiene dos: el ___ 1 y el ___ 2."
+      },
+      {
+       "palabra": "LAVADO",
+       "pista": "Con triple ___, el envase de agroquímico pasa a ser desecho especial."
+      },
+      {
+       "palabra": "AMIANTO",
+       "pista": "Fibra mineral prohibida, también llamada asbesto."
+      }
+     ],
+     "explicacion": "Palabras: CÓDIGO, ANEXO, FUENTE, LISTADO, LAVADO y AMIANTO, todas del AM 142.",
+     "grid": [
+      "BSLAVADOP",
+      "OAFGJRSFN",
+      "GLETNEUFA",
+      "IPIICOIMM",
+      "DAOSUGISE",
+      "ONPDTATGU",
+      "CEUNNABNC",
+      "MXTTEJDVG",
+      "POOEMOFOO"
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "id": "Z1-E1",
+     "tipo": "single",
+     "nivel": "Aplicar",
+     "enunciado": "Al vaciar un laboratorio de docencia de una universidad aparecen frascos sin etiqueta con restos de prácticas de química. ¿Qué código del AM 142 es el más adecuado?",
+     "opciones": [
+      "NE-23 · Desechos químicos de laboratorio de análisis y control de calidad",
+      "NE-48 · Productos químicos caducados o fuera de especificaciones",
+      "NE-54 · Sustancias químicas de desecho, no identificadas o nuevas, resultantes de… las actividades de enseñanza",
+      "NE-47 · Productos farmacéuticos caducados o fuera de especificaciones"
+     ],
+     "correcta": [
+      2
+     ],
+     "explicacion": "NE-54 nombra justamente las sustancias no identificadas de la investigación o la enseñanza (T, I, C, R). NE-23 es para laboratorios de análisis y control de calidad. Los productos caducados que sí están identificados no irían en NE-48: en una universidad les corresponde M.71.02, la fila propia de las actividades de enseñanza."
+    },
+    {
+     "id": "Z1-E2",
+     "tipo": "single",
+     "nivel": "Aplicar",
+     "enunciado": "Una lubricadora acumula los filtros de aceite que retira de los motores. ¿Qué código del AM 142 corresponde?",
+     "opciones": [
+      "NE-41 · Material filtrante y/o carbón activado usados con contenido nocivo",
+      "NE-32 · Filtros usados de aceite mineral",
+      "NE-09 · Chatarra contaminada con materiales peligrosos",
+      "NE-03 · Aceites minerales usados o gastados"
+     ],
+     "correcta": [
+      1
+     ],
+     "explicacion": "Existe una fila exacta: NE-32, filtros usados de aceite mineral (T; Y8). NE-41 es material filtrante genérico y NE-09 chatarra; el aceite drenado del filtro iría aparte, como NE-03."
+    },
+    {
+     "id": "Z1-E3",
+     "tipo": "single",
+     "nivel": "Aplicar",
+     "enunciado": "En una gasolinera se retiró la tierra empapada por una fuga del tanque de gasolina. ¿Qué código del AM 142 corresponde a esa tierra?",
+     "opciones": [
+      "NE-38 · Lodos de tanques de almacenamiento de hidrocarburos",
+      "NE-31 · Escombros de construcción contaminados con materiales peligrosos",
+      "NE-35 · Hidrocarburos sucios o contaminados con otras sustancias",
+      "NE-52 · Suelos contaminados con materiales peligrosos"
+     ],
+     "correcta": [
+      3
+     ],
+     "explicacion": "El residuo es suelo contaminado, NE-52 (T; Y18). NE-38 son lodos del interior de un tanque, NE-35 el combustible sucio en sí y NE-31 escombros de construcción."
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "zona": "Patio de rombos",
+   "nombre": "El patio donde nada puede tocarse",
+   "intro": "La NTE INEN 2266 decide qué rombo lleva cada material y qué puede almacenarse junto. Pueden usar la herramienta «Matriz del Anexo K».",
+   "preguntas": [
+    {
+     "id": "Z2-1",
+     "tipo": "match",
+     "nivel": "Aplicar",
+     "min": 3.5,
+     "enunciado": "Asignen a cada material la clase o división de la NTE INEN 2266. Sobran opciones.",
+     "izquierda": [
+      "Carburo de calcio que quedó húmedo por una gotera y empezó a desprender gas inflamable.",
+      "Sacos de nitrato de amonio vencido para fertilizar.",
+      "Cilindros de CO₂ de extintores dados de baja.",
+      "Electrolito de baterías: ácido sulfúrico que destruye el piso de cemento."
+     ],
+     "derecha": [
+      "2.1 · Gases inflamables",
+      "2.2 · Gases no inflamables, no tóxicos",
+      "3 · Líquidos inflamables",
+      "4.2 · Combustión espontánea",
+      "4.3 · Desprenden gases inflamables con el agua",
+      "5.1 · Sustancias comburentes",
+      "6.1 · Sustancias tóxicas",
+      "8 · Sustancias corrosivas"
+     ],
+     "correcta": [
+      4,
+      5,
+      1,
+      7
+     ],
+     "explicacion": "La norma cita como ejemplos el carburo de calcio con agua (4.3), los nitratos en general (5.1), el dióxido de carbono (2.2) y los ácidos (8). La clase depende del peligro que muestra el material, no del nombre del envase.",
+     "fija": false
+    },
+    {
+     "id": "Z2-2",
+     "tipo": "match",
+     "nivel": "Recordar",
+     "min": 2,
+     "enunciado": "Identifiquen cada rótulo de transporte de la NTE INEN 2266 (Anexo F). Sobran opciones.",
+     "izquierda": [
+      "{{rot:4.1}}",
+      "{{rot:4.2}}",
+      "{{rot:5.2}}",
+      "{{rot:6.2}}"
+     ],
+     "derecha": [
+      "4.1 · Sólidos inflamables",
+      "4.2 · Combustión espontánea",
+      "4.3 · Peligroso cuando se moja",
+      "5.1 · Comburente",
+      "5.2 · Peróxido orgánico",
+      "6.1 · Tóxico",
+      "6.2 · Sustancia infecciosa"
+     ],
+     "correcta": [
+      0,
+      1,
+      4,
+      6
+     ],
+     "explicacion": "4.1: franjas verticales rojas y blancas con llama. 4.2: mitad superior blanca y mitad inferior roja. 5.2: mitad superior roja y mitad inferior amarilla, con llama. 6.2: fondo blanco con el símbolo de riesgo biológico.",
+     "fija": false
+    },
+    {
+     "id": "Z2-3",
+     "tipo": "bodega",
+     "nivel": "Aplicar",
+     "min": 3,
+     "enunciado": "Ubiquen los 5 tambores en las 3 jaulas de la bodega. Según la matriz del Anexo K, dos materiales marcados como INCOMPATIBLES (rojo) no pueden compartir jaula. Las combinaciones en amarillo (precaución) se aceptan. Cada par incompatible bien separado suma puntos.",
+     "tambores": [
+      {
+       "t": "Thinner gastado",
+       "clase": "3"
+      },
+      {
+       "t": "Permanganato de potasio vencido",
+       "clase": "5.1"
+      },
+      {
+       "t": "Ácido sulfúrico gastado",
+       "clase": "8"
+      },
+      {
+       "t": "Plaguicida tóxico caducado",
+       "clase": "6"
+      },
+      {
+       "t": "Azufre en polvo contaminado",
+       "clase": "4.1"
+      }
+     ],
+     "jaulas": [
+      "Jaula A",
+      "Jaula B",
+      "Jaula C"
+     ],
+     "explicacion": "Pares incompatibles en el Anexo K: 3 con 5.1; 5.1 con 8; 5.1 con 4.1; 8 con 4.1. Una solución válida es: A = permanganato + plaguicida (precaución); B = thinner + ácido (compatibles); C = azufre. El comburente (5.1) solo puede acompañar al tóxico.",
+     "fija": true
+    },
+    {
+     "id": "Z2-4",
+     "tipo": "multi",
+     "nivel": "Evaluar",
+     "min": 3,
+     "n_correctas": 3,
+     "enunciado": "Inspección de la bodega de residuos de una camaronera. ¿Qué hallazgos INCUMPLEN la NTE INEN 2266 (6.1.7.10)? Hay exactamente 3.",
+     "opciones": [
+      "Los tambores con líquidos están apoyados directamente sobre el piso.",
+      "El canal perimetral de recolección descarga en el alcantarillado público.",
+      "Hay 1 m libre entre los bloques de tambores y la pared, y también entre un bloque y otro.",
+      "La puerta de emergencia abre hacia adentro para no invadir el patio.",
+      "Los bloques miden dos paletas de ancho por seis paletas de largo, con las filas marcadas en el piso."
+     ],
+     "correcta": [
+      0,
+      1,
+      3
+     ],
+     "explicacion": "Los envases van sobre plataformas o paletas (h.2). Los canales se conectan a una fosa o sumidero especial y nunca directamente al alcantarillado (f.11). Las puertas de emergencia abren hacia afuera (f.16). El metro libre (h.7) y los bloques de 2 × hasta 8 paletas (h.6) sí cumplen.",
+     "fija": false
+    },
+    {
+     "id": "Z2-5",
+     "tipo": "fill",
+     "nivel": "Recordar",
+     "min": 3.5,
+     "enunciado": "Completen el párrafo con las medidas que exige la NTE INEN 2266 para la bodega. Las opciones pueden repetirse y sobran algunas.",
+     "texto": "La bodega de residuos peligrosos de la empresa debe estar rodeada por una cerca o muro, con un espacio mínimo de {1} m hasta las paredes de la bodega. Para ventilar, entre la línea del producto más alto y el techo se deja {2} m, y el respiradero tiene una abertura de al menos {3} de la superficie del piso. Los canales perimetrales de recolección, construidos de hormigón, tienen una profundidad mínima de {4} cm y se conectan a una fosa o sumidero especial. Cuando la bodega es grande, las puertas de emergencia se ubican a {5} m unas de otras y siempre abren hacia afuera.",
+     "banco": [
+      "1",
+      "10",
+      "15",
+      "30",
+      "1/150",
+      "1/50",
+      "5",
+      "2",
+      "50"
+     ],
+     "correcta": [
+      1,
+      0,
+      4,
+      2,
+      3
+     ],
+     "explicacion": "10 m entre la cerca y la bodega (d.5); 1 m hasta el techo (f.5); respiradero de 1/150 de la superficie del piso (f.4); canales de 15 cm (f.11); puertas de emergencia cada 30 m, abriendo hacia afuera (f.15-f.16).",
+     "fija": false
+    },
+    {
+     "id": "Z2-6",
+     "tipo": "match",
+     "nivel": "Recordar",
+     "min": 2.5,
+     "enunciado": "Rombo de seguridad NFPA 704 {{nfpa:2-3-1-OX}} Asignen a cada color lo que comunica. Sobran opciones.",
+     "izquierda": [
+      "Rombo azul (izquierda)",
+      "Rombo rojo (arriba)",
+      "Rombo amarillo (derecha)",
+      "Rombo blanco (abajo)"
+     ],
+     "derecha": [
+      "Peligro para la salud",
+      "Inflamabilidad",
+      "Inestabilidad o reactividad",
+      "Riesgos especiales (W tachada, OX, SA)",
+      "Toxicidad para el ambiente",
+      "Corrosión de los envases"
+     ],
+     "correcta": [
+      0,
+      1,
+      2,
+      3
+     ],
+     "explicacion": "NFPA 704: azul = salud, rojo = inflamabilidad, amarillo = inestabilidad/reactividad, blanco = riesgos especiales (W tachada: reacciona con el agua; OX: oxidante; SA: asfixiante simple). Cada uno se califica de 0 a 4.",
+     "fija": false
+    },
+    {
+     "id": "Z2-7",
+     "tipo": "single",
+     "nivel": "Analizar",
+     "min": 2.5,
+     "enunciado": "Un tanque fijo de almacenamiento de la empresa tiene este rombo NFPA 704: {{nfpa:1-3-0-W}} ¿Qué información comunica?",
+     "opciones": [
+      "Salud 1 (leve), inflamabilidad 3 (arde a temperatura ambiente), estable y reacciona con el agua.",
+      "Salud 3 (grave), inflamabilidad 1 (debe calentarse para arder), estable y es un oxidante.",
+      "Salud 1 (leve), inflamabilidad 3, muy inestable (puede detonar) y se apaga con agua.",
+      "Salud 0 (sin riesgo), inflamabilidad 3, reactividad 1 y el agua es el mejor extintor."
+     ],
+     "correcta": [
+      0
+     ],
+     "explicacion": "Azul 1: peligro leve para la salud. Rojo 3: líquidos o sólidos que pueden encenderse a casi cualquier temperatura ambiente. Amarillo 0: normalmente estable. W tachada en el blanco: reacciona con el agua, por lo que no debe usarse agua.",
+     "fija": false
+    },
+    {
+     "id": "Z2-8",
+     "tipo": "fill",
+     "nivel": "Comprender",
+     "min": 3.5,
+     "fija": true,
+     "enunciado": "Completen el párrafo sobre el rombo NFPA 704 y su uso según la NTE INEN 2266. Sobran palabras.",
+     "texto": "El rombo de seguridad NFPA 704 se divide en cuatro rombos de colores. El rombo {1} indica el peligro para la salud; el rojo, la {2}; el amarillo, la inestabilidad o reactividad, y el blanco, los riesgos especiales, como la letra W tachada, que advierte que el material reacciona con el {3}, o las letras {4}, que identifican a un oxidante. Cada rombo usa una escala de 0 a {5}, donde el número mayor representa el peligro más grave. La NTE INEN 2266 no permite este rombo en los vehículos de transporte: solo en tanques fijos de almacenamiento a granel.",
+     "banco": [
+      "azul",
+      "verde",
+      "inflamabilidad",
+      "toxicidad",
+      "agua",
+      "aire",
+      "OX",
+      "COR",
+      "4",
+      "10"
+     ],
+     "correcta": [
+      0,
+      2,
+      4,
+      6,
+      8
+     ],
+     "explicacion": "Azul: salud; rojo: inflamabilidad; amarillo: inestabilidad; blanco: especiales (W tachada = no usar agua; OX = oxidante). La escala va de 0 a 4. La NTE INEN 2266 (6.1.5.2 b) reserva el NFPA 704 para tanques fijos a granel."
+    },
+    {
+     "id": "Z2-9",
+     "tipo": "single",
+     "nivel": "Evaluar",
+     "min": 2,
+     "enunciado": "En la bodega de una florícola quieren colocar sacos de semilla certificada en la jaula contigua a la de los plaguicidas caducados, sin separación entre ambas, «porque los dos son insumos agrícolas». ¿Qué indica la NTE INEN 2266?",
+     "opciones": [
+      "Se acepta si los plaguicidas están bien tapados y sobre paletas.",
+      "Está prohibido: no se mezclan materiales tóxicos con alimentos, semillas o cultivos.",
+      "Se acepta, porque la matriz del Anexo K no incluye a las semillas.",
+      "Se acepta si se coloca un rombo NFPA 704 en cada jaula."
+     ],
+     "correcta": [
+      1
+     ],
+     "explicacion": "6.1.7.10 b.1: durante el almacenamiento no se deben mezclar materiales tóxicos con alimentos, semillas o cultivos agrícolas comestibles. La regla es general y no depende del envase ni de la rotulación.",
+     "fija": false
+    },
+    {
+     "id": "Z2-10",
+     "tipo": "cruci",
+     "nivel": "Recordar",
+     "min": 3,
+     "fija": true,
+     "enunciado": "Minijuego · Crucigrama de la bodega (NTE INEN 2266). Toquen una pista y escriban sin tildes; el cursor avanza solo.",
+     "palabras": [
+      {
+       "respuesta": "RAMPA",
+       "pista": "En la entrada de la bodega: alto no menor de 10 cm y pendiente no mayor al 10 %."
+      },
+      {
+       "respuesta": "SUMIDERO",
+       "pista": "Fosa especial donde descargan los canales perimetrales; nunca va al alcantarillado."
+      },
+      {
+       "respuesta": "BORDILLO",
+       "pista": "Borde que debe rodear toda la bodega."
+      },
+      {
+       "respuesta": "DUCHA",
+       "pista": "De emergencia, junto a la fuente lavaojos."
+      },
+      {
+       "respuesta": "NARANJA",
+       "pista": "Color de la placa que lleva el número ONU junto al rombo del vehículo."
+      }
+     ],
+     "explicacion": "RAMPA (f.10), SUMIDERO (f.11-f.12), BORDILLO (f.18), DUCHA (f.17) y placa NARANJA con el número ONU (6.1.5.2).",
+     "filas": 8,
+     "cols": 7,
+     "entradas": [
+      {
+       "n": 4,
+       "dir": "H",
+       "r": 2,
+       "c": 0,
+       "respuesta": "RAMPA",
+       "pista": "En la entrada de la bodega: alto no menor de 10 cm y pendiente no mayor al 10 %."
+      },
+      {
+       "n": 5,
+       "dir": "H",
+       "r": 4,
+       "c": 2,
+       "respuesta": "DUCHA",
+       "pista": "De emergencia, junto a la fuente lavaojos."
+      },
+      {
+       "n": 1,
+       "dir": "V",
+       "r": 0,
+       "c": 0,
+       "respuesta": "BORDILLO",
+       "pista": "Borde que debe rodear toda la bodega."
+      },
+      {
+       "n": 2,
+       "dir": "V",
+       "r": 0,
+       "c": 2,
+       "respuesta": "SUMIDERO",
+       "pista": "Fosa especial donde descargan los canales perimetrales; nunca va al alcantarillado."
+      },
+      {
+       "n": 3,
+       "dir": "V",
+       "r": 1,
+       "c": 6,
+       "respuesta": "NARANJA",
+       "pista": "Color de la placa que lleva el número ONU junto al rombo del vehículo."
+      }
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "id": "Z2-E1",
+     "tipo": "single",
+     "nivel": "Comprender",
+     "enunciado": "Según la NTE INEN 2266, ¿dónde se permite usar el rombo NFPA 704?",
+     "opciones": [
+      "En los vehículos cisterna, junto a la placa naranja con el número ONU",
+      "Solo en tanques fijos de almacenamiento a granel",
+      "En envases menores de 20 litros, en lugar de la etiqueta de clase",
+      "En la puerta de la bodega, en reemplazo de la señalización de peligro"
+     ],
+     "correcta": [
+      1
+     ],
+     "explicacion": "6.1.5.2 b): el rombo NFPA 704 no se usa en los vehículos de transporte; solo en los tanques fijos de almacenamiento a granel, exteriores o interiores."
+    },
+    {
+     "id": "Z2-E2",
+     "tipo": "single",
+     "nivel": "Aplicar",
+     "enunciado": "Un camión lleva tres desechos peligrosos compatibles entre sí. ¿Cómo debe rotularse según la NTE INEN 2266?",
+     "opciones": [
+      "Con los rombos de las tres clases, para que no se omita ninguno de los peligros de la carga",
+      "Con un solo rombo de clase 9, porque se trata de una carga mixta de desechos",
+      "Con los dos rombos de mayor peligro y sus placas naranjas (número ONU)",
+      "Con los pictogramas SGA de los tres desechos, pegados en las puertas"
+     ],
+     "correcta": [
+      2
+     ],
+     "explicacion": "6.1.5.2 b.1): con dos o más sustancias, se identifican los riesgos principales con los dos rombos de mayor peligrosidad y sus placas naranjas con el número ONU. Los pictogramas SGA no se usan para rotular vehículos (6.1.5.3)."
+    },
+    {
+     "id": "Z2-E3",
+     "tipo": "single",
+     "nivel": "Aplicar",
+     "enunciado": "Un bulto con material radiactivo marca 0,3 mSv/h como máximo en su superficie externa. ¿Qué etiqueta de clase 7 le corresponde?",
+     "opciones": [
+      "Categoría I · blanca",
+      "Categoría II · amarilla",
+      "Categoría III · amarilla",
+      "No necesita etiqueta, porque está por debajo de 2 mSv/h"
+     ],
+     "correcta": [
+      1
+     ],
+     "explicacion": "Tabla del 6.1.5.1 h): más de 0,005 y hasta 0,5 mSv/h corresponde a la categoría II, amarilla."
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "zona": "Laboratorio de etiquetas",
+   "nombre": "El laboratorio de los símbolos",
+   "intro": "El Sistema Globalmente Armonizado (SGA) comunica el peligro con pictogramas, palabras de advertencia e indicaciones H.",
+   "preguntas": [
+    {
+     "id": "Z3-1",
+     "tipo": "match",
+     "nivel": "Recordar",
+     "min": 2,
+     "enunciado": "Elijan el nombre oficial que el SGA da a cada símbolo. Sobran opciones.",
+     "izquierda": [
+      "{{pic:GHS03}}",
+      "{{pic:GHS04}}",
+      "{{pic:GHS08}}",
+      "{{pic:GHS09}}"
+     ],
+     "derecha": [
+      "Llama",
+      "Llama sobre círculo",
+      "Bomba explotando",
+      "Corrosión",
+      "Botella de gas",
+      "Calavera y tibias cruzadas",
+      "Signo de exclamación",
+      "Medio ambiente",
+      "Peligro para la salud"
+     ],
+     "correcta": [
+      1,
+      4,
+      8,
+      7
+     ],
+     "explicacion": "Nombres del SGA (1.4.10.3): llama sobre círculo (comburentes), botella de gas (gases a presión), peligro para la salud (carcinógenos, mutágenos y sensibilizantes respiratorios, entre otros) y medio ambiente (peligro acuático).",
+     "fija": false
+    },
+    {
+     "id": "Z3-2",
+     "tipo": "match",
+     "nivel": "Aplicar",
+     "min": 3,
+     "enunciado": "Asignen a cada peligro el pictograma SGA que debe llevar la etiqueta. Las opciones pueden repetirse y sobran algunas.",
+     "izquierda": [
+      "Un desengrasante alcalino provoca quemaduras graves en la piel (corrosión cutánea, categoría 1).",
+      "Un solvente clorado puede provocar cáncer (carcinogenicidad, categoría 1B).",
+      "Un raticida es mortal en caso de ingestión (toxicidad aguda oral, categoría 2).",
+      "Un limpiador de pisos provoca irritación cutánea (categoría 2)."
+     ],
+     "derecha": [
+      "Llama",
+      "Llama sobre círculo",
+      "Bomba explotando",
+      "Corrosión",
+      "Botella de gas",
+      "Calavera y tibias cruzadas",
+      "Signo de exclamación",
+      "Medio ambiente",
+      "Peligro para la salud"
+     ],
+     "correcta": [
+      3,
+      8,
+      5,
+      6
+     ],
+     "explicacion": "Corrosión cutánea cat. 1 → corrosión. Carcinogenicidad → peligro para la salud. Toxicidad aguda cat. 1 a 3 → calavera y tibias cruzadas (la cat. 4 usa el signo de exclamación). Irritación cutánea cat. 2 → signo de exclamación.",
+     "fija": true
+    },
+    {
+     "id": "Z3-3",
+     "tipo": "single",
+     "nivel": "Evaluar",
+     "min": 2,
+     "enunciado": "La etiqueta de un plaguicida ya lleva {{pic:GHS06}} por toxicidad aguda (categoría 3). Además, el producto causa irritación ocular (categoría 2), y el diseñador quiere añadir el signo de exclamación. ¿Qué indica el SGA?",
+     "opciones": [
+      "Añadirlo, porque cada clase de peligro debe tener su propio pictograma en la etiqueta.",
+      "No añadirlo: si figura la calavera, el signo de exclamación no debe aparecer.",
+      "Cambiar la calavera por el signo de exclamación, que cubre ambos peligros a la vez.",
+      "Añadirlo, siempre que la palabra de advertencia se cambie a «Atención»."
+     ],
+     "correcta": [
+      1
+     ],
+     "explicacion": "Orden de prioridad (1.4.10.5.3.1 a): cuando aparece la calavera y las tibias cruzadas, no aparece el signo de exclamación. La indicación de peligro de irritación sí se mantiene en la etiqueta.",
+     "fija": false
+    },
+    {
+     "id": "Z3-4",
+     "tipo": "multi",
+     "nivel": "Analizar",
+     "min": 3,
+     "n_correctas": 3,
+     "enunciado": "¿Qué afirmaciones sobre los pictogramas SGA y los rótulos de transporte son correctas según el SGA y la NTE INEN 2266? Hay exactamente 3.",
+     "opciones": [
+      "El pictograma SGA es un rombo con símbolo negro sobre fondo blanco y borde rojo.",
+      "Los pictogramas SGA no deben usarse para rotular vehículos de transporte.",
+      "Si el bulto lleva el pictograma de transporte de un peligro, no debería repetirse el pictograma SGA de ese mismo peligro.",
+      "Los códigos GHS01 a GHS09 se imprimen junto a cada pictograma para facilitar su lectura.",
+      "El número de la clase ONU va en el ángulo inferior de todo pictograma SGA."
+     ],
+     "correcta": [
+      0,
+      1,
+      2
+     ],
+     "explicacion": "SGA 1.4.10.4.2.3 (fondo blanco y borde rojo), NTE INEN 2266 6.1.5.3 (no se rotulan vehículos con SGA) y SGA 1.4.10.5.1 (no duplicar el peligro). Los códigos GHS sirven solo como referencia y no deben aparecer en la etiqueta; el número de clase es propio de los rótulos de transporte.",
+     "fija": false
+    },
+    {
+     "id": "Z3-5",
+     "tipo": "single",
+     "nivel": "Analizar",
+     "min": 2,
+     "enunciado": "En un tambor sin nombre legible solo se distinguen {{pic:GHS09}} y la palabra «Atención». ¿Qué indicación de peligro es coherente con esa etiqueta?",
+     "opciones": [
+      "H225 · Líquido y vapores muy inflamables",
+      "H301 · Tóxico en caso de ingestión",
+      "H410 · Muy tóxico para los organismos acuáticos, con efectos duraderos",
+      "H314 · Provoca graves quemaduras en la piel y lesiones oculares"
+     ],
+     "correcta": [
+      2
+     ],
+     "explicacion": "El pictograma de medio ambiente con «Atención» corresponde a la toxicidad acuática (por ejemplo, crónica categoría 1, H410). H225, H301 y H314 llevan la palabra «Peligro» y otros pictogramas: llama, calavera y corrosión.",
+     "fija": false
+    },
+    {
+     "id": "Z3-6",
+     "tipo": "fill",
+     "nivel": "Comprender",
+     "min": 3.5,
+     "fija": true,
+     "enunciado": "Completen el párrafo sobre la etiqueta del SGA. Sobran palabras.",
+     "texto": "Una etiqueta del Sistema Globalmente Armonizado debe mostrar la identificación del {1} y los datos del proveedor: nombre, dirección y teléfono. Incluye los pictogramas de peligro, una palabra de {2} que expresa la gravedad, las indicaciones de peligro, que se codifican con la letra {3}, y los consejos de prudencia, que se codifican con la letra {4}. Cuando en la etiqueta corresponde la palabra «Peligro», no debe aparecer la palabra «{5}». Los códigos solo sirven como referencia: en la etiqueta va el texto de cada frase.",
+     "banco": [
+      "producto",
+      "envase",
+      "advertencia",
+      "seguridad",
+      "H",
+      "P",
+      "R",
+      "S",
+      "Atención",
+      "Cuidado"
+     ],
+     "correcta": [
+      0,
+      2,
+      4,
+      5,
+      8
+     ],
+     "explicacion": "SGA 1.4.10.5.2: identificación del producto y del proveedor, pictogramas, palabra de advertencia, indicaciones de peligro (códigos H) y consejos de prudencia (códigos P). 1.4.10.5.3.2: si va «Peligro», no va «Atención»."
+    },
+    {
+     "id": "Z3-7",
+     "tipo": "match",
+     "nivel": "Comprender",
+     "min": 3,
+     "enunciado": "Asignen a cada pictograma SGA la clase de peligro que comunica. Sobran opciones.",
+     "izquierda": [
+      "{{pic:GHS01}}",
+      "{{pic:GHS05}}",
+      "{{pic:GHS06}}",
+      "{{pic:GHS07}}"
+     ],
+     "derecha": [
+      "Explosivos y sustancias autorreactivas",
+      "Corrosión cutánea y corrosivo para los metales",
+      "Toxicidad aguda grave (categorías 1 a 3)",
+      "Toxicidad aguda leve (cat. 4), irritación y sensibilización cutánea",
+      "Carcinogenicidad y mutagenicidad",
+      "Peligro para el medio ambiente acuático"
+     ],
+     "correcta": [
+      0,
+      1,
+      2,
+      3
+     ],
+     "explicacion": "Bomba explotando: explosivos y autorreactivas. Corrosión: corrosión cutánea y metales. Calavera: toxicidad aguda de categorías 1 a 3. Signo de exclamación: toxicidad aguda de categoría 4, irritación y sensibilización cutánea. Los carcinógenos usan peligro para la salud y el ambiente acuático usa medio ambiente.",
+     "fija": false
+    },
+    {
+     "id": "Z3-8",
+     "tipo": "multi",
+     "nivel": "Aplicar",
+     "min": 2.5,
+     "n_correctas": 2,
+     "enunciado": "Un cilindro de oxígeno medicinal comprimido llega como residuo. ¿Qué pictogramas SGA lleva su etiqueta? Hay exactamente 2.",
+     "opciones": [
+      "Llama sobre círculo",
+      "Botella de gas",
+      "Llama",
+      "Bomba explotando",
+      "Signo de exclamación"
+     ],
+     "correcta": [
+      0,
+      1
+     ],
+     "explicacion": "El oxígeno es un gas comburente (puede provocar o agravar un incendio: llama sobre círculo) y está a presión (botella de gas). No es inflamable ni explosivo por sí mismo.",
+     "fija": false
+    },
+    {
+     "id": "Z3-9",
+     "tipo": "single",
+     "nivel": "Comprender",
+     "min": 1.5,
+     "enunciado": "De estos pictogramas, ¿cuál NO forma parte de la Reglamentación Modelo de la ONU para el transporte, es decir, solo existe en el SGA?",
+     "opciones": [
+      "{{pic:GHS02}}",
+      "{{pic:GHS06}}",
+      "{{pic:GHS07}}",
+      "{{pic:GHS05}}"
+     ],
+     "correcta": [
+      2
+     ],
+     "explicacion": "SGA 1.4.10.3: todos los símbolos forman parte de la Reglamentación Modelo excepto el signo de exclamación y el de peligro para la salud. Por eso no aparecen en los rótulos de transporte.",
+     "fija": false
+    },
+    {
+     "id": "Z3-10",
+     "tipo": "sopa",
+     "nivel": "Recordar",
+     "min": 2.5,
+     "fija": true,
+     "n": 10,
+     "enunciado": "Minijuego · Sopa de letras de la etiqueta SGA: encuentren las 6 palabras. Toquen la primera y la última letra; valen horizontal, vertical y diagonal en ambos sentidos.",
+     "palabras": [
+      {
+       "palabra": "PELIGRO",
+       "pista": "Palabra de advertencia de las categorías más graves."
+      },
+      {
+       "palabra": "PRUDENCIA",
+       "pista": "Consejos de ___: frases con código P."
+      },
+      {
+       "palabra": "PROVEEDOR",
+       "pista": "Su nombre, dirección y teléfono van en la etiqueta."
+      },
+      {
+       "palabra": "ROMBO",
+       "pista": "Forma de todo pictograma SGA."
+      },
+      {
+       "palabra": "BORDE",
+       "pista": "En el pictograma SGA es rojo."
+      },
+      {
+       "palabra": "SIMBOLO",
+       "pista": "Elemento gráfico negro dentro del pictograma."
+      }
+     ],
+     "explicacion": "Palabras: PELIGRO, PRUDENCIA, PROVEEDOR, ROMBO, BORDE y SÍMBOLO (SGA 1.4.10).",
+     "grid": [
+      "HBNECBVOAD",
+      "IISUMJLIPR",
+      "EGVBAOCEAO",
+      "DCJABNLJBE",
+      "RFBMEIFMTO",
+      "ODIDGIOFSC",
+      "BSURCRVPFV",
+      "OROFRDNHOU",
+      "PTRPHSGAPP",
+      "FRODEEVORP"
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "id": "Z3-E1",
+     "tipo": "single",
+     "nivel": "Comprender",
+     "enunciado": "Un cilindro tiene {{pic:GHS04}} como único pictograma. ¿Qué indicación de peligro le corresponde?",
+     "opciones": [
+      "H280 · Contiene gas a presión; peligro de explosión en caso de calentamiento",
+      "H271 · Puede provocar un incendio o una explosión; muy comburente",
+      "H220 · Gas extremadamente inflamable",
+      "H330 · Mortal en caso de inhalación"
+     ],
+     "correcta": [
+      0
+     ],
+     "explicacion": "La botella de gas identifica a los gases a presión (H280). H220 usaría la llama, H271 la llama sobre círculo y H330 la calavera."
+    },
+    {
+     "id": "Z3-E2",
+     "tipo": "single",
+     "nivel": "Aplicar",
+     "enunciado": "Un producto es líquido inflamable de categoría 3 («Atención») y causa lesiones oculares graves de categoría 1 («Peligro»). ¿Qué palabra de advertencia lleva la etiqueta?",
+     "opciones": [
+      "«Peligro» y «Atención», una por cada peligro",
+      "Solo «Atención», porque el peligro físico tiene prioridad",
+      "Solo «Peligro»",
+      "Ninguna: basta con los pictogramas"
+     ],
+     "correcta": [
+      2
+     ],
+     "explicacion": "1.4.10.5.3.2: si se usa «Peligro», no debe aparecer «Atención»."
+    },
+    {
+     "id": "Z3-E3",
+     "tipo": "single",
+     "nivel": "Aplicar",
+     "enunciado": "Un endurecedor de resina es sensibilizante respiratorio (categoría 1) y también sensibilizante cutáneo. ¿Qué pictogramas lleva la etiqueta?",
+     "opciones": [
+      "Peligro para la salud y signo de exclamación",
+      "Solo el signo de exclamación",
+      "Solo peligro para la salud",
+      "Calavera y signo de exclamación"
+     ],
+     "correcta": [
+      2
+     ],
+     "explicacion": "1.4.10.5.3.1 c): si aparece el peligro para la salud por sensibilización respiratoria, el signo de exclamación no figura para la sensibilización cutánea."
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "zona": "Sala de fichas",
+   "nombre": "La sala de las 16 secciones",
+   "intro": "La hoja de seguridad (FDS u HDS) es la primera fuente ante una emergencia. La NTE INEN 2266 (6.1.1.7) y el SGA (tabla 1.5.2) fijan sus 16 secciones.",
+   "preguntas": [
+    {
+     "id": "Z4-1",
+     "tipo": "order",
+     "nivel": "Recordar",
+     "min": 2.5,
+     "enunciado": "Ordenen estas secciones de la hoja de seguridad según su número, de menor a mayor.",
+     "opciones": [
+      "Identificación del peligro o peligros",
+      "Primeros auxilios",
+      "Medidas en caso de vertido o derrame accidental",
+      "Controles de exposición / protección personal",
+      "Estabilidad y reactividad",
+      "Información relativa al transporte"
+     ],
+     "explicacion": "Son las secciones 2, 4, 6, 8, 10 y 14 de las 16 que exigen la NTE INEN 2266 y el SGA.",
+     "fija": false
+    },
+    {
+     "id": "Z4-2",
+     "tipo": "match",
+     "nivel": "Aplicar",
+     "min": 3,
+     "enunciado": "Durante una emergencia, ¿qué sección de la hoja de seguridad consultan primero en cada caso? Sobran opciones.",
+     "izquierda": [
+      "Se derramaron 20 L en el piso de la bodega y hay que contener y limpiar.",
+      "A un operario le salpicó el producto en los ojos y la ambulancia tarda.",
+      "Hay que elegir guantes y respirador para trasvasar el residuo.",
+      "Un tambor está cerca del fuego y no se sabe si sirve el agua."
+     ],
+     "derecha": [
+      "Sección 2 · Identificación de peligros",
+      "Sección 4 · Primeros auxilios",
+      "Sección 5 · Lucha contra incendios",
+      "Sección 6 · Vertido accidental",
+      "Sección 7 · Manipulación y almacenamiento",
+      "Sección 8 · Controles de exposición / protección personal",
+      "Sección 11 · Información toxicológica",
+      "Sección 13 · Eliminación"
+     ],
+     "correcta": [
+      3,
+      1,
+      5,
+      2
+     ],
+     "explicacion": "Derrame → sección 6 (aislamiento y limpieza). Salpicadura → sección 4 (medidas por vía de exposición). EPP → sección 8. Medios de extinción adecuados y no adecuados → sección 5.",
+     "fija": true
+    },
+    {
+     "id": "Z4-3",
+     "tipo": "single",
+     "nivel": "Evaluar",
+     "min": 3,
+     "enunciado": "Fragmento de la FDS de un residuo de «Desengrasante D-40»: Sección 9 · punto de inflamación 38 °C. Sección 10 · materiales incompatibles: oxidantes fuertes. Sección 14 · ONU 1993, clase 3, GE III. En la bodega quedan libres dos jaulas: una con permanganato de potasio (5.1) y otra con ácidos gastados (8). ¿Dónde se ubica el residuo?",
+     "opciones": [
+      "Con el permanganato, porque los dos son residuos líquidos de limpieza.",
+      "Con los ácidos: el Anexo K permite 3 con 8 y la FDS lo aleja de oxidantes.",
+      "En cualquiera de las dos, porque el punto de inflamación supera los 23 °C y el riesgo es bajo.",
+      "Con el permanganato, porque la sección 14 indica grupo de embalaje III (bajo peligro)."
+     ],
+     "correcta": [
+      1
+     ],
+     "explicacion": "La sección 10 advierte la incompatibilidad con oxidantes (el permanganato es 5.1), y el Anexo K marca 3 con 5.1 como incompatibles y 3 con 8 en verde. El grupo de embalaje y el punto de inflamación no autorizan juntarlo con un comburente.",
+     "fija": false
+    },
+    {
+     "id": "Z4-4",
+     "tipo": "fill",
+     "nivel": "Comprender",
+     "min": 3.5,
+     "enunciado": "Completen el párrafo sobre la hoja de seguridad. Sobran opciones.",
+     "texto": "La NTE INEN 2266 exige que la hoja de seguridad esté redactada en idioma {1} y contenga {2} secciones. Al recibir un residuo, el técnico revisa primero la sección {3}, donde están la clasificación, los pictogramas y la palabra de advertencia. Si hay que entregar el residuo a un gestor ambiental, la sección {4} explica cómo eliminar el producto y sus envases contaminados, y la sección {5} da el número ONU y la clase para el transporte.",
+     "banco": [
+      "español",
+      "inglés",
+      "16",
+      "12",
+      "1",
+      "2",
+      "13",
+      "14",
+      "15",
+      "9"
+     ],
+     "correcta": [
+      0,
+      2,
+      5,
+      6,
+      7
+     ],
+     "explicacion": "Español y 16 secciones (6.1.1.7). Sección 2: identificación del peligro y elementos de la etiqueta; sección 13: eliminación; sección 14: transporte (número ONU, clase y grupo de embalaje).",
+     "fija": false
+    },
+    {
+     "id": "Z4-5",
+     "tipo": "multi",
+     "nivel": "Evaluar",
+     "min": 3,
+     "n_correctas": 3,
+     "enunciado": "Un proveedor envía la hoja de seguridad de un solvente. ¿Qué defectos la hacen inaceptable? Hay exactamente 3.",
+     "opciones": [
+      "Está redactada solo en inglés.",
+      "Tiene 12 secciones: omite la información ecotoxicológica y la de eliminación.",
+      "La sección 1 no incluye un número de teléfono para emergencias.",
+      "En la sección 2 los pictogramas aparecen descritos por escrito (llama, calavera).",
+      "En la sección 3 un componente se protege como información comercial confidencial autorizada."
+     ],
+     "correcta": [
+      0,
+      1,
+      2
+     ],
+     "explicacion": "El idioma, las 16 secciones y el teléfono de emergencia son obligatorios. El SGA permite describir los símbolos por escrito o en blanco y negro en la sección 2 (tabla 1.5.2), y la información comercial confidencial autorizada por la autoridad prevalece sobre la identificación del componente.",
+     "fija": false
+    },
+    {
+     "id": "Z4-6",
+     "tipo": "fill",
+     "nivel": "Aplicar",
+     "min": 3.5,
+     "fija": true,
+     "enunciado": "Completen el caso: el supervisor usa la hoja de seguridad durante el trasvase de un residuo. Sobran palabras.",
+     "texto": "Durante el trasvase de un residuo de ácido clorhídrico, el supervisor de la bodega abre la hoja de seguridad. En la sección 8 encuentra los límites de exposición y el equipo de {1} personal que debe usar la cuadrilla. En la sección {2} revisa qué productos de descomposición peligrosos se forman si el ácido se calienta. Antes de empezar, lee en la sección 6 cómo contener un {3} y qué material absorbente usar, y en la sección 13 cómo {4} los envases contaminados. Si un trabajador inhala los vapores, sigue las medidas de la sección {5}.",
+     "banco": [
+      "protección",
+      "limpieza",
+      "10",
+      "3",
+      "derrame",
+      "incendio",
+      "eliminar",
+      "reciclar",
+      "4",
+      "11"
+     ],
+     "correcta": [
+      0,
+      2,
+      4,
+      6,
+      8
+     ],
+     "explicacion": "Sección 8: controles de exposición y protección personal. Sección 10: estabilidad y reactividad (productos de descomposición). Sección 6: vertido o derrame accidental. Sección 13: eliminación. Sección 4: primeros auxilios por vía de exposición."
+    },
+    {
+     "id": "Z4-7",
+     "tipo": "match",
+     "nivel": "Aplicar",
+     "min": 3,
+     "fija": false,
+     "enunciado": "Cada dato se copió de la FDS de un residuo de solvente. ¿De qué sección proviene? Sobran opciones.",
+     "izquierda": [
+      "Punto de inflamación: 38 °C; presión de vapor: 2,3 kPa.",
+      "DL50 oral en rata: 300 mg/kg.",
+      "Número ONU 1993, clase 3, grupo de embalaje III.",
+      "CL50 en peces: 2 mg/L; no es fácilmente biodegradable.",
+      "Usar polvo químico seco o espuma; no usar chorro de agua."
+     ],
+     "derecha": [
+      "Sección 2 · Identificación de peligros",
+      "Sección 5 · Lucha contra incendios",
+      "Sección 9 · Propiedades físicas y químicas",
+      "Sección 11 · Información toxicológica",
+      "Sección 12 · Información ecotoxicológica",
+      "Sección 13 · Eliminación",
+      "Sección 14 · Transporte"
+     ],
+     "correcta": [
+      2,
+      3,
+      6,
+      4,
+      1
+     ],
+     "explicacion": "Propiedades físicas → 9; toxicidad para personas (DL50) → 11; número ONU y clase → 14; efectos en organismos acuáticos y degradabilidad → 12; medios de extinción → 5."
+    },
+    {
+     "id": "Z4-8",
+     "tipo": "single",
+     "nivel": "Aplicar",
+     "min": 2,
+     "enunciado": "Un tambor de residuo llegó sin etiqueta, pero con su FDS. Para elaborar la nueva etiqueta con los pictogramas, la palabra de advertencia y las indicaciones de peligro, ¿qué sección usan?",
+     "opciones": [
+      "Sección 1 · Identificación del producto",
+      "Sección 3 · Composición",
+      "Sección 2 · Identificación del peligro",
+      "Sección 15 · Reglamentación"
+     ],
+     "correcta": [
+      2
+     ],
+     "explicacion": "La sección 2 contiene la clasificación SGA y los elementos de la etiqueta: pictogramas, palabra de advertencia, indicaciones de peligro y consejos de prudencia (tabla 1.5.2).",
+     "fija": false
+    },
+    {
+     "id": "Z4-9",
+     "tipo": "single",
+     "nivel": "Comprender",
+     "min": 2,
+     "enunciado": "La NTE INEN 2266 incluye en su Anexo C un modelo de tarjeta de emergencia para el transporte. ¿Qué situaciones cubre la parte «En caso de accidente»?",
+     "opciones": [
+      "Derrames o fugas, fuego y exposición.",
+      "Compra, almacenamiento y eliminación.",
+      "Etiquetado, rotulado y embalaje.",
+      "Clasificación, composición y transporte."
+     ],
+     "correcta": [
+      0
+     ],
+     "explicacion": "El modelo del Anexo C pide, en caso de accidente, qué hacer ante derrames o fugas, fuego y exposición, además de los riesgos del producto y la protección básica.",
+     "fija": false
+    },
+    {
+     "id": "Z4-10",
+     "tipo": "cruci",
+     "nivel": "Recordar",
+     "min": 3,
+     "fija": true,
+     "enunciado": "Minijuego · Crucigrama de la hoja de seguridad. Toquen una pista y escriban sin tildes; el cursor avanza solo.",
+     "palabras": [
+      {
+       "respuesta": "AUXILIOS",
+       "pista": "Sección 4: primeros ___."
+      },
+      {
+       "respuesta": "DERRAME",
+       "pista": "Sección 6: medidas en caso de vertido o ___ accidental."
+      },
+      {
+       "respuesta": "DIECISEIS",
+       "pista": "Número de secciones que exige la NTE INEN 2266."
+      },
+      {
+       "respuesta": "ELIMINACION",
+       "pista": "Sección 13: información relativa a la ___ de los productos."
+      },
+      {
+       "respuesta": "REACTIVIDAD",
+       "pista": "Sección 10: estabilidad y ___."
+      }
+     ],
+     "explicacion": "AUXILIOS (4), DERRAME (6), DIECISÉIS secciones, ELIMINACIÓN (13) y REACTIVIDAD (10).",
+     "filas": 7,
+     "cols": 11,
+     "entradas": [
+      {
+       "n": 1,
+       "dir": "H",
+       "r": 0,
+       "c": 0,
+       "respuesta": "DIECISEIS",
+       "pista": "Número de secciones que exige la NTE INEN 2266."
+      },
+      {
+       "n": 2,
+       "dir": "H",
+       "r": 2,
+       "c": 0,
+       "respuesta": "REACTIVIDAD",
+       "pista": "Sección 10: estabilidad y ___."
+      },
+      {
+       "n": 3,
+       "dir": "H",
+       "r": 4,
+       "c": 0,
+       "respuesta": "AUXILIOS",
+       "pista": "Sección 4: primeros ___."
+      },
+      {
+       "n": 4,
+       "dir": "H",
+       "r": 6,
+       "c": 0,
+       "respuesta": "ELIMINACION",
+       "pista": "Sección 13: información relativa a la ___ de los productos."
+      },
+      {
+       "n": 1,
+       "dir": "V",
+       "r": 0,
+       "c": 0,
+       "respuesta": "DERRAME",
+       "pista": "Sección 6: medidas en caso de vertido o ___ accidental."
+      }
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "id": "Z4-E1",
+     "tipo": "single",
+     "nivel": "Comprender",
+     "enunciado": "El jefe de bodega quiere saber qué gases tóxicos podría liberar el producto si se descompone. ¿Qué sección de la FDS consulta?",
+     "opciones": [
+      "Sección 9 · Propiedades físicas y químicas",
+      "Sección 10 · Estabilidad y reactividad",
+      "Sección 12 · Información ecotoxicológica",
+      "Sección 7 · Manipulación y almacenamiento"
+     ],
+     "correcta": [
+      1
+     ],
+     "explicacion": "Los productos de descomposición peligrosos forman parte de la sección 10 (tabla 1.5.2, literal f)."
+    },
+    {
+     "id": "Z4-E2",
+     "tipo": "single",
+     "nivel": "Comprender",
+     "enunciado": "Para el plan de manejo ambiental necesitan saber si el residuo es persistente y bioacumulable. ¿Qué sección de la FDS consultan?",
+     "opciones": [
+      "Sección 11 · Información toxicológica",
+      "Sección 13 · Eliminación",
+      "Sección 12 · Información ecotoxicológica",
+      "Sección 15 · Reglamentación"
+     ],
+     "correcta": [
+      2
+     ],
+     "explicacion": "La persistencia, la degradabilidad, el potencial de bioacumulación y la movilidad en el suelo están en la sección 12."
+    },
+    {
+     "id": "Z4-E3",
+     "tipo": "single",
+     "nivel": "Comprender",
+     "enunciado": "El médico de emergencia pregunta por los efectos retardados y crónicos de la exposición. ¿Qué sección de la FDS le entregan?",
+     "opciones": [
+      "Sección 4 · Primeros auxilios",
+      "Sección 8 · Controles de exposición",
+      "Sección 2 · Identificación del peligro",
+      "Sección 11 · Información toxicológica"
+     ],
+     "correcta": [
+      3
+     ],
+     "explicacion": "La sección 11 describe los efectos inmediatos, retardados y crónicos, y las medidas numéricas de toxicidad."
+    }
+   ]
+  }
+ ],
+ "expediente": {
+  "id": "Z5",
+  "zona": "Expediente de contención",
+  "peso": 2.0,
+  "min": 8,
+  "intro": "Caso integrador calificado por el docente. Cada grupo recibe un residuo distinto. Completen el expediente y justifiquen la decisión de almacenamiento. Pueden usar el Archivo 142 y la Matriz del Anexo K.",
+  "bodega": "La bodega temporal del gestor tiene cinco jaulas: J1 · permanganato de potasio vencido (5.1); J2 · thinner y restos de pintura (3); J3 · baterías y ácidos gastados (8); J4 · plaguicidas caducados (6.1); J5 · cilindros de CO₂ de extintores (2.2). También hay una celda aislada con ventilación propia.",
+  "criterios": [
+   {
+    "k": "c1",
+    "nombre": "Nombre oficial y código del AM 142",
+    "max": 0.4
+   },
+   {
+    "k": "c2",
+    "nombre": "Clase o división de la NTE INEN 2266",
+    "max": 0.3
+   },
+   {
+    "k": "c3",
+    "nombre": "Pictogramas SGA de la etiqueta",
+    "max": 0.4
+   },
+   {
+    "k": "c4",
+    "nombre": "Sección de la FDS para el incidente",
+    "max": 0.3
+   },
+   {
+    "k": "c5",
+    "nombre": "Ubicación y justificación del almacenamiento",
+    "max": 0.6
+   }
+  ],
+  "variantes": [
+   {
+    "v": 1,
+    "titulo": "El balde de thinner",
+    "caso": "Un taller de enderezada y pintura de autos entrega 60 L de thinner sucio de lavar pistolas de pintura (mezcla de tolueno y xilenos; punto de inflamación 12 °C). Al descargarlo se volcó un balde de 10 L en el patio.",
+    "clave": {
+     "c1": "NE-51 · Solventes orgánicos gastados y mezclas de solventes gastados (T, I; Y6)",
+     "c2": "Clase 3 · Líquidos inflamables",
+     "c2_cod": "3",
+     "c3": [
+      "GHS02",
+      "GHS08",
+      "GHS07"
+     ],
+     "c3_min": [
+      "GHS02",
+      "GHS08"
+     ],
+     "c4": "6",
+     "c5": "J2, con los inflamables (3 con 3), o J5 (3 con 2.2, compatible). Nunca J1: 3 con 5.1 es incompatible. Sobre paletas, con los cierres hacia arriba, lejos de fuentes de calor e ignición y con ventilación."
+    }
+   },
+   {
+    "v": 2,
+    "titulo": "El ácido que gotea",
+    "caso": "Un taller de montacargas entrega 40 L de electrolito de baterías (ácido sulfúrico, pH < 1) en un bidón agrietado. A un ayudante le salpicaron gotas en el antebrazo.",
+    "clave": {
+     "c1": "NE-18 · Desechos de soluciones ácidas con pH < 2 (C; Y34)",
+     "c2": "Clase 8 · Sustancias corrosivas",
+     "c2_cod": "8",
+     "c3": [
+      "GHS05"
+     ],
+     "c3_min": [
+      "GHS05"
+     ],
+     "c4": "4",
+     "c5": "J3, con los ácidos (8 con 8). Lejos de J1 (8 con 5.1 es incompatible). Se pasa a un envase íntegro sobre paleta y con contención secundaria; nunca se almacena junto a bases."
+    }
+   },
+   {
+    "v": 3,
+    "titulo": "Los cilindros olvidados",
+    "caso": "Un hotel entrega 6 cilindros de GLP en desuso, con gas remanente. Uno tiene la válvula floja y huele a gas, y en el patio hay una soldadura en curso.",
+    "clave": {
+     "c1": "NE-33 · Gases comprimidos, gases refrigerantes en desuso, almacenados en contenedores o cilindros (A4140)",
+     "c2": "División 2.1 · Gases inflamables",
+     "c2_cod": "2.1",
+     "c3": [
+      "GHS02",
+      "GHS04"
+     ],
+     "c3_min": [
+      "GHS02",
+      "GHS04"
+     ],
+     "c4": "5",
+     "c5": "J5, con los gases no inflamables (2.1 con 2.2, compatible), o la celda aislada. Nunca J4: 2.1 con 6 es incompatible. De pie y sujetos, ventilados, lejos de fuentes de ignición y con la válvula protegida."
+    }
+   },
+   {
+    "v": 4,
+    "titulo": "El plaguicida municipal",
+    "caso": "El área de control de vectores de un municipio entrega 25 L de un insecticida organofosforado caducado (tóxico en caso de ingestión e inhalación, muy tóxico para la vida acuática). Para trasvasarlo hay que elegir el equipo de protección.",
+    "clave": {
+     "c1": "NE-04 · Agroquímicos caducados o fuera de especificaciones generados en actividades comunes (T; Y4)",
+     "c2": "División 6.1 · Sustancias tóxicas",
+     "c2_cod": "6.1",
+     "c3": [
+      "GHS06",
+      "GHS09"
+     ],
+     "c3_min": [
+      "GHS06",
+      "GHS09"
+     ],
+     "c4": "8",
+     "c5": "J4, con los plaguicidas (6.1 con 6.1). Lejos de alimentos o semillas (b.1). Sobre paleta, en un área ventilada y con material para contener derrames."
+    }
+   },
+   {
+    "v": 5,
+    "titulo": "El cloro de la piscina",
+    "caso": "Un club deportivo entrega 30 kg de hipoclorito de calcio granulado caducado (oxidante, corrosivo y muy tóxico para la vida acuática). El encargado pregunta con qué no debe guardarlo.",
+    "clave": {
+     "c1": "NE-48 · Productos químicos caducados o fuera de especificaciones (T, I, C, R; A4140)",
+     "c2": "División 5.1 · Sustancias comburentes",
+     "c2_cod": "5.1",
+     "c3": [
+      "GHS03",
+      "GHS05",
+      "GHS07",
+      "GHS09"
+     ],
+     "c3_min": [
+      "GHS03",
+      "GHS05"
+     ],
+     "c4": "7 o 10",
+     "c5": "J1, con el comburente (5.1 con 5.1). Nunca J2 (5.1 con 3) ni J3 (5.1 con 8): son incompatibles. En un lugar seco, lejos de combustibles y de ácidos."
+    }
+   }
+  ]
+ },
+ "reto_final": {
+  "peso": 0.1,
+  "crucigrama": {
+   "palabras": [
+    {
+     "respuesta": "BASILEA",
+     "pista": "Convenio internacional cuyo código (Y o A) acompaña a cada desecho del AM 142."
+    },
+    {
+     "respuesta": "COMBURENTE",
+     "pista": "Sustancia de la división 5.1 que, sin arder necesariamente, aporta oxígeno a la combustión."
+    },
+    {
+     "respuesta": "PALETA",
+     "pista": "Plataforma sobre la que se colocan los envases para no apoyarlos en el suelo."
+    },
+    {
+     "respuesta": "ATENCION",
+     "pista": "Palabra de advertencia del SGA para las categorías de peligro menos graves."
+    },
+    {
+     "respuesta": "ESPECIALES",
+     "pista": "Tipo de desechos del Anexo C del AM 142, como los neumáticos usados."
+    },
+    {
+     "respuesta": "PARARRAYOS",
+     "pista": "Sistema de protección que deben tener todas las bodegas, según la NTE INEN 2266."
+    }
+   ],
+   "filas": 11,
+   "cols": 10,
+   "entradas": [
+    {
+     "n": 2,
+     "dir": "H",
+     "r": 1,
+     "c": 1,
+     "respuesta": "BASILEA",
+     "pista": "Convenio internacional cuyo código (Y o A) acompaña a cada desecho del AM 142."
+    },
+    {
+     "n": 4,
+     "dir": "H",
+     "r": 5,
+     "c": 2,
+     "respuesta": "ATENCION",
+     "pista": "Palabra de advertencia del SGA para las categorías de peligro menos graves."
+    },
+    {
+     "n": 5,
+     "dir": "H",
+     "r": 7,
+     "c": 0,
+     "respuesta": "PARARRAYOS",
+     "pista": "Sistema de protección que deben tener todas las bodegas, según la NTE INEN 2266."
+    },
+    {
+     "n": 6,
+     "dir": "H",
+     "r": 9,
+     "c": 0,
+     "respuesta": "COMBURENTE",
+     "pista": "Sustancia de la división 5.1 que, sin arder necesariamente, aporta oxígeno a la combustión."
+    },
+    {
+     "n": 1,
+     "dir": "V",
+     "r": 0,
+     "c": 2,
+     "respuesta": "PALETA",
+     "pista": "Plataforma sobre la que se colocan los envases para no apoyarlos en el suelo."
+    },
+    {
+     "n": 3,
+     "dir": "V",
+     "r": 1,
+     "c": 6,
+     "respuesta": "ESPECIALES",
+     "pista": "Tipo de desechos del Anexo C del AM 142, como los neumáticos usados."
+    }
+   ]
+  },
+  "sopa": {
+   "n": 11,
+   "palabras": [
+    {
+     "palabra": "LLAMA",
+     "pista": "{{pic:GHS02}}"
+    },
+    {
+     "palabra": "BOMBA",
+     "pista": "{{pic:GHS01}}"
+    },
+    {
+     "palabra": "CORROSION",
+     "pista": "{{pic:GHS05}}"
+    },
+    {
+     "palabra": "CALAVERA",
+     "pista": "{{pic:GHS06}}"
+    },
+    {
+     "palabra": "BOTELLA",
+     "pista": "{{pic:GHS04}}"
+    },
+    {
+     "palabra": "SALUD",
+     "pista": "{{pic:GHS08}}"
+    }
+   ],
+   "grid": [
+    "MVEUCOMNVTR",
+    "RHDBLEPDODE",
+    "OGRSLETHOIM",
+    "BOMBANRHTSS",
+    "BACORROSION",
+    "VJMASALUDIM",
+    "NMAASDBODDV",
+    "LBAILINMLDV",
+    "AGIEILHBMVJ",
+    "NFPBOTELLAA",
+    "CPIAREVALAC"
+   ]
+  }
+ },
+ "por_zona": 5,
+ "tiempos_por_zona": {
+  "5": 85,
+  "6": 105,
+  "7": 115
+ }
+}

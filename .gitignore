@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+datos/
+datos_revision/
+__pycache__/
+*.pyc
+.vercel/
+grupos_semana4.txt
+SOLUCIONARIO_PRIVADO.*
+MATRIZ_ESPECIFICACIONES.*
+CLAVES_VERCEL_PRIVADO.txt
