@@ -1,5 +1,5 @@
 {
- "version": "BT-ERP-S4-v2.2",
+ "version": "BT-ERP-S4-v2.3",
  "titulo": "Bodega Peligrosa · Código de Contención",
  "asignatura": "Eliminación de Residuos Peligrosos",
  "carrera": "Ingeniería Ambiental · Facultad de Ciencias de la Ingeniería · UTEQ",
@@ -2114,13 +2114,14 @@
    ]
   }
  },
- "por_zona": 5,
+ "por_zona": 7,
  "tiempos_por_zona": {
   "5": 105,
   "6": 120,
-  "7": 130
+  "7": 130,
+  "8": 155
  },
  "ajuste_zona": {
-  "4": -2
+  "4": 0
  }
 }
