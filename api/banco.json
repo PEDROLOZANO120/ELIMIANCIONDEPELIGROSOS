@@ -1,10 +1,10 @@
 {
- "version": "BT-ERP-S4-v2.0",
+ "version": "BT-ERP-S4-v2.2",
  "titulo": "Bodega Peligrosa · Código de Contención",
  "asignatura": "Eliminación de Residuos Peligrosos",
  "carrera": "Ingeniería Ambiental · Facultad de Ciencias de la Ingeniería · UTEQ",
  "semana": "Semana 4 · AM 142, NTE INEN 2266 y SGA",
- "duracion_min": 85,
+ "duracion_min": 105,
  "pesos": {
   "zonas": 7.0,
   "reto": 1.0,
@@ -1212,7 +1212,7 @@
       2
      ],
      "explicacion": "Derrame → sección 6 (aislamiento y limpieza). Salpicadura → sección 4 (medidas por vía de exposición). EPP → sección 8. Medios de extinción adecuados y no adecuados → sección 5.",
-     "fija": true
+     "fija": false
     },
     {
      "id": "Z4-3",
@@ -1288,7 +1288,7 @@
      "tipo": "fill",
      "nivel": "Aplicar",
      "min": 3.5,
-     "fija": true,
+     "fija": false,
      "enunciado": "Completen el caso: el supervisor usa la hoja de seguridad durante el trasvase de un residuo. Sobran palabras.",
      "texto": "Durante el trasvase de un residuo de ácido clorhídrico, el supervisor de la bodega abre la hoja de seguridad. En la sección 8 encuentra los límites de exposición y el equipo de {1} personal que debe usar la cuadrilla. En la sección {2} revisa qué productos de descomposición peligrosos se forman si el ácido se calienta. Antes de empezar, lee en la sección 6 cómo contener un {3} y qué material absorbente usar, y en la sección 13 cómo {4} los envases contaminados. Si un trabajador inhala los vapores, sigue las medidas de la sección {5}.",
      "banco": [
@@ -1382,78 +1382,421 @@
     },
     {
      "id": "Z4-10",
-     "tipo": "cruci",
-     "nivel": "Recordar",
-     "min": 3,
+     "tipo": "fds",
+     "nivel": "Aplicar",
+     "min": 12,
      "fija": true,
-     "enunciado": "Minijuego · Crucigrama de la hoja de seguridad. Toquen una pista y escriban sin tildes; el cursor avanza solo.",
-     "palabras": [
-      {
-       "respuesta": "AUXILIOS",
-       "pista": "Sección 4: primeros ___."
-      },
-      {
-       "respuesta": "DERRAME",
-       "pista": "Sección 6: medidas en caso de vertido o ___ accidental."
-      },
-      {
-       "respuesta": "DIECISEIS",
-       "pista": "Número de secciones que exige la NTE INEN 2266."
-      },
-      {
-       "respuesta": "ELIMINACION",
-       "pista": "Sección 13: información relativa a la ___ de los productos."
-      },
-      {
-       "respuesta": "REACTIVIDAD",
-       "pista": "Sección 10: estabilidad y ___."
-      }
+     "enunciado": "Hoja de datos de seguridad del residuo «Thinner gastado (mezcla de tolueno y xilenos)». Es la hoja que recibió la bodega con el residuo. Complete cada una de sus 16 secciones eligiendo el dato correcto (la hoja viene con un dato faltante en cada sección). Pueden consultar el Archivo 142 y la Matriz del Anexo K.",
+     "hoja": {
+      "producto": "Thinner gastado (mezcla de tolueno y xilenos)",
+      "nota": "Hoja ficticia, elaborada para esta práctica con las 16 secciones que exigen la NTE INEN 2266 y el SGA.",
+      "secciones": [
+       {
+        "n": 1,
+        "titulo": "Identificación del producto y del proveedor",
+        "texto": "Producto: thinner gastado de la limpieza de pistolas de pintura de un taller de enderezada. Proveedor: Taller Los Andes, teléfono de emergencia 1-800-000-000. En el AM 142 el residuo se registra como {}.",
+        "opciones": [
+         "NE-49 · Residuos de tintas, pinturas y resinas",
+         "NE-51 · Solventes orgánicos gastados y mezclas de solventes gastados",
+         "NE-35 · Hidrocarburos sucios o contaminados con otras sustancias",
+         "NE-43 · Material adsorbente contaminado con sustancias químicas peligrosas"
+        ]
+       },
+       {
+        "n": 2,
+        "titulo": "Identificación de los peligros",
+        "texto": "Clasificación SGA: líquido inflamable, categoría 2. Pictogramas: llama, signo de exclamación y peligro para la salud. Palabra de advertencia: Peligro. Indicación de peligro principal: {}.",
+        "opciones": [
+         "H301 · Tóxico en caso de ingestión",
+         "H225 · Líquido y vapores muy inflamables",
+         "H280 · Contiene gas a presión; peligro de explosión en caso de calentamiento",
+         "H314 · Provoca graves quemaduras en la piel y lesiones oculares"
+        ]
+       },
+       {
+        "n": 3,
+        "titulo": "Composición e información de los ingredientes",
+        "texto": "Mezcla de solventes: tolueno 60 %, xilenos 30 %, otros 10 %. Cada componente se identifica con su número {}, que no debe confundirse con el número ONU.",
+        "opciones": [
+         "CAS (por ejemplo, tolueno 108-88-3)",
+         "CRTIB",
+         "de lote del envase",
+         "NFPA"
+        ]
+       },
+       {
+        "n": 4,
+        "titulo": "Primeros auxilios",
+        "texto": "Primeros auxilios: si los vapores se inhalan, {}. Si el líquido cae en los ojos, lavar con agua durante 15 minutos. No provocar el vómito si se ingiere.",
+        "opciones": [
+         "darle leche para neutralizar el solvente",
+         "pedirle que haga ejercicio para eliminar los vapores",
+         "llevar a la persona al aire fresco y mantenerla en reposo",
+         "aplicar aceite en las fosas nasales"
+        ]
+       },
+       {
+        "n": 5,
+        "titulo": "Medidas de lucha contra incendios",
+        "texto": "Lucha contra incendios: usar {}. No usar chorro de agua directo, porque el solvente flota y extiende el fuego. Los bomberos usan equipo de respiración autónomo.",
+        "opciones": [
+         "agua a presión en chorro directo",
+         "bicarbonato disuelto en agua",
+         "arena humedecida con ácido",
+         "polvo químico seco, espuma o dióxido de carbono"
+        ]
+       },
+       {
+        "n": 6,
+        "titulo": "Medidas en caso de vertido accidental",
+        "texto": "Vertido: eliminar todas las fuentes de ignición, ventilar, y contener el derrame con {}. Recoger con herramientas que no produzcan chispas y guardar en envase cerrado.",
+        "opciones": [
+         "abundante agua dirigida al sumidero",
+         "ácido diluido para neutralizarlo",
+         "material absorbente inerte, como arena o vermiculita",
+         "cemento en polvo seco"
+        ]
+       },
+       {
+        "n": 7,
+        "titulo": "Manejo y almacenamiento",
+        "texto": "Manejo y almacenamiento: envase cerrado, en lugar ventilado, lejos del calor y de la ignición, sobre paletas. Por la matriz del Anexo K no debe guardarse junto a {}.",
+        "opciones": [
+         "residuos de pintura al agua en envases sellados",
+         "otros líquidos inflamables de la clase 3",
+         "comburentes, como el permanganato de potasio",
+         "cilindros de dióxido de carbono"
+        ]
+       },
+       {
+        "n": 8,
+        "titulo": "Control de exposición y protección personal",
+        "texto": "Protección personal: guantes resistentes a solventes, gafas de seguridad, ropa antiestática y respirador con filtro para {}.",
+        "opciones": [
+         "polvos minerales",
+         "humos de soldadura",
+         "vapores orgánicos",
+         "gases ácidos"
+        ]
+       },
+       {
+        "n": 9,
+        "titulo": "Propiedades físicas y químicas",
+        "texto": "Propiedades: líquido incoloro de olor aromático; punto de inflamación 12 °C. Sus vapores son más densos que el aire, por eso {}.",
+        "opciones": [
+         "se mantienen siempre dentro del envase",
+         "suben y se dispersan rápido sin riesgo",
+         "se acumulan a ras del piso y pueden alcanzar una fuente de ignición lejana",
+         "se disuelven en el aire sin acumularse"
+        ]
+       },
+       {
+        "n": 10,
+        "titulo": "Estabilidad y reactividad",
+        "texto": "Estabilidad y reactividad: estable en condiciones normales de almacenamiento. Reacciona con {} y puede formar mezclas explosivas con el aire.",
+        "opciones": [
+         "nitrógeno",
+         "envases de acero inoxidable",
+         "oxidantes fuertes",
+         "arena seca"
+        ]
+       },
+       {
+        "n": 11,
+        "titulo": "Información toxicológica",
+        "texto": "Información toxicológica: puede causar somnolencia, mareo y dolor de cabeza. La exposición repetida daña el {}.",
+        "opciones": [
+         "cabello y las uñas",
+         "esmalte de los dientes",
+         "sistema nervioso central",
+         "tejido óseo únicamente"
+        ]
+       },
+       {
+        "n": 12,
+        "titulo": "Información ecotoxicológica",
+        "texto": "Información ecotoxicológica: es tóxico para los organismos acuáticos. Un vertido a un cauce afectaría a {}.",
+        "opciones": [
+         "a ninguna especie",
+         "peces e invertebrados acuáticos",
+         "solo a plantas terrestres",
+         "únicamente a bacterias del suelo seco"
+        ]
+       },
+       {
+        "n": 13,
+        "titulo": "Información relativa a la eliminación",
+        "texto": "Eliminación: entregar el residuo a un {} como desecho peligroso. Los envases vacíos contaminados son NE-27 y no deben tratarse como basura común.",
+        "opciones": [
+         "gestor ambiental autorizado",
+         "taller vecino que lo reutilice como limpiador",
+         "relleno sanitario sin tratamiento previo",
+         "recolector municipal de basura doméstica"
+        ]
+       },
+       {
+        "n": 14,
+        "titulo": "Información relativa al transporte",
+        "texto": "Transporte: ONU 1993, clase 3, grupo de embalaje III. El vehículo lleva el rombo {} y la placa naranja con el número ONU.",
+        "opciones": [
+         "amarillo con llama sobre círculo y el número 5.1",
+         "blanco y negro con el símbolo de corrosión y el número 8",
+         "verde con un cilindro y el número 2",
+         "rojo con una llama y el número 3"
+        ]
+       },
+       {
+        "n": 15,
+        "titulo": "Información sobre la reglamentación",
+        "texto": "Reglamentación: en el AM 142 el residuo figura con la característica de peligrosidad {} y el código de Basilea Y6.",
+        "opciones": [
+         "R (reactivo)",
+         "C (corrosivo)",
+         "B (biológico-infeccioso)",
+         "T, I (tóxico e inflamable)"
+        ]
+       },
+       {
+        "n": 16,
+        "titulo": "Otras informaciones",
+        "texto": "Otras informaciones: se indica la fecha de elaboración y la versión. Según la NTE INEN 2266, la hoja debe estar redactada en idioma {} y contener 16 secciones.",
+        "opciones": [
+         "inglés",
+         "francés",
+         "español",
+         "el idioma del proveedor"
+        ]
+       }
+      ]
+     },
+     "correcta": [
+      1,
+      1,
+      0,
+      2,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      0,
+      3,
+      3,
+      2
      ],
-     "explicacion": "AUXILIOS (4), DERRAME (6), DIECISÉIS secciones, ELIMINACIÓN (13) y REACTIVIDAD (10).",
-     "filas": 7,
-     "cols": 11,
-     "entradas": [
-      {
-       "n": 1,
-       "dir": "H",
-       "r": 0,
-       "c": 0,
-       "respuesta": "DIECISEIS",
-       "pista": "Número de secciones que exige la NTE INEN 2266."
-      },
-      {
-       "n": 2,
-       "dir": "H",
-       "r": 2,
-       "c": 0,
-       "respuesta": "REACTIVIDAD",
-       "pista": "Sección 10: estabilidad y ___."
-      },
-      {
-       "n": 3,
-       "dir": "H",
-       "r": 4,
-       "c": 0,
-       "respuesta": "AUXILIOS",
-       "pista": "Sección 4: primeros ___."
-      },
-      {
-       "n": 4,
-       "dir": "H",
-       "r": 6,
-       "c": 0,
-       "respuesta": "ELIMINACION",
-       "pista": "Sección 13: información relativa a la ___ de los productos."
-      },
-      {
-       "n": 1,
-       "dir": "V",
-       "r": 0,
-       "c": 0,
-       "respuesta": "DERRAME",
-       "pista": "Sección 6: medidas en caso de vertido o ___ accidental."
-      }
-     ]
+     "explicacion": "Cada sección completa un dato que se usa en la gestión del residuo «Thinner gastado (mezcla de tolueno y xilenos)»: código del AM 142, elementos de la etiqueta, primeros auxilios, extinción, derrame, almacenamiento según el Anexo K, protección personal, propiedades, reactividad, toxicidad, ecotoxicidad, eliminación, transporte (ONU, clase y rótulo), reglamentación (CRTIB y Basilea) y las 16 secciones en español."
+    },
+    {
+     "id": "Z4-11",
+     "tipo": "fds",
+     "nivel": "Aplicar",
+     "min": 12,
+     "fija": true,
+     "enunciado": "Hoja de datos de seguridad del residuo «Ácido sulfúrico gastado (electrolito de baterías plomo-ácido)». Es la hoja que recibió la bodega con el residuo. Complete cada una de sus 16 secciones eligiendo el dato correcto (la hoja viene con un dato faltante en cada sección). Pueden consultar el Archivo 142 y la Matriz del Anexo K.",
+     "hoja": {
+      "producto": "Ácido sulfúrico gastado (electrolito de baterías plomo-ácido)",
+      "nota": "Hoja ficticia, elaborada para esta práctica con las 16 secciones que exigen la NTE INEN 2266 y el SGA.",
+      "secciones": [
+       {
+        "n": 1,
+        "titulo": "Identificación del producto y del proveedor",
+        "texto": "Producto: electrolito gastado de baterías de montacargas (ácido sulfúrico diluido, cerca de 35 %). Proveedor: Servicio Eléctrico Sur, teléfono de emergencia 1-800-000-001. En el AM 142 se registra como {}.",
+        "opciones": [
+         "NE-08 · Baterías usadas que contengan Hg, Ni, Cd u otros materiales peligrosos",
+         "NE-18 · Desechos de soluciones ácidas con pH < 2",
+         "NE-19 · Desechos de soluciones alcalinas con pH > 12,5",
+         "NE-48 · Productos químicos caducados o fuera de especificaciones"
+        ]
+       },
+       {
+        "n": 2,
+        "titulo": "Identificación de los peligros",
+        "texto": "Clasificación SGA: corrosivo para los metales y corrosión cutánea, categoría 1. Pictograma: corrosión. Palabra de advertencia: Peligro. Indicación de peligro principal: {}.",
+        "opciones": [
+         "H314 · Provoca graves quemaduras en la piel y lesiones oculares",
+         "H330 · Mortal en caso de inhalación",
+         "H410 · Muy tóxico para los organismos acuáticos, con efectos duraderos",
+         "H225 · Líquido y vapores muy inflamables"
+        ]
+       },
+       {
+        "n": 3,
+        "titulo": "Composición e información de los ingredientes",
+        "texto": "Composición: ácido sulfúrico (CAS 7664-93-9) cerca de 35 % y agua. Por provenir de baterías plomo-ácido puede contener trazas de {}.",
+        "opciones": [
+         "cianuros de galvanoplastia",
+         "plomo y sulfato de plomo de las placas",
+         "mercurio de termómetros",
+         "benceno y tolueno"
+        ]
+       },
+       {
+        "n": 4,
+        "titulo": "Primeros auxilios",
+        "texto": "Primeros auxilios: en contacto con la piel o los ojos, lavar con abundante {} durante al menos 15 minutos y buscar atención médica inmediata.",
+        "opciones": [
+         "aceite mineral",
+         "agua",
+         "alcohol",
+         "solución de soda cáustica para neutralizar"
+        ]
+       },
+       {
+        "n": 5,
+        "titulo": "Medidas de lucha contra incendios",
+        "texto": "Lucha contra incendios: no es combustible. En contacto con metales libera gas {}, que es inflamable y puede formar mezclas explosivas.",
+        "opciones": [
+         "oxígeno",
+         "cloro",
+         "hidrógeno",
+         "nitrógeno"
+        ]
+       },
+       {
+        "n": 6,
+        "titulo": "Medidas en caso de vertido accidental",
+        "texto": "Vertido: contener con diques de arena y neutralizar con {}, controlando la efervescencia. Recoger en envase resistente a los ácidos.",
+        "opciones": [
+         "soda cáustica concentrada",
+         "agua caliente",
+         "carbonato o bicarbonato de sodio",
+         "un solvente orgánico"
+        ]
+       },
+       {
+        "n": 7,
+        "titulo": "Manejo y almacenamiento",
+        "texto": "Manejo y almacenamiento: envases plásticos resistentes a los ácidos, sobre paletas y con cubeto de contención. Por el Anexo K debe separarse de {}.",
+        "opciones": [
+         "otros ácidos de la clase 8",
+         "gases no inflamables, como el dióxido de carbono",
+         "residuos de la clase 9",
+         "bases, comburentes (5.1) y sólidos inflamables (4.1)"
+        ]
+       },
+       {
+        "n": 8,
+        "titulo": "Control de exposición y protección personal",
+        "texto": "Protección personal: gafas ajustadas o careta, guantes de {}, delantal y botas resistentes a los ácidos. Debe haber ducha de emergencia y lavaojos cerca.",
+        "opciones": [
+         "cuero natural",
+         "neopreno o PVC",
+         "algodón",
+         "látex fino de consultorio"
+        ]
+       },
+       {
+        "n": 9,
+        "titulo": "Propiedades físicas y químicas",
+        "texto": "Propiedades: líquido incoloro e inodoro, más denso que el agua, con un pH de {}.",
+        "opciones": [
+         "12,5",
+         "7, neutro",
+         "9",
+         "menos de 1"
+        ]
+       },
+       {
+        "n": 10,
+        "titulo": "Estabilidad y reactividad",
+        "texto": "Estabilidad y reactividad: estable, pero se calienta al diluirse y reacciona violentamente con {}. Evitar el contacto con metales.",
+        "opciones": [
+         "nitrógeno y gases inertes",
+         "arena seca y vermiculita",
+         "bases fuertes y materia orgánica",
+         "agua fría y envases plásticos"
+        ]
+       },
+       {
+        "n": 11,
+        "titulo": "Información toxicológica",
+        "texto": "Información toxicológica: las nieblas ácidas irritan las vías respiratorias. El contacto con la piel o los ojos causa {}.",
+        "opciones": [
+         "solo un enrojecimiento pasajero",
+         "somnolencia y mareo",
+         "efectos solo después de años",
+         "quemaduras químicas graves"
+        ]
+       },
+       {
+        "n": 12,
+        "titulo": "Información ecotoxicológica",
+        "texto": "Información ecotoxicológica: baja el pH del agua y es dañino para {}. No debe llegar a suelos ni a cursos de agua.",
+        "opciones": [
+         "ningún organismo",
+         "solo plantas de interior",
+         "peces y organismos acuáticos",
+         "únicamente aves migratorias"
+        ]
+       },
+       {
+        "n": 13,
+        "titulo": "Información relativa a la eliminación",
+        "texto": "Eliminación: el residuo lo debe entregar a un {}, como desecho peligroso NE-18. No se vierte al alcantarillado ni al suelo.",
+        "opciones": [
+         "recolector municipal de basura común",
+         "taller que lo mezcle con otros residuos",
+         "gestor ambiental autorizado",
+         "vecino que lo use para limpiar"
+        ]
+       },
+       {
+        "n": 14,
+        "titulo": "Información relativa al transporte",
+        "texto": "Transporte: ONU 2796, clase 8. El rótulo del vehículo es {}, con el número 8 y la placa naranja con el número ONU.",
+        "opciones": [
+         "amarillo con trébol de radiactividad",
+         "blanco arriba y negro abajo, con el símbolo de corrosión",
+         "verde con un cilindro",
+         "rojo con una llama"
+        ]
+       },
+       {
+        "n": 15,
+        "titulo": "Información sobre la reglamentación",
+        "texto": "Reglamentación: en el AM 142 figura con la característica de peligrosidad {} y el código de Basilea Y34.",
+        "opciones": [
+         "R (reactivo)",
+         "C (corrosivo)",
+         "T (tóxico) únicamente",
+         "I (inflamable)"
+        ]
+       },
+       {
+        "n": 16,
+        "titulo": "Otras informaciones",
+        "texto": "Otras informaciones: se incluye fecha, versión y referencias. La NTE INEN 2266 exige que la hoja de seguridad contenga {} secciones.",
+        "opciones": [
+         "12",
+         "9",
+         "10",
+         "16"
+        ]
+       }
+      ]
+     },
+     "correcta": [
+      1,
+      0,
+      1,
+      1,
+      2,
+      2,
+      3,
+      1,
+      3,
+      2,
+      3,
+      2,
+      2,
+      1,
+      1,
+      3
+     ],
+     "explicacion": "Cada sección completa un dato que se usa en la gestión del residuo «Ácido sulfúrico gastado (electrolito de baterías plomo-ácido)»: código del AM 142, elementos de la etiqueta, primeros auxilios, extinción, derrame, almacenamiento según el Anexo K, protección personal, propiedades, reactividad, toxicidad, ecotoxicidad, eliminación, transporte (ONU, clase y rótulo), reglamentación (CRTIB y Basilea) y las 16 secciones en español."
     }
    ],
    "extras": [
@@ -1773,8 +2116,11 @@
  },
  "por_zona": 5,
  "tiempos_por_zona": {
-  "5": 85,
-  "6": 105,
-  "7": 115
+  "5": 105,
+  "6": 120,
+  "7": 130
+ },
+ "ajuste_zona": {
+  "4": -2
  }
 }

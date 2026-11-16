@@ -388,11 +388,13 @@ def asignar(g, n):
         fijas = [q["id"] for q in t["preguntas"] if q.get("fija")]
         resto = [q["id"] for q in t["preguntas"] if not q.get("fija")]
         random.Random(f"{g['id']}:banco:{t['id']}").shuffle(resto)
-        ids = fijas + resto[:max(0, n - len(fijas))]
+        nz = (n + int(BANCO.get("ajuste_zona", {}).get(str(t["id"]), 0))) if n < 10 else len(t["preguntas"])   # la zona 4 trae dos hojas largas
+        ids = fijas + resto[:max(0, nz - len(fijas))]
         random.Random(f"{g['id']}:orden:{t['id']}").shuffle(ids)
         out[str(t["id"])] = ids
     g["asig"] = out
     g["por_zona"] = n
+    g["asig_v"] = BANCO["version"]
     return out
 
 
@@ -428,6 +430,15 @@ def vista_pregunta(g, q):
     if q["tipo"] == "bodega":
         base["tambores"] = q["tambores"]
         base["jaulas"] = q["jaulas"]
+        return base
+    if q["tipo"] == "fds":
+        secs = []
+        for i, s in enumerate(q["hoja"]["secciones"]):
+            idx = list(range(len(s["opciones"])))
+            random.Random(f"{g['id']}:{q['id']}:{i}").shuffle(idx)
+            secs.append({"n": s["n"], "titulo": s["titulo"], "texto": s["texto"], "opciones": [{"k": j, "texto": s["opciones"][j]} for j in idx]})
+        base["hoja"] = {"producto": q["hoja"]["producto"], "nota": q["hoja"].get("nota", ""), "secciones": secs}
+        base["huecos"] = len(secs)
         return base
     if q["tipo"] == "sopa":
         base["grid"] = q["grid"]
@@ -482,7 +493,7 @@ def corregir(q, sel):
             return max(0.0, (len(s & c) - len(s - c)) / len(c))
         if q["tipo"] == "order":
             return 1.0 if sel == list(range(len(q["opciones"]))) else 0.0
-        if q["tipo"] in ("match", "fill"):
+        if q["tipo"] in ("match", "fill", "fds"):
             n = len(q["correcta"])
             if len(sel) != n:
                 return 0.0
@@ -508,6 +519,8 @@ def texto_correcto(q):
     if q["tipo"] == "bodega":
         return ["Separar: " + "; ".join(f"{q['tambores'][i]['t']} ({q['tambores'][i]['clase']}) ≠ {q['tambores'][j]['t']} ({q['tambores'][j]['clase']})"
                                         for i, j in pares_incompatibles(q))]
+    if q["tipo"] == "fds":
+        return [f"Sección {s['n']} · {s['titulo']}: {s['opciones'][c]}" for s, c in zip(q["hoja"]["secciones"], q["correcta"])]
     if q["tipo"] == "sopa":
         return [p["palabra"] for p in q["palabras"]]
     if q["tipo"] == "cruci":
@@ -527,6 +540,8 @@ def resp_texto(q, sel):
             return "; ".join(f"({i + 1}) {q['banco'][s] if isinstance(s, int) and 0 <= s < len(q['banco']) else '(vacío)'}" for i, s in enumerate(sel))
         if q["tipo"] == "bodega":
             return "; ".join(f"{t['t']} -> {q['jaulas'][s]}" for t, s in zip(q["tambores"], sel))
+        if q["tipo"] == "fds":
+            return "; ".join(f"S{s['n']}: {s['opciones'][v] if isinstance(v, int) and 0 <= v < len(s['opciones']) else '(vacío)'}" for s, v in zip(q["hoja"]["secciones"], sel))
         if q["tipo"] == "sopa":
             return ", ".join(_linea(q["grid"], *s) or "?" for s in sel) or "(ninguna marcada)"
         if q["tipo"] == "cruci":
@@ -697,7 +712,7 @@ def cierre_por_tiempo(g, cfg):
 
 def asegurar_asignacion(g, cfg):
     n = int(cfg["datos"].get("por_zona") or POR_ZONA_DEF)
-    if g.get("asig") is None or (g.get("por_zona") != n and not g["resp"]):
+    if g.get("asig") is None or ((g.get("por_zona") != n or g.get("asig_v") != BANCO["version"]) and not g["resp"]):
         asignar(g, n)
 
 
