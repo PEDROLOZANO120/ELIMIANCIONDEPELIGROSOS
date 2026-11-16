@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel docente · Bodega Peligrosa</title>
+<link rel="icon" href="logo-ingenieria-ambiental-uteq.png">
+<style>
+:root{--bg:#07100b;--card:#102117;--line:#23402d;--txt:#e8f3ea;--ap:#9db5a3;--toxi:#9cff3b;--ok:#38d97a;--mal:#ff5a5a;--oro:#ffd21f}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI",system-ui,Arial,sans-serif;line-height:1.45}
+.haz{height:6px;background:repeating-linear-gradient(-45deg,var(--oro) 0 12px,#111 12px 24px)}
+.wrap{max-width:1300px;margin:0 auto;padding:14px 16px}
+h1{margin:0;font-size:1.3rem;color:var(--toxi);letter-spacing:.05em}
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.marca{display:flex;gap:10px;align-items:center}.marca img{width:40px;height:40px;border-radius:50%;background:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
+.btn{border:1px solid #3d8f14;background:#2a6a0e;color:#fff;border-radius:8px;padding:8px 13px;font:inherit;font-weight:600;cursor:pointer}
+.btn:hover{filter:brightness(1.2)} .btn.sec{background:transparent;border-color:var(--line);color:var(--txt)} .btn.rojo{background:#7a1414;border-color:var(--mal)}
+.btn.sm{padding:3px 8px;font-size:.78rem}
+input,textarea,select{background:#08130c;color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:7px;font:inherit}
+textarea{width:100%;min-height:80px}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th,td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--ap);font-weight:600;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em}
+.pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.74rem;border:1px solid var(--line)}
+.pill.ok{border-color:var(--ok);color:var(--ok)} .pill.mal{border-color:var(--mal);color:var(--mal)} .pill.oro{border-color:var(--oro);color:var(--oro)}
+.z{display:inline-block;min-width:36px;text-align:center;padding:1px 5px;margin:1px 3px 1px 0;border-radius:6px;background:#173222;font-size:.78rem}
+.z.full{background:#21661a}
+.banner{border:1px solid var(--oro);background:rgba(255,210,31,.08);border-radius:10px;padding:12px;margin-bottom:12px}
+.muted{color:var(--ap);font-size:.84rem}
+.bar{height:7px;background:#173222;border-radius:5px;overflow:hidden;width:90px}.bar i{display:block;height:100%;background:var(--toxi)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.det>td{background:#0b170f}
+.rub{display:grid;grid-template-columns:minmax(0,1fr) 90px;gap:6px 10px;align-items:center;max-width:620px}
+.rub input{width:90px}
+.ok{color:var(--ok)} .no{color:var(--mal)}
+.reloj{font-size:1.6rem;font-weight:800;font-variant-numeric:tabular-nums}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px} @media(max-width:900px){.grid2{grid-template-columns:1fr}}
+.login{max-width:380px;margin:12vh auto}
+</style>
+</head>
+<body><div class="haz"></div><div class="wrap" id="app"></div>
+<script src="graficos.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const f2=n=>n===null||n===undefined?'—':Number(n).toFixed(2).replace('.',',');
+let clave=''; try{clave=sessionStorage.getItem('bt_clave')||'';}catch(e){}
+let P=null, abiertos=new Set(), editando=false;
+async function api(ruta,cuerpo){
+  const r=await fetch(ruta,{method:cuerpo!==undefined?'POST':'GET',headers:{'Content-Type':'application/json','X-Docente-Clave':clave},body:cuerpo!==undefined?JSON.stringify(cuerpo):undefined});
+  if(r.status===401){ clave=''; try{sessionStorage.removeItem('bt_clave');}catch(e){} login('Clave incorrecta'); throw new Error('clave'); }
+  return r.json();
+}
+function login(msg){
+  clearInterval(window.__t);
+  $('#app').innerHTML=`<div class="card login"><div class="marca"><img src="logo-ingenieria-ambiental-uteq.png" alt="Logotipo de Ingeniería Ambiental UTEQ"><h1>Panel docente</h1></div>
+   <p class="muted">Bodega Peligrosa · Eliminación de Residuos Peligrosos</p>
+   <input id="cl" type="password" placeholder="Clave del docente" style="width:100%;margin:8px 0" autocomplete="current-password">
+   <button class="btn" id="go" style="width:100%">Entrar</button><p style="color:var(--mal)">${msg||''}</p>
+   <p class="muted">En la versión local, la clave aparece en la ventana del servidor. En Vercel es la variable DOCENTE_CLAVE.</p></div>`;
+  $('#go').onclick=()=>{ clave=$('#cl').value.trim(); try{sessionStorage.setItem('bt_clave',clave);}catch(e){} cargar(true); };
+  $('#cl').addEventListener('keydown',e=>{if(e.key==='Enter')$('#go').click();});
+}
+const fmt=t=>t?new Date(t*1000).toLocaleTimeString('es-EC'):'—';
+const dur=(a,b)=>{ const s=Math.round(((b||P.ahora)-a)); return s<60?s+' s':Math.floor(s/60)+' min '+(s%60)+' s'; };
+let finLocal=null;
+async function cargar(forzar){
+  try{ P=await api('/api/docente/panel'); }catch(e){ return; }
+  finLocal = P.tiempo.iniciado ? Date.now()+P.tiempo.restante*1000 : null;
+  if(editando && !forzar){ const r=$('#relojD'); if(r) r.textContent=txtReloj(); return; }
+  pintar();
+  clearInterval(window.__t); window.__t=setInterval(()=>{ if(!editando) cargar(); },4000);
+}
+function txtReloj(){ if(!P) return ''; const t=P.tiempo; if(!t.iniciado) return Math.round(t.restante/60)+':00 (sin iniciar)';
+  const s=(t.pausado||!P.abierto)?t.restante:Math.max(0,Math.round((finLocal-Date.now())/1000)); return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`+(t.agotado?' · TERMINADO':(t.pausado?' · en pausa':'')); }
+setInterval(()=>{ const r=$('#relojD'); if(r) r.textContent=txtReloj(); },1000);
+
+function detalle(g){
+  const su=g.sugerencia, k=su.clave, b=g.exp.borrador||{}, rb=g.rubrica||{};
+  const marca=v=>v?'<span class="ok">✔ coincide</span>':'<span class="no">✗ revisar</span>';
+  const pics=(b.c3||[]).map(x=>GRAF.pictogramaSGA(x,34,true)).join(' ')||'—';
+  const picsK=k.c3.map(x=>GRAF.pictogramaSGA(x,28,true)).join(' ');
+  const crit=P.criterios.map(c=>`<label for="r_${g.id}_${c.k}">${esc(c.nombre)} <span class="muted">(máx. ${f2(c.max)})</span></label>
+     <input id="r_${g.id}_${c.k}" inputmode="decimal" value="${rb[c.k]!==undefined?String(rb[c.k]).replace('.',','):''}" onfocus="editando=true" onblur="editando=false">`).join('');
+  return `<tr class="det"><td colspan="9"><div class="grid2">
+   <div><b>Expediente · caso ${su.variante}: ${esc(su.titulo)}</b> ${g.exp.entregado?`<span class="pill ok">entregado${g.exp.auto?' (por tiempo)':''}</span>`:'<span class="pill oro">borrador</span>'}<p class="muted">${esc(su.caso)}</p>
+    <table><tr><th></th><th>Respuesta del grupo</th><th>Clave</th></tr>
+     <tr><td>AM 142</td><td>${esc(b.c1||'—')}<br>${marca(su.auto.c1)}</td><td class="muted">${esc(k.c1)}</td></tr>
+     <tr><td>Clase INEN</td><td>${esc(b.c2||'—')} ${b.c2&&GRAF.ROT[b.c2]?GRAF.rotulo(b.c2,30):''}<br>${marca(su.auto.c2)}</td><td class="muted">${esc(k.c2)}</td></tr>
+     <tr><td>Pictogramas</td><td>${pics}<br>${marca(su.auto.c3)}</td><td class="muted">${picsK}<br>mínimo: ${esc(k.c3_min.join(', '))}</td></tr>
+     <tr><td>Sección FDS</td><td>${esc(b.c4||'—')}<br>${marca(su.auto.c4)}</td><td class="muted">${esc(k.c4)}</td></tr>
+     <tr><td>Ubicación</td><td>${esc(b.c5j||'—')}<br>${esc(b.c5||'—')}</td><td class="muted">${esc(k.c5)}</td></tr></table>
+    <p class="muted">La comparación automática solo orienta; la nota la decide usted con la rúbrica.</p></div>
+   <div><b>Rúbrica (2 puntos)</b> ${rb.calificado?`<span class="pill ok">calificado: ${f2(g.notas.docente)}</span>`:'<span class="pill oro">pendiente</span>'}
+    <div class="rub" style="margin-top:8px">${crit}</div>
+    <label class="muted" for="obs_${g.id}">Observación para el grupo</label><textarea id="obs_${g.id}" onfocus="editando=true" onblur="editando=false">${esc(rb.obs||'')}</textarea>
+    <div class="row" style="margin-top:6px"><button class="btn" onclick="guardarRub('${g.id}')">Guardar rúbrica</button>
+     <button class="btn sec" onclick="pdfGrupo('${g.id}','${esc(g.nombre).replace(/'/g,'')}')">&#128196; PDF de este grupo</button></div>
+    <p style="margin-top:12px"><b>Zonas:</b> ${g.temas.map(t=>`Z${t.id}: ${t.respondidas}/${t.total} resp., ${f2(t.puntos)} pts, ${t.cerrado?t.sellos+' sellos':'abierta'}`).join(' · ')}<br>
+     <b>Variante del ítem Z1-2:</b> ${g.variante_pool} · <b>Retos extra:</b> ${g.extras_resp} · <b>PIN:</b> ${esc(g.pin)}<br>
+     <b>Integrantes:</b> ${esc(g.integrantes||'—')}<br>
+     <b>Salidas:</b> ${g.salidas_detalle.length?g.salidas_detalle.map((s,k)=>`#${k+1} ${fmt(s.ini)} (${s.fin?dur(s.ini,s.fin):'sigue fuera'})`).join(' · '):'ninguna'}
+     ${g.salidas_detalle.length?` <button class="btn sm sec" onclick="ajusteSalida('${g.id}')">Anular la última salida</button>`:''}</p>
+    <div class="row">${g.temas.filter(t=>t.cerrado&&t.sellos<4).map(t=>`<button class="btn sm" onclick="ficha('${g.id}',${t.id})">+1 sello Z${t.id} (reto presencial)</button>`).join(' ')}</div>
+   </div></div></td></tr>`;
+}
+function pintar(){
+  const t=P.tiempo;
+  const filas=P.grupos.map((g,i)=>{
+    const est=g.fuera_ahora?'<span class="pill mal">FUERA ahora</span>':(g.en_linea?'<span class="pill ok">en línea</span>':'<span class="pill">desconectado</span>');
+    const zonas=g.temas.map(z=>`<span class="z ${z.sellos===4?'full':''}" title="Zona ${z.id}: ${f2(z.puntos)}/${z.total}">Z${z.id} ${z.cerrado?z.sellos:'·'}/4</span>`).join('');
+    const sal=g.salidas>P.reglas.gratis?'mal':(g.salidas>0?'oro':'ok');
+    const n=g.notas;
+    return `<tr><td>${i+1}</td>
+      <td><b>${esc(g.nombre)}${P.ganador===g.nombre?' 🏆':''}</b><br><a href="#" class="muted" onclick="tog('${g.id}');return false">${abiertos.has(g.id)?'ocultar':'detalle y rúbrica'}</a></td>
+      <td>${est}</td>
+      <td>${g.respondidas}/${g.total}<div class="bar"><i style="width:${g.respondidas/g.total*100}%"></i></div>
+        <div class="muted">Exp.: ${g.exp.entregado?'✔':'…'} · Reto: ${g.reto.entregado?`${g.reto.cw_ok}/${g.reto.cw_total} · ${g.reto.sopa_ok}/${g.reto.sopa_total}`:'—'}</div></td>
+      <td>${f2(n.zonas)} + ${f2(n.reto)} + ${n.docente===null?'<span class="pill oro">pend.</span>':f2(n.docente)}</td>
+      <td><span class="pill ${sal}">${g.salidas}${g.penalizacion>0?' (−'+f2(g.penalizacion)+')':''}</span></td>
+      <td><b style="font-size:1.05rem">${f2(n.nota)}</b>${n.docente_pendiente?'<div class="muted">sin rúbrica</div>':''}</td>
+      <td><b>${g.sellos}</b>/${P.max_sellos}<br>${zonas}${g.completado_en?`<div class="pill ok">completo ${fmt(g.completado_en)}</div>`:''}</td>
+      <td><button class="btn sm sec" onclick="reiniciar('${g.id}','${esc(g.nombre).replace(/'/g,'')}')">Reiniciar</button> <button class="btn sm sec" onclick="eliminar('${g.id}','${esc(g.nombre).replace(/'/g,'')}')">Quitar</button></td></tr>${abiertos.has(g.id)?detalle(g):''}`;
+  }).join('');
+  const pend=P.grupos.filter(g=>g.notas.docente_pendiente).length;
+  $('#app').innerHTML=`
+  <div class="top"><div class="marca"><img src="logo-ingenieria-ambiental-uteq.png" alt="Logotipo de Ingeniería Ambiental UTEQ"><div><h1>&#9888; Bodega Peligrosa · Panel docente</h1>
+    <div class="muted">Eliminación de Residuos Peligrosos · ${esc(P.version)} · datos: ${P.modo==='supabase'?'Supabase':'local'}</div></div></div>
+    <div class="row"><span class="pill ${P.abierto?'ok':'oro'}">${P.abierto?'ABIERTO':(t.iniciado?'EN PAUSA':'CERRADO')}</span>
+      <button class="btn ${P.abierto?'rojo':''}" onclick="abrir(${!P.abierto})">${P.abierto?'⏸ Pausar':(t.iniciado?'▶ Reanudar':'▶ Abrir para todos')}</button>
+      <button class="btn sec" onclick="descargarPDF()">&#128196; Informe PDF del curso</button></div></div>
+  ${P.ganador?`<div class="banner">🏆 <b>Ganador: ${esc(P.ganador)}</b> · +1 punto directo.</div>`:''}
+  <div class="card"><div class="row" style="justify-content:space-between">
+    <div><div class="muted">Tiempo restante</div><div class="reloj" id="relojD">${txtReloj()}</div></div>
+    <div class="row">${t.iniciado?`<button class="btn sec" onclick="sumar(5)">+5 min</button><button class="btn sec" onclick="sumar(-5)">−5 min</button>`:
+      `<label class="muted" for="pz">Preguntas por zona</label><select id="pz" onfocus="editando=true" onblur="editando=false" onchange="porZona()">${[5,6,7].map(n=>`<option value="${n}" ${(P.datos.por_zona||5)==n?'selected':''}>${n} de 10 (${({5:105,6:120,7:130})[n]} min)</option>`).join('')}</select>
+       <label class="muted" for="dur">Duración (min)</label><input id="dur" type="number" min="10" max="240" value="${P.datos.duracion_min}" style="width:80px" onfocus="editando=true" onblur="editando=false"><button class="btn sec" onclick="duracion()">Fijar</button>`}</div>
+    <div class="row"><span class="pill ${P.datos.publicado?'ok':'oro'}">${P.datos.publicado?'Resultados publicados':'Resultados sin publicar'}</span>
+      <button class="btn ${P.datos.publicado?'sec':''}" onclick="publicar(${!P.datos.publicado})">${P.datos.publicado?'Ocultar resultados':'Publicar resultados'}</button></div></div>
+    <p class="muted" style="margin:8px 0 0">Al <b>publicar</b>, cada grupo ve su rúbrica y su PDF incluye el detalle con explicaciones. ${pend?`Faltan ${pend} rúbrica(s) por calificar.`:''} Al terminar el tiempo, el expediente y el reto final se entregan solos con lo guardado.</p></div>
+  <div class="card"><div class="row" style="justify-content:space-between"><b>Grupos (${P.grupos.length})</b>
+    <span class="muted">Actualiza cada 4 s · Nota = zonas (7) + reto (1) + rúbrica (2) − 0,50 por salida desde la 3.ª</span></div>
+    <div style="overflow-x:auto;margin-top:8px"><table><tr><th>#</th><th>Grupo</th><th>Estado</th><th>Avance</th><th>Zonas + reto + rúbrica</th><th>Salidas</th><th>Nota /10</th><th>Sellos</th><th></th></tr>
+    ${filas||'<tr><td colspan="9" class="muted">Aún no hay grupos. Créelos abajo.</td></tr>'}</table></div></div>
+  ${(P.preguntas||[]).length?`<div class="card"><b>Preguntas más falladas</b> <span class="muted">(para repasar al final)</span><table style="margin-top:6px"><tr><th>Ítem</th><th>Aciertos</th><th>Enunciado</th></tr>
+    ${P.preguntas.map(q=>`<tr><td>${esc(q.id)}${q.extra?' <span class="pill">extra</span>':''}</td><td><span class="pill ${q.pct<40?'mal':(q.pct<70?'oro':'ok')}">${String(q.aciertos).replace('.',',')}/${q.n} · ${q.pct} %</span></td><td>${GRAF.rico(q.texto,esc,26)}</td></tr>`).join('')}</table></div>`:''}
+  <div class="card"><b>Crear grupos</b><p class="muted">Una línea por grupo: <code>Nombre;PIN;Integrantes separados por comas</code>. Copie aquí el contenido del archivo privado <code>grupos_semana4.txt</code>. Los nombres repetidos se ignoran.</p>
+    <textarea id="lote" onfocus="editando=true" onblur="editando=false" placeholder="Grupo A;1234;Nombre Apellido, Nombre Apellido"></textarea>
+    <div class="row" style="margin-top:8px"><button class="btn" onclick="crearLote()">Crear grupos</button><button class="btn rojo" onclick="borrarTodo()">Borrar todo y empezar de cero</button></div></div>
+  <p class="muted">Enlace para estudiantes: <b>${location.origin}/</b></p>`;
+}
+async function bajar(ruta,nombre){ try{ const r=await fetch(ruta,{headers:{'X-Docente-Clave':clave}}); if(!r.ok){ alert('No se pudo generar el informe'); return; }
+  const u=URL.createObjectURL(await r.blob()); const a=document.createElement('a'); a.href=u; a.download=nombre; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); }catch(e){ alert('No se pudo descargar'); } }
+function descargarPDF(){ bajar('/api/docente/informe-pdf','informe_docente_bodega_peligrosa.pdf'); }
+function pdfGrupo(gid,n){ bajar('/api/docente/informe-grupo-pdf?gid='+encodeURIComponent(gid),'informe_'+n.replace(/\W+/g,'_')+'.pdf'); }
+function tog(id){ abiertos.has(id)?abiertos.delete(id):abiertos.add(id); pintar(); }
+async function act(ruta,cuerpo){ try{ P=await api(ruta,cuerpo); finLocal=P.tiempo.iniciado?Date.now()+P.tiempo.restante*1000:null; editando=false; pintar(); }catch(e){} }
+function abrir(v){ if(!v && !confirm('¿Pausar el juego? El reloj se detiene y los grupos no podrán responder.')) return; act('/api/docente/abrir',{abierto:v}); }
+function sumar(m){ act('/api/docente/tiempo',{min:m}); }
+function porZona(){ const n=+$('#pz').value; if(n>5 && !confirm(`Con ${n} preguntas por zona la actividad dura unos ${({6:120,7:130})[n]} minutos y no cabe en una clase de 90. ¿Continuar?`)){ pintar(); return; } act('/api/docente/porzona',{n}); }
+function duracion(){ act('/api/docente/duracion',{min:+$('#dur').value}); }
+function publicar(v){ if(v){ const pend=P.grupos.filter(g=>g.notas.docente_pendiente).length; if(pend && !confirm(`Hay ${pend} grupo(s) sin rúbrica. ¿Publicar igual?`)) return; } act('/api/docente/publicar',{publicado:v}); }
+function guardarRub(gid){ const b={gid,obs:$('#obs_'+gid).value}; P.criterios.forEach(c=>b[c.k]=$(`#r_${gid}_${c.k}`).value||'0'); act('/api/docente/rubrica',b); }
+function ficha(gid,t){ if(confirm('¿Otorgar 1 sello de la zona '+t+' por un reto presencial superado?')) act('/api/docente/ficha',{gid,tema:t}); }
+function ajusteSalida(gid){ const m=prompt('Motivo para anular la última salida (falso positivo, incidente autorizado…):'); if(m) act('/api/docente/salida-ajuste',{gid,motivo:m}); }
+function reiniciar(gid,n){ if(confirm('¿Reiniciar TODO el avance de «'+n+'»? Se pierden respuestas, expediente, reto y salidas.')) act('/api/docente/reiniciar',{gid}); }
+function eliminar(gid,n){ if(confirm('¿Quitar al grupo «'+n+'»?')) act('/api/docente/eliminar',{gid}); }
+function crearLote(){ const t=$('#lote').value; if(t.trim()) act('/api/docente/grupos-lote',{texto:t}); }
+function borrarTodo(){ if(prompt('Escriba BORRAR para eliminar todos los grupos, respuestas y el reloj:')==='BORRAR') act('/api/docente/reiniciar-todo',{confirmar:'BORRAR'}); }
+if(location.protocol==='file:') $('#app').innerHTML='<div class="card login"><h1>Así no se abre el panel</h1><p>Abrió el archivo directamente. Encienda el servidor con <b>REVISAR.bat</b> (revisión: http://localhost:8081/docente) o <b>INICIAR.bat</b> (clase), y use esa dirección.</p></div>';
+else if(clave) cargar(true); else login();
+</script>
+</body>
+</html>
