@@ -1244,8 +1244,10 @@ class handler(BaseHTTPRequestHandler):
             g = self._grupo()
             if not g:
                 return self._json({"error": "sesion"}, 401)
+            inicio_nuevo = False
             if cfg["abierto"] and not g.get("fin_en_grupo"):
                 g["fin_en_grupo"] = time.time() + int(cfg["datos"].get("duracion_min") or DURACION_DEF) * 60
+                inicio_nuevo = True
             ahora = time.time()
             cambio = ahora - g.get("ultimo_latido", 0) > 8
             if cambio:
@@ -1253,7 +1255,7 @@ class handler(BaseHTTPRequestHandler):
             antes = json.dumps(g, sort_keys=True)
             gan_antes = cfg.get("ganador")
             r = estado_grupo(g, cfg, db)
-            if cambio or json.dumps(g, sort_keys=True) != antes:
+            if inicio_nuevo or cambio or json.dumps(g, sort_keys=True) != antes:
                 db.guardar_grupo(g)
             return self._json(r)
         if ruta == "/api/pregunta-extra":
