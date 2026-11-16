@@ -340,9 +340,21 @@ def responsable(g, i):
 
 
 # ---------------------------------------------------------------- tiempo
-def tiempo(cfg, ahora=None):
+def tiempo(cfg, ahora=None, g=None):
     ahora = ahora or time.time()
     d = cfg["datos"]
+    if g is None:
+        return {"iniciado": False, "restante": int(d.get("duracion_min") or DURACION_DEF) * 60,
+                "agotado": False, "fin_en": None, "pausado": not cfg["abierto"]}
+    if g is not None:
+        fin = g.get("fin_en_grupo")
+        if not fin:
+            return {"iniciado": False, "restante": int(d.get("duracion_min") or DURACION_DEF) * 60,
+                    "agotado": False, "fin_en": None, "pausado": not cfg["abierto"]}
+        ref = d.get("pausado_en") or ahora
+        rest = max(0, fin - ref)
+        return {"iniciado": True, "restante": int(rest), "agotado": rest <= 0,
+                "fin_en": fin, "pausado": not cfg["abierto"]}
     fin = d.get("fin_en")
     if not fin:
         return {"iniciado": False, "restante": d.get("duracion_min", DURACION_DEF) * 60, "agotado": False, "fin_en": None}
@@ -351,8 +363,8 @@ def tiempo(cfg, ahora=None):
     return {"iniciado": True, "restante": int(rest), "agotado": rest <= 0, "fin_en": fin, "pausado": bool(d.get("pausado_en"))}
 
 
-def puede_jugar(cfg):
-    return cfg["abierto"] and not tiempo(cfg)["agotado"]
+def puede_jugar(cfg, g):
+    return cfg["abierto"] and not tiempo(cfg, g=g)["agotado"]
 
 
 # ---------------------------------------------------------------- variantes y vistas
@@ -696,10 +708,10 @@ def _linea(grid, r1, c1, r2, c2):
 
 def cierre_por_tiempo(g, cfg):
     """Al agotarse el tiempo: el borrador del expediente y del reto final se entregan solos."""
-    t = tiempo(cfg)
+    t = tiempo(cfg, g=g)
     if not t["agotado"]:
         return
-    fin = cfg["datos"].get("fin_en")
+    fin = g.get("fin_en_grupo")
     if not exp_entregado(g):
         g["exp"]["entregado_en"] = fin
         g["exp"]["auto"] = True
@@ -801,7 +813,7 @@ def tablero(db, actual=None):
 
 def estado_grupo(g, cfg, db):
     revisar_cierre_y_ganador(g, cfg, db)
-    t = tiempo(cfg)
+    t = tiempo(cfg, g=g)
     if not reto_entregado(g):
         fase = "juego"
     else:
@@ -840,7 +852,7 @@ def estado_grupo(g, cfg, db):
 
 
 def informe_disponible(g, cfg):
-    return reto_entregado(g) or tiempo(cfg)["agotado"] or bool(cfg["datos"].get("publicado"))
+    return reto_entregado(g) or tiempo(cfg, g=g)["agotado"] or bool(cfg["datos"].get("publicado"))
 
 
 def dificiles(grupos, limite=10):
@@ -1232,6 +1244,8 @@ class handler(BaseHTTPRequestHandler):
             g = self._grupo()
             if not g:
                 return self._json({"error": "sesion"}, 401)
+            if cfg["abierto"] and not g.get("fin_en_grupo"):
+                g["fin_en_grupo"] = time.time() + int(cfg["datos"].get("duracion_min") or DURACION_DEF) * 60
             ahora = time.time()
             cambio = ahora - g.get("ultimo_latido", 0) > 8
             if cambio:
@@ -1250,7 +1264,7 @@ class handler(BaseHTTPRequestHandler):
                 tema = int(q.get("tema", ["0"])[0])
             except ValueError:
                 tema = 0
-            if not puede_jugar(cfg) or not reto_entregado(g) or total_sellos(g) >= TOTAL_SELLOS:
+            if not puede_jugar(cfg, g) or not reto_entregado(g) or total_sellos(g) >= TOTAL_SELLOS:
                 return self._json({"error": "no_disponible"}, 403)
             if tema not in TEMA or not zona_cerrada(g, tema) or sellos_zona(g, tema) >= SELLOS_POR_ZONA:
                 return self._json({"pregunta": None})
@@ -1298,6 +1312,9 @@ class handler(BaseHTTPRequestHandler):
                 return self._json({"error": "Demasiados intentos. Esperen un minuto."}, 429)
             if codigo != "ok":
                 return self._json({"error": "Esos nombres no abren la bodega. Descifren mejor las letras."}, 401)
+            if cfg["abierto"] and not g.get("fin_en_grupo"):
+                g["fin_en_grupo"] = time.time() + int(cfg["datos"].get("duracion_min") or DURACION_DEF) * 60
+                db.guardar_grupo(g)
             return self._json({"token": firmar(g["id"])})
         if ruta.startswith("/api/docente/"):
             if not self._docente():
@@ -1310,7 +1327,7 @@ class handler(BaseHTTPRequestHandler):
             return self._salida(g, b, cfg)
         if not cfg["abierto"]:
             return self._json({"error": "La bodega está cerrada: esperen al docente."}, 403)
-        if tiempo(cfg)["agotado"]:
+        if tiempo(cfg, g=g)["agotado"]:
             return self._json({"error": "tiempo", "estado": estado_grupo(g, cfg, db)}, 409)
         if ruta == "/api/responder":
             return self._responder(g, b, cfg)
@@ -1379,7 +1396,7 @@ class handler(BaseHTTPRequestHandler):
 
     def _salida(self, g, b, cfg):
         ahora = time.time()
-        cerrado = g.get("salidas_cierre") is not None or not cfg["abierto"] or tiempo(cfg)["agotado"]
+        cerrado = g.get("salidas_cierre") is not None or not cfg["abierto"] or tiempo(cfg, g=g)["agotado"]
         if b.get("tipo") == "salida" and not cerrado:
             if not g["salidas"] or g["salidas"][-1].get("fin") is not None:
                 g["salidas"].append({"ini": ahora, "fin": None})
@@ -1402,6 +1419,11 @@ class handler(BaseHTTPRequestHandler):
                     d["iniciado_en"] = ahora
                     d["fin_en"] = ahora + int(d.get("duracion_min") or DURACION_DEF) * 60
                 elif d.get("pausado_en"):
+                    pausa = ahora - d["pausado_en"]
+                    for g in db.grupos().values():
+                        if g.get("fin_en_grupo") and g["fin_en_grupo"] > d["pausado_en"]:
+                            g["fin_en_grupo"] += pausa
+                            db.guardar_grupo(g)
                     d["fin_en"] += ahora - d["pausado_en"]
                 d["pausado_en"] = None
             elif not abierto and cfg["abierto"] and d.get("fin_en") and not d.get("pausado_en"):
@@ -1413,19 +1435,18 @@ class handler(BaseHTTPRequestHandler):
                 m = max(-60, min(120, int(b.get("min", 5))))
             except Exception:
                 m = 5
-            if d.get("fin_en"):
-                base = max(d["fin_en"], d.get("pausado_en") or ahora) if m > 0 else d["fin_en"]
-                d["fin_en"] = base + m * 60
-            else:
-                d["duracion_min"] = max(10, int(d.get("duracion_min") or DURACION_DEF) + m)
+            d["duracion_min"] = max(10, min(240, int(d.get("duracion_min") or DURACION_DEF) + m))
+            for g in db.grupos().values():
+                if g.get("fin_en_grupo"):
+                    g["fin_en_grupo"] = max(g["fin_en_grupo"], d.get("pausado_en") or ahora) + m * 60 if m > 0 else g["fin_en_grupo"] + m * 60
+                    db.guardar_grupo(g)
             db.set_config(cfg)
         elif ruta == "/api/docente/duracion":
-            if not d.get("fin_en"):
-                try:
-                    d["duracion_min"] = max(10, min(240, int(b.get("min"))))
-                except Exception:
-                    pass
-                db.set_config(cfg)
+            try:
+                d["duracion_min"] = max(10, min(240, int(b.get("min"))))
+            except Exception:
+                pass
+            db.set_config(cfg)
         elif ruta == "/api/docente/porzona":
             # solo antes de iniciar: cambia cuántas preguntas del banco responde cada grupo y la duración sugerida
             if not d.get("fin_en"):
