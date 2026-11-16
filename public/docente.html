@@ -134,7 +134,7 @@ function pintar(){
   <div class="card"><div class="row" style="justify-content:space-between">
     <div><div class="muted">Tiempo restante</div><div class="reloj" id="relojD">${txtReloj()}</div></div>
     <div class="row">${t.iniciado?`<button class="btn sec" onclick="sumar(5)">+5 min</button><button class="btn sec" onclick="sumar(-5)">−5 min</button>`:
-      `<label class="muted" for="pz">Preguntas por zona</label><select id="pz" onfocus="editando=true" onblur="editando=false" onchange="porZona()">${[5,6,7].map(n=>`<option value="${n}" ${(P.datos.por_zona||5)==n?'selected':''}>${n} de 10 (${({5:85,6:105,7:115})[n]} min)</option>`).join('')}</select>
+      `<label class="muted" for="pz">Preguntas por zona</label><select id="pz" onfocus="editando=true" onblur="editando=false" onchange="porZona()">${[5,6,7].map(n=>`<option value="${n}" ${(P.datos.por_zona||5)==n?'selected':''}>${n} de 10 (${({5:105,6:120,7:130})[n]} min)</option>`).join('')}</select>
        <label class="muted" for="dur">Duración (min)</label><input id="dur" type="number" min="10" max="240" value="${P.datos.duracion_min}" style="width:80px" onfocus="editando=true" onblur="editando=false"><button class="btn sec" onclick="duracion()">Fijar</button>`}</div>
     <div class="row"><span class="pill ${P.datos.publicado?'ok':'oro'}">${P.datos.publicado?'Resultados publicados':'Resultados sin publicar'}</span>
       <button class="btn ${P.datos.publicado?'sec':''}" onclick="publicar(${!P.datos.publicado})">${P.datos.publicado?'Ocultar resultados':'Publicar resultados'}</button></div></div>
@@ -158,7 +158,7 @@ function tog(id){ abiertos.has(id)?abiertos.delete(id):abiertos.add(id); pintar(
 async function act(ruta,cuerpo){ try{ P=await api(ruta,cuerpo); finLocal=P.tiempo.iniciado?Date.now()+P.tiempo.restante*1000:null; editando=false; pintar(); }catch(e){} }
 function abrir(v){ if(!v && !confirm('¿Pausar el juego? El reloj se detiene y los grupos no podrán responder.')) return; act('/api/docente/abrir',{abierto:v}); }
 function sumar(m){ act('/api/docente/tiempo',{min:m}); }
-function porZona(){ const n=+$('#pz').value; if(n>5 && !confirm(`Con ${n} preguntas por zona la actividad dura unos ${({6:105,7:115})[n]} minutos y no cabe en una clase de 90. ¿Continuar?`)){ pintar(); return; } act('/api/docente/porzona',{n}); }
+function porZona(){ const n=+$('#pz').value; if(n>5 && !confirm(`Con ${n} preguntas por zona la actividad dura unos ${({6:120,7:130})[n]} minutos y no cabe en una clase de 90. ¿Continuar?`)){ pintar(); return; } act('/api/docente/porzona',{n}); }
 function duracion(){ act('/api/docente/duracion',{min:+$('#dur').value}); }
 function publicar(v){ if(v){ const pend=P.grupos.filter(g=>g.notas.docente_pendiente).length; if(pend && !confirm(`Hay ${pend} grupo(s) sin rúbrica. ¿Publicar igual?`)) return; } act('/api/docente/publicar',{publicado:v}); }
 function guardarRub(gid){ const b={gid,obs:$('#obs_'+gid).value}; P.criterios.forEach(c=>b[c.k]=$(`#r_${gid}_${c.k}`).value||'0'); act('/api/docente/rubrica',b); }

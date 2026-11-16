@@ -141,6 +141,13 @@ select.hueco{display:inline-block;width:auto;min-width:96px;max-width:100%;margi
 .nav{display:flex;justify-content:space-between;gap:8px;margin-top:12px}
 .estado-guardado{font-size:.8rem;color:var(--ap)}
 .notas td{padding:4px}
+.fds{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.fds-cab{padding:12px 14px;background:#0b1a11;border-bottom:2px solid var(--haz);font-size:1.02rem}
+.fds-sec{padding:10px 14px;border-bottom:1px solid var(--line)}
+.fds-sec:nth-child(odd){background:rgba(255,255,255,.015)}
+.fds-t{display:flex;gap:8px;align-items:center;color:var(--toxi);font-size:.92rem;margin-bottom:2px}
+.fds-t .n{flex:0 0 26px;height:26px;border-radius:50%;background:#2a5a17;color:#fff;display:grid;place-items:center;font-weight:700;font-size:.8rem}
+select.fdsel{max-width:100%;white-space:normal}
 .confeti{position:fixed;inset:0;pointer-events:none;z-index:120;overflow:hidden}
 .confeti i{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:caer linear forwards}
 @keyframes caer{to{top:105vh;transform:rotate(720deg)}}
@@ -390,7 +397,7 @@ function pantallaZona(id){
 }
 let preguntaActual=null;
 const AYUDA={single:'Elijan UNA respuesta.',multi:'Marquen las correctas (el número se indica en el enunciado). Cada error resta un acierto.',order:'Usen las flechas para ordenar.',
-  match:'Elijan la pareja de cada fila. Puntaje parcial.',fill:'Elijan del banco la palabra de cada espacio. Puntaje parcial.',bodega:'Asignen una jaula a cada tambor (lista o tocando el tambor y luego la jaula).',sopa:'Minijuego: cada palabra encontrada suma.',cruci:'Minijuego: cada palabra correcta suma.'};
+  match:'Elijan la pareja de cada fila. Puntaje parcial.',fill:'Elijan del banco la palabra de cada espacio. Puntaje parcial.',bodega:'Asignen una jaula a cada tambor (lista o tocando el tambor y luego la jaula).',fds:'Hoja de seguridad: completen los 16 datos faltantes. Puntaje parcial.',sopa:'Minijuego: cada palabra encontrada suma.',cruci:'Minijuego: cada palabra correcta suma.'};
 function cuerpoPregunta(p){
   sel=[]; ordenActual=(p.opciones||[]).map(o=>o.k); bodegaSel=(p.tambores||[]).map(()=>-1);
   const opts=arr=>arr.map(o=>`<option value="${o.k}">${esc(o.texto)}</option>`).join('');
@@ -407,6 +414,7 @@ function cuerpoPregunta(p){
       <div class="jaulas">${p.jaulas.map((j,k)=>`<div class="jaula" data-j="${k}"><h4>${esc(j)}</h4><div class="cont"></div></div>`).join('')}</div>
       <div style="margin-top:8px">${BTN_TOOLS}</div>`;
   }
+  else if(p.tipo==='fds') c=fdsHTML(p);
   else if(p.tipo==='sopa') c=miniSopaHTML(p);
   else if(p.tipo==='cruci') c=miniCruciHTML(p);
   else c=p.opciones.map(o=>`<button class="opt ${p.tipo==='multi'?'multi':''}" data-k="${o.k}" aria-pressed="false"><span class="mark"></span><span>${rico(o.texto,46)}</span></button>`).join('');
@@ -438,8 +446,8 @@ function enlazarPregunta(){
   const p=preguntaActual; if(!p || !$('#btnResp')) return;
   if(p.tipo==='sopa'||p.tipo==='cruci') enlazarMini();
   if(p.tipo==='order') pintarOrden();
-  if(p.tipo==='match'||p.tipo==='fill'){ const ss=[...document.querySelectorAll('#cardPregunta select[data-i]')].sort((a,b)=>a.dataset.i-b.dataset.i);
-    const upd=()=>{ sel=ss.map(s=>+s.value); $('#btnResp').disabled=sel.some(v=>v<0); }; ss.forEach(s=>s.onchange=upd); }
+  if(p.tipo==='match'||p.tipo==='fill'||p.tipo==='fds'){ const ss=[...document.querySelectorAll('#cardPregunta select[data-i]')].sort((a,b)=>a.dataset.i-b.dataset.i);
+    const upd=()=>{ sel=ss.map(s=>+s.value); $('#btnResp').disabled=sel.some(v=>v<0); const c=$('#fdsCont'); if(c) c.textContent=sel.filter(v=>v>=0).length; }; ss.forEach(s=>s.onchange=upd); }
   if(p.tipo==='bodega'){
     document.querySelectorAll('select[data-b]').forEach(s=>s.onchange=()=>{ bodegaSel[+s.dataset.b]=+s.value; pintarBodega(); });
     document.querySelectorAll('.tamb').forEach(t=>t.onclick=e=>{ if(e.target.tagName==='SELECT'||e.target.tagName==='OPTION') return; tamborActivo=+t.dataset.t; pintarBodega(); });
@@ -664,6 +672,13 @@ function confeti(){
 }
 
 /* ---------- minijuegos dentro de las zonas ---------- */
+function fdsHTML(p){
+  const h=p.hoja;
+  return `<div class="fds"><div class="fds-cab"><b>HOJA DE DATOS DE SEGURIDAD</b><br>${esc(h.producto)}<div class="hint">${esc(h.nota)} Cada sección tiene un espacio para elegir. Avance: <b id="fdsCont">0</b> de ${h.secciones.length}.</div></div>`+
+    h.secciones.map((s,i)=>{ const pt=s.texto.split('{}');
+      return `<div class="fds-sec"><div class="fds-t"><span class="n">${s.n}</span><b>${esc(s.titulo)}</b></div>
+        <div class="parrafo" style="line-height:2.3">${esc(pt[0])}<select class="hueco fdsel" data-i="${i}" aria-label="Sección ${s.n}: ${esc(s.titulo)}"><option value="-1">— elijan —</option>${s.opciones.map(o=>`<option value="${o.k}">${esc(o.texto)}</option>`).join('')}</select>${esc(pt[1]||'')}</div></div>`; }).join('')+`</div>`;
+}
 let MINI=null;
 function miniSopaHTML(p){
   MINI={tipo:'sopa',sopa:[],ini:null,p};
